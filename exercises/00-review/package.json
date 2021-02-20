@@ -1,0 +1,19 @@
+{
+  "name": "00-review",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/**/*.spec.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.17",
+    "@babel/preset-env": "^7.12.17",
+    "@babel/register": "^7.12.13",
+    "chai": "^4.3.0",
+    "mocha": "^8.3.0"
+  }
+}
