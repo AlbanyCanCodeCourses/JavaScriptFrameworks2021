@@ -37,6 +37,7 @@ Follow the guide [Creating a pull request from a fork](https://help.github.com/a
 - [Slides](https://slides.com/accjavascript/decks/2021-javascript-frameworks)
 - [Code Sandboxes](https://codesandbox.io/u/matinaspatsos/sandboxes)
 - Installation Guide: [Mac](docs/InstallationGuideMac.md) | [Windows](docs/InstallationGuideWindows.md) | [Linux](docs/InstallationGuideLinuxAndNVM.md)
+- React: [Manual](https://reactjs.org/) | [Create React App](https://create-react-app.dev/)
 - [MDN](https://developer.mozilla.org/en-US/) (Unofficial JavaScript Manual)
 - Command Line: [NPM Guide](https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/) | [Unix Crash Course](https://www.vikingcodeschool.com/web-development-basics/a-command-line-crash-course) | [Unix Summary](https://swcarpentry.github.io/shell-novice/reference/)
 - [Git Basics](http://rogerdudler.github.io/git-guide/)
