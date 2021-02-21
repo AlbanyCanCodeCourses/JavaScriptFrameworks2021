@@ -39,7 +39,9 @@ function Greeter() {
  * combineArray(['Japan','China','India'], ['USA','UK']) // ['Japan','China','India','USA','UK']
  **/
 
-function combineArray(array1, array2) {}
+function combineArray(array1, array2) {
+  return ["HTML", "CSS"];
+}
 
 /**
  * Combine two objects into one
@@ -96,13 +98,17 @@ function removeVowels(str) {}
  */
 
 function getIsHungryText() {
+  //don't change this variable
+  let isStomachEmpty = false;
+
   /* convert this if else statement into a ternary expression */
-  let isHungry = "";
-  if (hungry) {
-    isHungry = "Go eat something.";
-  } else {
-    isHungry = "Keep coding!";
-  }
+
+  // if (hungry) {
+  //   isHungry = "Go eat something.";
+  // } else {
+  //   isHungry = "Keep coding!";
+  // }
+
   return isHungry;
 }
 
@@ -137,14 +143,18 @@ function getTempOfTmrw() {
  */
 function addItems(arr) {}
 
-/***
- * Use sets to remove duplicate elements from an array
+/**
+ * @example
+ * [1,1,2,2,3,3] // [1,2,3]
+ * @param {array} arr
+ * remove duplicates elements from an array
+ *  hint you can use sets (optional) as a way to solve this problem.
+ *  https://slides.com/accjavascript/deck-10#/24
  * @return {array}
+ *
  */
 
-function removeDuplicates() {
-  let numbers = [2, 3, 4, 4, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 5, 32, 3, 4, 5]; // You can change this line
-
+function removeDuplicates(array) {
   /** Return the an array of unique values */
   return;
 }
@@ -165,3 +175,15 @@ export const functionsToTest = (() => {
     greeter,
   };
 })();
+
+module.exports = {
+  highestNumber,
+  combineArray,
+  combineObject,
+  doubleValues,
+  removeVowels,
+  getIsHungryText,
+  getTempOfTmrw,
+  addItems,
+  removeDuplicates,
+};

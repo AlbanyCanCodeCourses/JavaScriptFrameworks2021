@@ -1,5 +1,16 @@
 const { expect } = require("chai");
-const { functionsToTest } = require("../es6-modules");
+const {
+  functionsToTest,
+  highestNumber,
+  combineArray,
+  combineObject,
+  onlyEvenValues,
+  removeVowels,
+  getIsHungryText,
+  getTempOfTmrw,
+  addItems,
+  removeDuplicates,
+} = require("../00-review");
 
 const path = require("path");
 const fs = require("fs");
@@ -28,5 +39,75 @@ describe("Greeter", () => {
     expect(say.hello).to.be.a("function");
     const greeting = say.hello("Twinkle Toes");
     expect(greeting).to.equal("Hello Twinkle Toes!");
+  });
+});
+
+describe.only("Review", () => {
+  it("Return the highest number in the array", () => {
+    expect(highestNumber([1, 10, 2, 3, 4])).to.equal(10);
+    expect(highestNumber([-1, -5, -4])).to.equal(-1);
+  });
+
+  it("it should merge both arrays", () => {
+    const combinedArray = combineArray(["HTML"], ["CSS"]);
+    expect(combinedArray).to.have.all.members(["HTML", "CSS"]);
+  });
+
+  it("it should combine two objects and return a single object", () => {
+    const obj1 = {
+      firstName: "Clark",
+    };
+    const obj2 = {
+      lastName: "Kent",
+    };
+    const combinedObj = combineObject(obj1, obj2);
+    expect(combinedObj).to.deep.equal({
+      firstName: "Clark",
+      lastName: "Kent",
+    });
+  });
+
+  it("should return only even numbers", () => {
+    expect(onlyEvenValues([1, 2, 3])).to.have.all.members([2]);
+    expect(onlyEvenValues([5, 1, 2, 3, 10])).to.have.all.members([2, 10]);
+  });
+
+  it("tests doubledValues to see if the function returns an array that doubling every value in the array", () => {
+    const doubledValues = doubleValues([2, 3, 4], (number) => {
+      return number * 2;
+    });
+    expect(doubledValues).to.have.all.members([4, 6, 8]);
+  });
+
+  it("removes all vowels from the string", () => {
+    expect(removeVowels("Elie")).to.equal("l");
+    expect(removeVowels("TIM")).to.equal("tm");
+  });
+
+  it("it converts an if else statement to use a ternary expression", () => {
+    const getIsHungryTextString = getIsHungryText.toString().split(" ");
+
+    expect(getIsHungryTextString.includes("?")).to.be.true;
+    expect(getIsHungryTextString.includes(":")).to.be.true;
+
+    expect(getIsHungryText()).to.equal("Keep coding!");
+  });
+
+  it("should use destructuring and return the right values", () => {
+    expect(getTempOfTmrw()).to.equal(
+      "Today's temperature is 77.5.\nTomorrow's temperature is 79"
+    );
+  });
+
+  it("should use reduce as the method to solve the problem and sum of all the values inside the array", () => {
+    expect(addItems([1, 5, 6])).to.equal(12);
+  });
+
+  it("should remove duplicates from the array", () => {
+    expect(removeDuplicates([1, 1, 1, 2, 2, 5, 5])).to.have.all.members([
+      1,
+      2,
+      5,
+    ]);
   });
 });
