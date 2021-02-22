@@ -39,9 +39,7 @@ function Greeter() {
  * combineArray(['Japan','China','India'], ['USA','UK']) // ['Japan','China','India','USA','UK']
  **/
 
-function combineArray(array1, array2) {
-  return ["HTML", "CSS"];
-}
+function combineArray(array1, array2) {}
 
 /**
  * Combine two objects into one
@@ -81,7 +79,7 @@ Examples:
 */
 
 /**
- * Remove all vowels from within a string
+ * Remove all vowels from within a string and lower case each letter
  * @param {string} str
  * @returns {string} string with the vowels removed
  * @example

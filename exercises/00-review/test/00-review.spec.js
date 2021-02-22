@@ -17,6 +17,13 @@ const fs = require("fs");
 const reviewQuestinonsPath = path.resolve(__dirname, "../00-review.js");
 const greeterFilePath = path.resolve(__dirname, "../Greeter.js");
 
+describe("highestNumber", () => {
+  it("should return the highest number in the array", () => {
+    expect(highestNumber([1, 10, 2, 3, 4])).to.equal(10);
+    expect(highestNumber([-1, -5, -4])).to.equal(-1);
+  });
+});
+
 describe("Greeter", () => {
   it('should have a new file named "Greeter.js" inside of "exercises/00-review/". (NOTE that this is case sensitive)', () => {
     expect(fs.existsSync(greeterFilePath)).to.be.true;
@@ -42,18 +49,18 @@ describe("Greeter", () => {
   });
 });
 
-describe("Review", () => {
-  it("Return the highest number in the array", () => {
-    expect(highestNumber([1, 10, 2, 3, 4])).to.equal(10);
-    expect(highestNumber([-1, -5, -4])).to.equal(-1);
-  });
-
-  it("it should merge both arrays", () => {
+describe("combineArray", () => {
+  it("should merge both arrays using the spread operator", () => {
     const combinedArray = combineArray(["HTML"], ["CSS"]);
     expect(combinedArray).to.have.all.members(["HTML", "CSS"]);
+    const funcStr = combineArray.toString();
+    expect(funcStr).to.contain("_toConsumableArray(array1)");
+    expect(funcStr).to.contain("_toConsumableArray(array2)");
   });
+});
 
-  it("it should combine two objects and return a single object", () => {
+describe("combineObject", () => {
+  it("should combine two objects and return a single object", () => {
     const obj1 = {
       firstName: "Clark",
     };
@@ -66,25 +73,35 @@ describe("Review", () => {
       lastName: "Kent",
     });
   });
+});
 
-  it("should return only even numbers", () => {
-    expect(onlyEvenValues([1, 2, 3])).to.have.all.members([2]);
-    expect(onlyEvenValues([5, 1, 2, 3, 10])).to.have.all.members([2, 10]);
-  });
-
-  it("tests doubledValues to see if the function returns an array that doubling every value in the array", () => {
+describe("doubledValues", () => {
+  it("should use Array.map to return an array where every number in the array is doubled", () => {
     const doubledValues = doubleValues([2, 3, 4], (number) => {
       return number * 2;
     });
     expect(doubledValues).to.have.all.members([4, 6, 8]);
+    const funcStr = doubledValues.toString();
+    expect(funcStr).to.contain(".map");
   });
+});
 
-  it("removes all vowels from the string", () => {
+describe("onlyEvenValues", () => {
+  it("should return only even numbers in an array", () => {
+    expect(onlyEvenValues([1, 2, 3])).to.have.all.members([2]);
+    expect(onlyEvenValues([5, 1, 2, 3, 10])).to.have.all.members([2, 10]);
+  });
+});
+
+describe("removeVowels", () => {
+  it("removes all vowels from the string and lower case each letter", () => {
     expect(removeVowels("Elie")).to.equal("l");
     expect(removeVowels("TIM")).to.equal("tm");
   });
+});
 
-  it("it converts an if else statement to use a ternary expression", () => {
+describe("getIsHungryTextString", () => {
+  it("should use a ternary expression instead of an if ... else statement", () => {
     const getIsHungryTextString = getIsHungryText.toString().split(" ");
 
     expect(getIsHungryTextString.includes("?")).to.be.true;
@@ -92,17 +109,25 @@ describe("Review", () => {
 
     expect(getIsHungryText()).to.equal("Keep coding!");
   });
+});
 
-  it("should use destructuring and return the right values", () => {
+describe("getTempOfTmrw", () => {
+  it("should use destructuring and return the right values. (NOTE this will return a false positive. It will pass, even if you do not use destructuring.)", () => {
     expect(getTempOfTmrw()).to.equal(
       "Today's temperature is 77.5.\nTomorrow's temperature is 79"
     );
   });
+});
 
-  it("should use reduce as the method to solve the problem and sum of all the values inside the array", () => {
+describe("addItems", () => {
+  it("should use reduce to return the sum of all the values inside the array", () => {
     expect(addItems([1, 5, 6])).to.equal(12);
+    const funcStr = addItems.toString();
+    expect(funcStr).to.contain(".reduce");
   });
+});
 
+describe("removeDuplicates", () => {
   it("should remove duplicates from the array", () => {
     expect(removeDuplicates([1, 1, 1, 2, 2, 5, 5])).to.have.all.members([
       1,
