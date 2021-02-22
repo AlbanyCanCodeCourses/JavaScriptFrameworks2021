@@ -100,10 +100,10 @@ function removeVowels(str) {}
 function getIsHungryText() {
   //don't change this variable
   let isStomachEmpty = false;
-
   /* convert this if else statement into a ternary expression */
 
-  // if (hungry) {
+  // let isHungry;
+  // if (isStomachEmpty) {
   //   isHungry = "Go eat something.";
   // } else {
   //   isHungry = "Keep coding!";

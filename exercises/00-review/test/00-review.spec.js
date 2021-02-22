@@ -42,7 +42,7 @@ describe("Greeter", () => {
   });
 });
 
-describe.only("Review", () => {
+describe("Review", () => {
   it("Return the highest number in the array", () => {
     expect(highestNumber([1, 10, 2, 3, 4])).to.equal(10);
     expect(highestNumber([-1, -5, -4])).to.equal(-1);
