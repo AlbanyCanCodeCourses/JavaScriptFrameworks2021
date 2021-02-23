@@ -8,7 +8,11 @@
  *
  **/
 
-function highestNumber(array) {}
+function highestNumber(array) {
+  return Math.max(...array)
+}
+
+console.log(highestNumber([1, 10, 2, 3, 4]));
 
 /**
  * Refactor this to use ES6 Modules with default exports
