@@ -4,3 +4,5 @@
 - Matina Patsos
 
 # Students
+
+- Katie Bullock
