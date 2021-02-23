@@ -5,5 +5,5 @@
 
 # Students
 
-test student
 Michael Jones
+- Katie Bullock
