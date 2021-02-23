@@ -8,7 +8,8 @@
  *
  **/
 
-function highestNumber(array) {}
+function highestNumber(array) {
+}
 
 /**
  * Refactor this to use ES6 Modules with default exports
