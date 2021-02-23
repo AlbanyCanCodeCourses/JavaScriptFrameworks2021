@@ -5,5 +5,7 @@
 
 # Students
 
-test student
 Hillary Wallace
+- John Mellet
+- Michael Jones
+- Katie Bullock
