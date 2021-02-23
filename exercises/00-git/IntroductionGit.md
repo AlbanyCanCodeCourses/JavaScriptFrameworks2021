@@ -5,5 +5,6 @@
 
 # Students
 
-Michael Jones
+- John Mellet
+- Michael Jones
 - Katie Bullock
