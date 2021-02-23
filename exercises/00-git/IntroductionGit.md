@@ -5,5 +5,6 @@
 
 # Students
 
-test student
--John Mellet
+- John Mellet
+- Michael Jones
+- Katie Bullock
