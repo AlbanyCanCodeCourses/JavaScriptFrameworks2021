@@ -5,6 +5,7 @@
 
 # Students
 
+Hillary Wallace
 - John Mellet
 - Michael Jones
 - Katie Bullock
