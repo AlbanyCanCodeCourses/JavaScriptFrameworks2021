@@ -9,5 +9,5 @@
 - Hillary Wallace
 - John Mellet
 - Michael Jones
-- Katie Bullock
+- Katie Bullockcd
 - Godson Umoren

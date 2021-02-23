@@ -8,8 +8,7 @@
  *
  **/
 
-function highestNumber(array) {
-}
+function highestNumber(array) {}
 
 /**
  * Refactor this to use ES6 Modules with default exports
@@ -49,7 +48,11 @@ function combineArray(array1, array2) {}
  * @return {object} obj1 and obj2 combined
  */
 
-function combineObject(obj1, obj2) {}
+function combineObject(obj1, obj2) {
+  let main = [...obj1, ...obj2];
+
+  return main;
+}
 
 /**
  * Please use the higher order function map to solve this problem.
