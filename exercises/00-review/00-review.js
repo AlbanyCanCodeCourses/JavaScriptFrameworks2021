@@ -9,6 +9,8 @@
  **/
 
 function highestNumber(array) {
+ let number = Math.max(...array);
+ return number;
 }
 
 /**
@@ -23,13 +25,8 @@ function highestNumber(array) {
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
  * @see https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export
  */
-function Greeter() {
-  return {
-    hello: (name) => {
-      return `Hello ${name}!`;
-    },
-  };
-}
+  import Greeter from "C:/Users/hilla/repos/JavaScriptFrameworks2021/exercises/00-review/Greeter.js"
+  Greeter();
 
 /**
  * Combine an array by using the spread operator
@@ -40,7 +37,10 @@ function Greeter() {
  * combineArray(['Japan','China','India'], ['USA','UK']) // ['Japan','China','India','USA','UK']
  **/
 
-function combineArray(array1, array2) {}
+function combineArray(array1, array2) {
+  let newArray = [...array1, ...array2]
+  return newArray;
+}
 
 /**
  * Combine two objects into one
@@ -49,7 +49,10 @@ function combineArray(array1, array2) {}
  * @return {object} obj1 and obj2 combined
  */
 
-function combineObject(obj1, obj2) {}
+function combineObject(obj1, obj2) {
+  let newObject = {...obj1, ...obj2}
+  return newObject;
+}
 
 /**
  * Please use the higher order function map to solve this problem.
@@ -58,7 +61,10 @@ function combineObject(obj1, obj2) {}
  * @returns {array} new array, with each value doubled e.g. [2, 5, 10]
  */
 
-const doubleValues = (arr) => {};
+const doubleValues = (arr) => {
+  let newArr = arr.map(number => number*2);
+  return newArr;
+};
 
 /**
  * * Please use the higher order function filter to solve this problem.
@@ -69,7 +75,14 @@ const doubleValues = (arr) => {};
  *   onlyEvenValues([1,2,3]) // [2]
  *   onlyEvenValues([5,1,2,3,10]) // [2,10]
  */
-function onlyEvenValues(arr) {}
+function onlyEvenValues(arr) {
+  let evenValues = arr.filter( (n)=>{
+    return n % 2 === 0;
+  })
+  return evenValues;
+}
+onlyEvenValues([5, 1, 2, 3, 10]);
+
 
 /*
 Write a function called removeVowels which accepts a string and returns a new string with all of the vowels (both uppercased and lowercased) removed. Every character in the new string should be lowercased.
@@ -88,7 +101,12 @@ Examples:
  *  removeVowels('TIM') // ('tm')
  *  removeVowels('ZZZZZZ') // ('zzzzzz')
  */
-function removeVowels(str) {}
+function removeVowels(str) {
+  str = str.replace( /[aeiouy]gi/, '' );
+  let newStr = str.toLowerCase();
+  return newStr;
+
+}
 
 /**
  *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
@@ -107,8 +125,11 @@ function getIsHungryText() {
   // } else {
   //   isHungry = "Keep coding!";
   // }
+  
 
-  return isHungry;
+  // return isHungry;
+ return(isHungry ? "Go eat something" : "Go eat something.");
+  
 }
 
 /**
@@ -140,7 +161,13 @@ function getTempOfTmrw() {
  *  addItems([1,5,6]) // 12
  *  addItems([1,-2,-3]) // -4
  */
-function addItems(arr) {}
+function addItems(arr) {
+  arr.reduce( (a, b)=>{
+    let sum = a + b;
+    return sum;
+  });
+ 
+}
 
 /**
  * @example
@@ -155,7 +182,9 @@ function addItems(arr) {}
 
 function removeDuplicates(array) {
   /** Return the an array of unique values */
-  return;
+  let newSet = new Set([...array]);
+  let newArray = [...newSet];
+  return newArray;
 }
 
 /**
