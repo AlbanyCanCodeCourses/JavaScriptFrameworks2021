@@ -8,7 +8,7 @@
  *
  **/
 
-const highestNumber = array => array.reduce((max, candidate) => candidate > max ? candidate : max);
+const highestNumber = array => array.reduce((max, current) => current > max ? current : max, Number.NEGATIVE_INFINITY);
 
 /**
  * Refactor this to use ES6 Modules with default exports
@@ -22,9 +22,10 @@ const highestNumber = array => array.reduce((max, candidate) => candidate > max 
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
  * @see https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export
  */
+
 import Greeter from './Greeter.js';
-const greeter = Greeter();
-console.log(greeter.hello("Sean"));
+const myGreeter = Greeter();
+console.log(myGreeter.hello("Sean"));
 
 /**
  * Combine an array by using the spread operator
@@ -153,21 +154,15 @@ const removeDuplicates = array => [...new Set(array)];
  * Ignore this. It is for the tests.
  */
 
-const functionsToTest = (() => {
-  let greeter;
-  try {
-    greeter = Greeter;
-  } catch (e) {
-    // Normally it is bad practice to not handle the error.
-    // However, I am just using try ... catch to get the unit test to work
-  }
-  return {
-    greeter,
-  };
-})();
-
+let greeter;
+try {
+  greeter = Greeter;
+} catch (e) {
+  // Normally it is bad practice to not handle the error.
+  // However, I am just using try ... catch to get the unit test to work
+}
 module.exports = {
-  functionsToTest,
+  greeter,
   highestNumber,
   combineArray,
   combineObject,
@@ -178,4 +173,5 @@ module.exports = {
   getTempOfTmrw,
   addItems,
   removeDuplicates,
+  doubleValues,
 };
