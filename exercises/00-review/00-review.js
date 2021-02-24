@@ -207,4 +207,5 @@ module.exports = {
   getTempOfTmrw,
   addItems,
   removeDuplicates,
+  doubleValues,
 };
