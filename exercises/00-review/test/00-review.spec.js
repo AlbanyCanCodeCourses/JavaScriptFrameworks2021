@@ -4,6 +4,7 @@ const {
   highestNumber,
   combineArray,
   combineObject,
+  doubleValues,
   onlyEvenValues,
   removeVowels,
   getIsHungryText,
@@ -81,7 +82,7 @@ describe("doubledValues", () => {
       return number * 2;
     });
     expect(doubledValues).to.have.all.members([4, 6, 8]);
-    const funcStr = doubledValues.toString();
+    const funcStr = doubleValues.toString();
     expect(funcStr).to.contain(".map");
   });
 });
