@@ -10,9 +10,6 @@
 
 const highestNumber = (array) => Math.max(...array)
 
-
-console.log(highestNumber([1, 10, 2, 3, 4]));
-
 /**
  * Refactor this to use ES6 Modules with default exports
  * @see https://slides.com/accjavascript/webpack-npm#/10
@@ -61,8 +58,6 @@ const combineObject = (obj1, obj2) => {
 
 const doubleValues = (arr) => arr.map(el => el * 2);
 
-console.log(doubleValues([1,3,5]))
-
 /**
  * * Please use the higher order function filter to solve this problem.
  * Find and return only the even numbers in an array
@@ -74,7 +69,6 @@ console.log(doubleValues([1,3,5]))
  */
 const onlyEvenValues = (arr) => arr.filter((element) => element % 2 == 0)
 
-console.log(onlyEvenValues([1,2,4,5,6]))
 
 /*
 Write a function called removeVowels which accepts a string and returns a new string with all of the vowels (both uppercased and lowercased) removed. Every character in the new string should be lowercased.
@@ -85,12 +79,14 @@ Examples:
 */
 
 const removeVowels = (string) => {
+  string = string.toLocaleLowerCase();
   for (const letter of string) {
-    ['a','e','i','o','u'].forEach((vowel) => (letter === vowel) ? (string = string.replace(letter, "")) : false );
+    ['a','e','i','o','u'].forEach((vowel) => {
+      (letter === vowel) ? (string = string.replace(letter, "")) : false ;
+    });
   }
   return string;
 }
-
 
 /**
  * Remove all vowels from within a string and lower case each letter
@@ -108,17 +104,15 @@ const removeVowels = (string) => {
  *
  */
 
-function getIsHungryText() {
+const getIsHungryText = () => {
   //don't change this variable
   let isStomachEmpty = false;
   /* convert this if else statement into a ternary expression */
 
-  // let isHungry;
-  // if (isStomachEmpty) {
-  //   isHungry = "Go eat something.";
-  // } else {
-  //   isHungry = "Keep coding!";
-  // }
+  let isHungry;
+  isStomachEmpty
+    ? (isHungry = "Go eat something.")
+    : (isHungry = "Keep coding!");
 
   return isHungry;
 }
@@ -129,16 +123,16 @@ function getIsHungryText() {
  * @return Function should return tomorrow's temperature
  */
 
-function getTempOfTmrw() {
+const getTempOfTmrw = () => {
   // Do not change me
-  const AVG_TEMPERATURES = {
+  const {today, tomorrow} = {
     today: 77.5,
     tomorrow: 79,
   };
 
   // Start of what you should change
-  const today = AVG_TEMPERATURES.today;
-  const tomorrow = AVG_TEMPERATURES.tomorrow;
+  // const today = AVG_TEMPERATURES.today;
+  // const tomorrow = AVG_TEMPERATURES.tomorrow;
   // End of what you should change
   return `Today's temperature is ${today}.\nTomorrow's temperature is ${tomorrow}`;
 }
@@ -152,7 +146,8 @@ function getTempOfTmrw() {
  *  addItems([1,5,6]) // 12
  *  addItems([1,-2,-3]) // -4
  */
-function addItems(arr) {}
+const addItems = (arr) => arr.reduce((acc, curVal) => acc + curVal);
+
 
 /**
  * @example
@@ -165,36 +160,31 @@ function addItems(arr) {}
  *
  */
 
-function removeDuplicates(array) {
-  /** Return the an array of unique values */
-  return;
-}
+const removeDuplicates = (array) => Array.from(new Set(array));
+
 
 /**
  * Ignore this. It is for the tests.
  */
 
-export const functionsToTest = (() => {
-  let greeter;
-  try {
-    greeter = Greeter;
-  } catch (e) {
-    // Normally it is bad practice to not handle the error.
-    // However, I am just using try ... catch to get the unit test to work
-  }
-  return {
-    greeter,
-  };
-})();
-
+let greeter;
+try {
+  greeter = Greeter;
+} catch (e) {
+  // Normally it is bad practice to not handle the error.
+  // However, I am just using try ... catch to get the unit test to work
+}
 module.exports = {
+  greeter,
   highestNumber,
   combineArray,
   combineObject,
   doubleValues,
+  onlyEvenValues,
   removeVowels,
   getIsHungryText,
   getTempOfTmrw,
   addItems,
   removeDuplicates,
+  doubleValues,
 };
