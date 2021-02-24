@@ -26,7 +26,7 @@ function highestNumber(array) {
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
  * @see https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export
  */
-//Greeter();
+Greeter();
 /**
  * Combine an array by using the spread operator
  * @param  {array} array1
