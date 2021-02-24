@@ -26,7 +26,7 @@ function highestNumber(array) {
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
  * @see https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export
  */
-Greeter();
+//Greeter();
 /**
  * Combine an array by using the spread operator
  * @param  {array} array1
@@ -61,14 +61,14 @@ function combineObject(obj1, obj2) {
  * @returns {array} new array, with each value doubled e.g. [2, 5, 10]
  */
 
-function doubleValues(arr) {
+const doubleValues = (arr) => {
   function func(item) {
     return item * 2;
   }
   var newArr = arr.map(func);
 
   return newArr;
-}
+};
 
 /**
  * * Please use the higher order function filter to solve this problem.
