@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 const {
-  functionsToTest,
+  greeter,
   highestNumber,
   combineArray,
   combineObject,
@@ -42,8 +42,8 @@ describe("Greeter", () => {
     expect(fileContents).to.match(/import\s*Greeter\s*from/);
   });
   it("Greeter function should work, even after you move it to a different file", () => {
-    expect(functionsToTest.greeter).to.be.a("function");
-    const say = functionsToTest.greeter();
+    expect(greeter).to.be.a("function");
+    const say = greeter();
     expect(say.hello).to.be.a("function");
     const greeting = say.hello("Twinkle Toes");
     expect(greeting).to.equal("Hello Twinkle Toes!");
