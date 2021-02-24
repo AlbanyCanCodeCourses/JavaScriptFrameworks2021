@@ -5,5 +5,9 @@
 
 # Students
 
-test student
+- Sean Russell
+- Hillary Wallace
+- John Mellet
+- Michael Jones
 - Katie Bullock
+- Godson Umoren
