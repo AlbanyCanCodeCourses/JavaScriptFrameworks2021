@@ -102,7 +102,7 @@ Examples:
  *  removeVowels('ZZZZZZ') // ('zzzzzz')
  */
 function removeVowels(str) {
-  str = str.replace( /[aeiouy]gi/, '' );
+  str = str.replace( /[aeiouy]/gi, '' );
   let newStr = str.toLowerCase();
   return newStr;
 
@@ -119,16 +119,17 @@ function getIsHungryText() {
   let isStomachEmpty = false;
   /* convert this if else statement into a ternary expression */
 
-  // let isHungry;
+  let isHungry;
   // if (isStomachEmpty) {
   //   isHungry = "Go eat something.";
   // } else {
   //   isHungry = "Keep coding!";
   // }
   
-
+  isHungry = isStomachEmpty ? "Go eat something" : "Keep coding!";
+  
   // return isHungry;
- return(isHungry ? "Go eat something" : "Go eat something.");
+ return isHungry;
   
 }
 
@@ -146,8 +147,9 @@ function getTempOfTmrw() {
   };
 
   // Start of what you should change
-  const today = AVG_TEMPERATURES.today;
-  const tomorrow = AVG_TEMPERATURES.tomorrow;
+  // const today = AVG_TEMPERATURES.today;
+  // const tomorrow = AVG_TEMPERATURES.tomorrow;
+  const {today, tomorrow} = AVG_TEMPERATURES;
   // End of what you should change
   return `Today's temperature is ${today}.\nTomorrow's temperature is ${tomorrow}`;
 }
