@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 const {
-  functionsToTest,
+  greeter,
   highestNumber,
   combineArray,
   combineObject,
@@ -10,6 +10,7 @@ const {
   getTempOfTmrw,
   addItems,
   removeDuplicates,
+  doubleValues,
 } = require("../00-review");
 
 const path = require("path");
@@ -41,8 +42,8 @@ describe("Greeter", () => {
     expect(fileContents).to.match(/import\s*Greeter\s*from/);
   });
   it("Greeter function should work, even after you move it to a different file", () => {
-    expect(functionsToTest.greeter).to.be.a("function");
-    const say = functionsToTest.greeter();
+    expect(greeter).to.be.a("function");
+    const say = greeter();
     expect(say.hello).to.be.a("function");
     const greeting = say.hello("Twinkle Toes");
     expect(greeting).to.equal("Hello Twinkle Toes!");
@@ -77,11 +78,9 @@ describe("combineObject", () => {
 
 describe("doubledValues", () => {
   it("should use Array.map to return an array where every number in the array is doubled", () => {
-    const doubledValues = doubleValues([2, 3, 4], (number) => {
-      return number * 2;
-    });
+    const doubledValues = doubleValues([2, 3, 4]);
     expect(doubledValues).to.have.all.members([4, 6, 8]);
-    const funcStr = doubledValues.toString();
+    const funcStr = doubleValues.toString();
     expect(funcStr).to.contain(".map");
   });
 });

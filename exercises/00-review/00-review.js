@@ -185,27 +185,24 @@ function removeDuplicates(array) {
  * Ignore this. It is for the tests.
  */
 
-export const functionsToTest = (() => {
-  let greeter;
-  try {
-    greeter = Greeter;
-  } catch (e) {
-    // Normally it is bad practice to not handle the error.
-    // However, I am just using try ... catch to get the unit test to work
-  }
-  return {
-    greeter,
-  };
-})();
-
+let greeter;
+try {
+  greeter = Greeter;
+} catch (e) {
+  // Normally it is bad practice to not handle the error.
+  // However, I am just using try ... catch to get the unit test to work
+}
 module.exports = {
+  greeter,
   highestNumber,
   combineArray,
   combineObject,
   doubleValues,
+  onlyEvenValues,
   removeVowels,
   getIsHungryText,
   getTempOfTmrw,
   addItems,
   removeDuplicates,
+  doubleValues,
 };
