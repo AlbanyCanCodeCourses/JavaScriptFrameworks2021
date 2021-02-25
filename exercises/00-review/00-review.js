@@ -81,7 +81,7 @@ Examples:
 const removeVowels = (string) => {
   string = string.toLocaleLowerCase();
   for (const letter of string) {
-    ['a','e','i','o','u'].forEach((vowel) => {
+    ['a','e','i','o','u','y'].forEach((vowel) => {
       (letter === vowel) ? (string = string.replace(letter, "")) : false ;
     });
   }
@@ -108,11 +108,7 @@ const getIsHungryText = () => {
   //don't change this variable
   let isStomachEmpty = false;
   /* convert this if else statement into a ternary expression */
-
-  let isHungry;
-  isStomachEmpty
-    ? (isHungry = "Go eat something.")
-    : (isHungry = "Keep coding!");
+  let isHungry = isStomachEmpty ? "Go eat something." : "Keep coding!"
 
   return isHungry;
 }
@@ -129,11 +125,7 @@ const getTempOfTmrw = () => {
     today: 77.5,
     tomorrow: 79,
   };
-
-  // Start of what you should change
-  // const today = AVG_TEMPERATURES.today;
-  // const tomorrow = AVG_TEMPERATURES.tomorrow;
-  // End of what you should change
+  
   return `Today's temperature is ${today}.\nTomorrow's temperature is ${tomorrow}`;
 }
 

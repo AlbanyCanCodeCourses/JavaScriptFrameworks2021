@@ -1,8 +1,13 @@
 import "./App.css";
-// import something here
+import React from 'react';
+import Images from './images/images';
 
-function App() {
-  return <div className="App">{/* Complete me */}</div>;
-}
+const App = () => {
+  return (
+  <div className="App">
+    <Images />
+    </div>
+    );
+};
 
 export default App;
