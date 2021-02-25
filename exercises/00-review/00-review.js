@@ -8,6 +8,7 @@
  *
  **/
 
+<<<<<<< HEAD
 function highestNumber(array) {
   let largestNum = array[0]
   for(let i = 0; i < array.length; i++){
@@ -17,6 +18,9 @@ function highestNumber(array) {
   }
   return largestNum;
 }
+=======
+function highestNumber(array) {}
+>>>>>>> 0c70692fd01c83c3207195e97c2de5a53dd3ac56
 
 /**
  * Refactor this to use ES6 Modules with default exports
