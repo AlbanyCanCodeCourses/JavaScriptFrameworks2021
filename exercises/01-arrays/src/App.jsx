@@ -7,7 +7,7 @@ import "./App.css"
 function App() {
   return <div className="App">{
     images.map((image, index)=>{
-    return images ? <img src={image} alt="The evolution of computers"/> : "uh-oh";
+    return images ? <img src={image} key = {`image-${index}`} alt="The evolution of computers"/> : "uh-oh";
   })}</div>;
   
 }
