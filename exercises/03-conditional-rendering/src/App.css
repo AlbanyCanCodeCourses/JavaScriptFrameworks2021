@@ -1,3 +1,8 @@
-/**
- * Write your CSS here
- */
+/* body {
+    text-align: center;
+} */
+body {
+  list-style-type: none;
+  display: table;
+  margin: 0 auto;
+}

@@ -1,8 +1,12 @@
 import "./App.css";
-// import something here
+import Welcome from './components/Welcome';
 
 function App() {
-  return <div className="App">{/* Complete me */}</div>;
+  return (
+    <div className="App">
+      <Welcome name="God"/>
+    </div>
+    )
 }
 
 export default App;

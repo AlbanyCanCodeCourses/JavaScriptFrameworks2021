@@ -1,0 +1,10 @@
+.title {
+    margin-left: 17%;
+}
+
+.container {
+    padding: 2%;
+    background-color: yellow;
+    margin-top: 6%;
+    box-shadow: 2px 8px 10px 1px gray;
+}
