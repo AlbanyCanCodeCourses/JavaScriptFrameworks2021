@@ -1,11 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 /*function Item(props) {
   return <li>{props.title}</li>;
 }*/
 
 const Todo = ({ todos, name = "", showCompleted, ...props }) => {
-  var trueArr = [];
+  const [state, setState] = useState({
+    isWorkCompleted: showCompleted,
+    notCompleted: [],
+  });
+
+  function filterNotCompleted() {
+    var arr = todos;
+
+    arr.prototype.forEach(function (e) {
+      state.notCompleted = state.notCompleted.concat(
+        e.todos.filter(function (c) {
+          return c.showCompleted === false;
+        })
+      );
+    });
+    console.log(state.notCompleted);
+  }
+  /*var trueArr = [];
   function hideUnCompleted() {
     for (var key in todos) {
       if (todos.showCompleted[key] === false) {
@@ -14,19 +31,19 @@ const Todo = ({ todos, name = "", showCompleted, ...props }) => {
         trueArr.push(key);
       }
     }
-  }
+  }*/
 
   useEffect(() => {
-    hideUnCompleted();
+    filterNotCompleted();
   });
 
   return (
     <div>
-      <ul>
+      {/*<ul>
         {trueArr.map(function (text, index) {
           return <li key={index}>{text.title}</li>;
         })}
-      </ul>
+      </ul>*/}
     </div>
   );
 };
