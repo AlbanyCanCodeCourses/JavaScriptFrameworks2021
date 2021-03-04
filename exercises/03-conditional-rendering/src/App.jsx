@@ -4,7 +4,7 @@ import { todos } from "./data/todos";
 // import another thing
 import Todo from "./Components/Todo";
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <Todo items={todos} showCompleted={false} />
