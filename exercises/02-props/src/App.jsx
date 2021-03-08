@@ -6,4 +6,4 @@ function App(props) {
   return <div className="App">{/* Complete me */ <Welcome name = "Patricia"/>}</div>;
 }
 
-export default App;
+export default App; 
