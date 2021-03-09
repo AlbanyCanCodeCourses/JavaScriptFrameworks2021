@@ -2,16 +2,43 @@ import { useState } from "react";
 import "./App.css";
 
 const GroceryList = () => {
+  const [groceryItems, setGroceryItems] = useState([]);
+  const [itemInput, setItemInput] = useState("");
+  const [priceInput, setPriceInput] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newGroceryItem = {
+      item: itemInput,
+      price: priceInput,
+    };
+    const newGroceryItems = [...groceryItems, newGroceryItem];
+
+    let total = newGroceryItems.reduce((acc, value) => {
+      return acc + parseInt(value.price);
+    }, 0);
+
+    setGroceryItems(newGroceryItems);
+    setItemInput("");
+    setPriceInput("");
+    setTotalPrice(total);
+  };
+
   return (
     <div className="container">
       <div className="card card-body bg-light mb-2">
-        <form method="POST" className="row g-3">
+        <form method="POST" className="row g-3" onSubmit={handleSubmit}>
           <div className="col">
             <input
               className="form-control"
               type="text"
               placeholder="Name of grocery item..."
               aria-label="Name of grocery item..."
+              required={true}
+              value={itemInput}
+              onChange={(event) => setItemInput(event.target.value)}
             />
           </div>
           <div className="col">
@@ -22,6 +49,9 @@ const GroceryList = () => {
               step=".01"
               placeholder="Cost of grocery item..."
               aria-label="Cost of grocery item..."
+              required={true}
+              value={priceInput}
+              onChange={(event) => setPriceInput(event.target.value)}
             />
           </div>
           <div className="col-md-auto">
@@ -42,23 +72,24 @@ const GroceryList = () => {
             </tr>
           </thead>
           <tbody>
-            {/**
-             * Complete me. (You can use something else instead of a table if you like)
-             * @example
-             * <tr>
-             *   <td>Toilet Paper</td>
-             *   <td>$1.99</td>
-             *   <td>
-             *     <button aria-label="Delete" title="Delete" ... >
-             *       &times;
-             *     </button>
-             *   </td>
-             * </tr>
-             */}
+            {groceryItems.map((groceryItem, index) => {
+              const { item, price } = groceryItem;
+              return (
+                <tr key={`grocery-item-${index}`}>
+                  <td>{item}</td>
+                  <td>{price}</td>
+                  <td>
+                    <button aria-label="Delete" title="Delete">
+                      &times;
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <p className="lead">
-          <strong>Total Cost: {/* Complete me */}</strong>
+          <strong>Total Cost: {totalPrice}</strong>
         </p>
         <div className="d-flex justify-content-end">
           <button type="button" className="btn btn-outline-success">
