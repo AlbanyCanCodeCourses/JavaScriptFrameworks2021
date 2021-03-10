@@ -2,16 +2,54 @@ import { useState } from "react";
 import "./App.css";
 
 const GroceryList = () => {
+  // groceryList = [{name: 'name', price: $}, ...]
+  const [ groceryList, setGroceryList ] = useState([]);
+  // currentItem = {name: 'name', price: $}
+  const [ currentItem, setCurrentItem ] = useState({});
+  // Reset groceryList to empty array
+  const clearGroceryList = () => setGroceryList([]);
+  // Remove a single item from groceryList
+  const removeItem = (name, price) => {
+    console.log(`Removing ${name} ($${price})`)
+
+    // This filters out all instances of a given item tuple, even if intentionaly duplicate
+    const newGroceryList = groceryList.filter(item => !((item.name === name) && (item.price === price)))
+
+    // The long way lol
+    // let newGroceryList = [];
+    // let trash;
+    // for (let item of groceryList) {
+    //   // One-time filter out function
+    //   (!trash && item.name === name && item.price === price) && trash.push(item)
+    // }
+
+    
+
+    setGroceryList(newGroceryList);
+  }
+
+  // Handle submit
+  const addItem = event => {
+    event.preventDefault();
+    // Check current item for completeness
+    // Clone existing, add new
+    (currentItem.name && currentItem.price) && setGroceryList([...groceryList, currentItem]);
+    console.log(groceryList, currentItem)
+  }
   return (
     <div className="container">
       <div className="card card-body bg-light mb-2">
-        <form method="POST" className="row g-3">
+        <form method="POST" className="row g-3" onSubmit={event => addItem(event)}>
           <div className="col">
             <input
               className="form-control"
               type="text"
               placeholder="Name of grocery item..."
               aria-label="Name of grocery item..."
+              onChange={event => setCurrentItem({
+                ...currentItem,
+                name: event.target.value,
+              })}
             />
           </div>
           <div className="col">
@@ -22,6 +60,10 @@ const GroceryList = () => {
               step=".01"
               placeholder="Cost of grocery item..."
               aria-label="Cost of grocery item..."
+              onChange={event => setCurrentItem({
+                ...currentItem,
+                price: event.target.value,
+              })}
             />
           </div>
           <div className="col-md-auto">
@@ -42,26 +84,33 @@ const GroceryList = () => {
             </tr>
           </thead>
           <tbody>
-            {/**
-             * Complete me. (You can use something else instead of a table if you like)
-             * @example
-             * <tr>
-             *   <td>Toilet Paper</td>
-             *   <td>$1.99</td>
-             *   <td>
-             *     <button aria-label="Delete" title="Delete" ... >
-             *       &times;
-             *     </button>
-             *   </td>
-             * </tr>
-             */}
+            {
+              // For each item in groceryList, map a table row
+              groceryList.map((item, index) => 
+                <tr key={`${item}${index}`}>
+                  <td>{item.name}</td>
+                  <td>{item.price}</td>
+                  <td>
+                    <button
+                      className="btn btn-sm btn-danger"
+                      aria-label="Delete" 
+                      title="Delete" 
+                      onClick={// Filter this entry out
+                        () => removeItem(item.name, item.price)
+                      }
+                      >Remove
+                    </button>
+                  </td>
+                </tr>
+              )
+            }
           </tbody>
         </table>
         <p className="lead">
-          <strong>Total Cost: {/* Complete me */}</strong>
+          <strong>Total Cost: {groceryList.reduce((accumulator, item) => (parseFloat(accumulator) + parseFloat(item.price)).toFixed(2), 0)}</strong>
         </p>
         <div className="d-flex justify-content-end">
-          <button type="button" className="btn btn-outline-success">
+          <button type="button" className="btn btn-outline-success" onClick={event => clearGroceryList(event)}> 
             Clear
           </button>
         </div>
