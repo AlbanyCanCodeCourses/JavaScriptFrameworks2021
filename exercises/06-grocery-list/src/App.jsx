@@ -9,35 +9,21 @@ const GroceryList = () => {
   // Reset groceryList to empty array
   const clearGroceryList = () => setGroceryList([]);
   // Remove a single item from groceryList
-  const removeItem = (name, price) => {
-    console.log(`Removing ${name} ($${price})`)
-
-    // This filters out all instances of a given item tuple, even if intentionaly duplicate
-    const newGroceryList = groceryList.filter(item => !((item.name === name) && (item.price === price)))
-
-    // The long way lol
-    // let newGroceryList = [];
-    // let trash;
-    // for (let item of groceryList) {
-    //   // One-time filter out function
-    //   (!trash && item.name === name && item.price === price) && trash.push(item)
-    // }
-
-    
-
+  const removeItem = (itemIndex) => {
+    // Filter out the item at desired index
+    const newGroceryList = groceryList.filter((item, index) => !(index === itemIndex));
     setGroceryList(newGroceryList);
   }
 
   // Handle submit
   const addItem = event => {
     event.preventDefault();
-    // Check current item for completeness
-    // Clone existing, add new
+    // Check current item for completeness before setting
     (currentItem.name && currentItem.price) && setGroceryList([...groceryList, currentItem]);
-    console.log(groceryList, currentItem)
   }
+
   return (
-    <div className="container">
+    <div className="container mt-5">
       <div className="card card-body bg-light mb-2">
         <form method="POST" className="row g-3" onSubmit={event => addItem(event)}>
           <div className="col">
@@ -87,7 +73,7 @@ const GroceryList = () => {
             {
               // For each item in groceryList, map a table row
               groceryList.map((item, index) => 
-                <tr key={`${item}${index}`}>
+                <tr key={index}>
                   <td>{item.name}</td>
                   <td>{item.price}</td>
                   <td>
@@ -96,7 +82,7 @@ const GroceryList = () => {
                       aria-label="Delete" 
                       title="Delete" 
                       onClick={// Filter this entry out
-                        () => removeItem(item.name, item.price)
+                        () => removeItem(index)
                       }
                       >Remove
                     </button>
