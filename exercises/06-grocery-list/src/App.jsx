@@ -2,10 +2,32 @@ import { useState } from "react";
 import "./App.css";
 
 const GroceryList = () => {
+  const [groceryItem, setGroceryItem] = useState([
+    {item: 'itemName',
+    cost: 'price'
+   }
+   
+  ]);
+
+  
+  function newGroceryItem(item, index){
+    setGroceryItem([...groceryItem, {item: "", cost: ""}])
+  }
+  function addGroceryItem(userInput, index){
+    const newGroceryItem = [...groceryItem];
+    newGroceryItem[index] = userInput;
+    setGroceryItem(newGroceryItem);
+  }
+  function handleForm(e){
+    e.preventDefault();
+
+  }
+
+
   return (
     <div className="container">
       <div className="card card-body bg-light mb-2">
-        <form method="POST" className="row g-3">
+        <form onSubmit = {handleForm} method="POST" className="row g-3">
           <div className="col">
             <input
               className="form-control"
@@ -42,7 +64,14 @@ const GroceryList = () => {
             </tr>
           </thead>
           <tbody>
-            {/**
+            {
+              <tr>
+                <td>{}</td>
+                <th>{}</th>
+                </tr>
+              
+              
+            /**
              * Complete me. (You can use something else instead of a table if you like)
              * @example
              * <tr>
@@ -58,10 +87,10 @@ const GroceryList = () => {
           </tbody>
         </table>
         <p className="lead">
-          <strong>Total Cost: {/* Complete me */}</strong>
+          <strong>Total Cost: {/*complete  me*/ }</strong>
         </p>
         <div className="d-flex justify-content-end">
-          <button type="button" className="btn btn-outline-success">
+          <button  type="button" className="btn btn-outline-success">
             Clear
           </button>
         </div>

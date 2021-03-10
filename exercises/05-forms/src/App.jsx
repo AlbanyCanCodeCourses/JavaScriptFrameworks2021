@@ -1,11 +1,18 @@
 import { useState } from "react";
 import "./App.css";
+import countries from "./assets/countries.json"
+import states from "./assets/states.json"
 // Import data from "assets/countries.json" and "assets/states.json" here
 
 function App() {
+  const [state, setState] = useState(""); 
+  const [country, setCountry] = useState("");
+  function handleForm(e){
+    e.preventDefault()
+  }
   return (
-    <form className="container mt-4" method="POST">
-      {/* You will need to handle form submission */}
+    <form onSubmit = {handleForm}className="container mt-4" method="POST">
+      {}
       <div className="mb-3">
         <label htmlFor="firstName" className="control-label">
           First Name
@@ -53,8 +60,9 @@ function App() {
         <label htmlFor="state" className="control-label">
           State / Province / Region
         </label>
-        {/* Loop through the states you imported here */}
-        <select id="state" name="state" className="form-control" />
+        { 
+        }
+        <select value={state} onChange = {states.map( (individualState)=>{ <option></option>})}id="state" name="state" className="form-control" />
       </div>
 
       <div className="mb-3">
@@ -73,8 +81,12 @@ function App() {
         <label htmlFor="country" className="control-label">
           Country
         </label>
-        {/* Loop through the countries you imported here */}
-        <select id="country" name="country" className="form-control" />
+        
+        {
+        
+        }        
+        
+        <select id="country" name="country" className="form-control"  ></select>
       </div>
       <button type="submit" className="btn btn-primary">
         Submit
