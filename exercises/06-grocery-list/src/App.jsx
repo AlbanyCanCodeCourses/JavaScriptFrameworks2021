@@ -5,25 +5,29 @@ const GroceryList = () => {
   const [groceryItems, setGroceryItems] = useState([]);
   const [itemInput, setItemInput] = useState("");
   const [priceInput, setPriceInput] = useState("");
-  const [totalPrice, setTotalPrice] = useState(0);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const newGroceryItem = {
+    let newGroceryItem = {
       item: itemInput,
       price: priceInput,
     };
-    const newGroceryItems = [...groceryItems, newGroceryItem];
-
-    let total = newGroceryItems.reduce((acc, value) => {
-      return acc + parseInt(value.price);
-    }, 0);
+    let newGroceryItems = [...groceryItems, newGroceryItem];
 
     setGroceryItems(newGroceryItems);
     setItemInput("");
     setPriceInput("");
-    setTotalPrice(total);
+  };
+
+  const deleteItem = (index) => {
+    setGroceryItems(
+      groceryItems.filter((groceryItem, currentIndex) => currentIndex !== index)
+    );
+  };
+
+  const clearList = () => {
+    setGroceryItems([]);
   };
 
   return (
@@ -79,7 +83,11 @@ const GroceryList = () => {
                   <td>{item}</td>
                   <td>{price}</td>
                   <td>
-                    <button aria-label="Delete" title="Delete">
+                    <button
+                      aria-label="Delete"
+                      title="Delete"
+                      onClick={() => deleteItem(index)}
+                    >
                       &times;
                     </button>
                   </td>
@@ -89,10 +97,19 @@ const GroceryList = () => {
           </tbody>
         </table>
         <p className="lead">
-          <strong>Total Cost: {totalPrice}</strong>
+          <strong>
+            Total Cost:{" "}
+            {Object.values(groceryItems).reduce((total, item) => {
+              return total + parseInt(item.price);
+            }, 0)}
+          </strong>
         </p>
         <div className="d-flex justify-content-end">
-          <button type="button" className="btn btn-outline-success">
+          <button
+            type="button"
+            className="btn btn-outline-success"
+            onClick={clearList}
+          >
             Clear
           </button>
         </div>
