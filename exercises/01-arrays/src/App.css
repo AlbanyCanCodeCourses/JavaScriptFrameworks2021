@@ -1,3 +1,13 @@
 /**
  * Write your CSS here
  */
+.App div {
+    display: inline-block;
+}
+img {
+    width: 200px;
+    height: 200px;
+}
+body {
+    background-color: #a9a9a9;
+}

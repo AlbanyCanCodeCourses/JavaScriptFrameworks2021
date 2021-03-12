@@ -1,15 +1,16 @@
-import { render } from "@testing-library/react";
 import React from "react";
 
-function Todo(todos, showCompleted) { 
-                
-                   const listItems = todos.map((x) => {
-                        {x.completed=true ?  <div className="page1"> <li>{x.title}</li></div> : <div className="page2"><li>{x.title}</li></div>}
-                        }
-                    )
-                    return (<ul>{listItems}</ul>);
-        };
-
+function Todo(props) { 
+    return <ul>          
+    {props.todos.filter((todo) => {
+        return props.showCompleted ? todo.completed : true; })   
+        // if ((props.showCompleted && todo.completed)) || 
+        // !props.showCompleted) {        
+        // .map((todo, idx) => {}      
+        // return <li key={`todo-item-${idx}`}>{todo.title}</li>;
+    }
+ </ul>
+}
 export default Todo;
     
 
