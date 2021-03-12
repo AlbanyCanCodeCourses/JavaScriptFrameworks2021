@@ -3,66 +3,44 @@ import "./App.css";
 
 const GroceryList = () => {
   const [list, setList] = useState([
-    {
-      name: "Toliet Paper",
-      cost: 2.50
-    }
-  ])
-  const [name, setName] = useState();
-  const [cost , setCost] = useState();
+    { name: "Toilet Paper", cost: 10000000.99 },
+    { name: "Tooth Paste", cost: 1.99 },
+  ]);
+  const [name, setName] = useState("");
+  const [cost, setCost] = useState("");
 
-  const handleClear = () => {
-    setList([]);
-  }
+  const add = () => {
+    setList([...list, { name: name, cost: cost }]);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleList();
-    console.log("handleSubmit:","Name:",name,"cost:", cost,"list:", list);
-  }
-
-  const handleList = () => {
-    setList(
-      [...list, {name: name,  cost: cost}]
-    )
-  }
-
-  const handleDelete = (indexDel) => {
-    setList(list.filter((item, index)=> index !== indexDel))
-  }
-  
+    add();
+  };
   return (
     <div className="container">
       <div className="card card-body bg-light mb-2">
-        <form
-          method="POST"
-          className="row g-3"
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
+        <form onSubmit={handleSubmit} method="POST" className="row g-3">
           <div className="col">
             <input
-              name="Item Name"
               className="form-control"
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
               placeholder="Name of grocery item..."
               aria-label="Name of grocery item..."
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="col">
             <input
-              name="Cost"
               className="form-control"
               type="number"
               min="0"
               step=".01"
-              value={cost}
-              onChange={(e) => setCost(e.target.value)}
               placeholder="Cost of grocery item..."
               aria-label="Cost of grocery item..."
+              value={cost}
+              onChange={(e) => setCost(e.target.value)}
             />
           </div>
           <div className="col-md-auto">
@@ -83,18 +61,20 @@ const GroceryList = () => {
             </tr>
           </thead>
           <tbody>
-            {list.map((item, index) => {
-              // console.log(index)
+            {/*
+            const [list, setList] = useState([
+              * [
+              { name: 'Toilet Paper', cost: 10000000.99 },
+              { name: 'Tooth Paste', cost: 1.99 }
+            ]
+            */}
+            {list.map((item, idx) => {
               return (
-                <tr key={'grocery-item-' + index}>
+                <tr key={`grocery-item-${idx}`}>
                   <td>{item.name}</td>
                   <td>{item.cost}</td>
                   <td>
-                    <button
-                      onClick={() => handleDelete(index)}
-                      aria-label="Delete"
-                      title="Delete"
-                    >
+                    <button aria-label="Delete" title="Delete">
                       &times;
                     </button>
                   </td>
@@ -104,18 +84,10 @@ const GroceryList = () => {
           </tbody>
         </table>
         <p className="lead">
-          <strong>
-            Total Cost:{" "}
-            {Array.from(list.map((object) => Number(object.cost))).reduce(
-              (acc, el) => {
-                return acc + el;
-              },
-              0
-            )}
-          </strong>
+          <strong>Total Cost: {/* Complete me */}</strong>
         </p>
         <div className="d-flex justify-content-end">
-          <button onClick={handleClear} className="btn btn-outline-success">
+          <button type="button" className="btn btn-outline-success">
             Clear
           </button>
         </div>
