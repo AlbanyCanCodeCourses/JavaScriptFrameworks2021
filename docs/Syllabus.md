@@ -84,9 +84,7 @@ If you do not turn in your projects, you may not receive a certificate of comple
 
 In addition to your projects, you will be completing in-class and take-home assignments. We will not grade the assignments, but you must complete 80% of your work in order to get a certificate of completion. We will ask you to submit your work through GitHub pull requests so that we can view your progress.
 
-You can find a list of what the assignments are and when they are do inside our class feed in Teams. To view, click on the "Teams" icon in the sidebar, select the JavaScript Frameworks - Spring 2021 Team, and then click on the "General" tab on the left.
-
-![How to view your assignments in Teams](img/teams-assignments.png)
+You can find a list of what the assignments are inside of our Slack channel _#jsframeworks-2021_.
 
 ### Getting Help
 
@@ -104,7 +102,7 @@ If you must drop the course, please contact Annmarie Lanesey at annmarie@albanyc
 
 **Important Note:** This schedule, along with course assignments and due dates are subject to change. It is the student’s responsibility to check the Slack channel, course materials and updates to the syllabus. Any changes will be clearly noted in course announcements.
 
-### Weeks 1 - 4
+### Weeks 1 - 3
 
 During the first few weeks, we will learn the basics of React. Our lectures will introduce:
 
@@ -115,14 +113,14 @@ During the first few weeks, we will learn the basics of React. Our lectures will
 - Events in React
 - Forms in React
 
-### Week 5
+### Week 4
 
 We will then looks into some out-of-the-box ways in which you can share state between React components. We will teach:
 
 - Lifting State Up
 - Context API
 
-### Week 6
+### Week 5
 
 In the beginning of the second half of the class, we will learn about how to handle AJAX and asynchronous code within React. We will also talk how and when to break out of the normal React flow.
 
@@ -131,7 +129,7 @@ In the beginning of the second half of the class, we will learn about how to han
 - AJAX and Asynchronous Code in React
 - Suspense
 
-### Weeks 7 - 8
+### Weeks 6 - 7
 
 Next, we will cover setting up and structuring your application. We will learn about the common problems you will need to solve to build your application.
 
@@ -140,7 +138,7 @@ Next, we will cover setting up and structuring your application. We will learn a
 - JWT Tokens
 - Environments and Configuration
 
-### Weeks 9 - 10
+### Weeks 8 - 9
 
 If you join a development team that already has an older codebase, you may need to support older systems like the React Classes and Redux. This section will prepare you for:
 
@@ -150,7 +148,7 @@ If you join a development team that already has an older codebase, you may need 
 - Redux
 - Redux Thunk
 
-### Week 11
+### Weeks 10 - 11
 
 In the final week, we will discuss unit testing as well miscellaneous development operations stuff you will need to know to share your application with the world. Here is what we will teach, time permitting:
 
