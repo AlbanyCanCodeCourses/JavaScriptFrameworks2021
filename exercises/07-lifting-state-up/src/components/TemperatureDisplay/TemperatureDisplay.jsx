@@ -14,7 +14,7 @@ const TemperatureDisplay = ({temp, scale}) => {
 }
 
 TemperatureDisplay.propTypes = {
-  temperature: PropTypes.number.isRequired,
+  temp: PropTypes.number.isRequired,
   scale: PropTypes.string.isRequired,
 };
 
