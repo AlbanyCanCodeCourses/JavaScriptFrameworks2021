@@ -6,13 +6,7 @@ import AddressResults from "../AddressResults/AddressResults";
 function App() {
   const [displayResults, setDisplayResults] = useState(false);
   const [form, setForm ] = useState({
-    firstName: '',
-    lastName: '',
-    address: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    country: '',
+
   });
   /**
    * You will need to call on useState here for form fields

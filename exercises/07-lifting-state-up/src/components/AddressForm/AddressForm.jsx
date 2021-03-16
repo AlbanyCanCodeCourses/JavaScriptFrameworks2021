@@ -41,7 +41,7 @@ function AddressForm({setDisplayResults, form, setForm}) {
           type="text"
           className="form-control"
           onChange={(e) => {
-            setForm({ ...form, firstName: e.target.value });
+            setForm({ ...form, "First Name": e.target.value });
           }}
         />
       </div>
@@ -55,7 +55,7 @@ function AddressForm({setDisplayResults, form, setForm}) {
           type="text"
           className="form-control"
           onChange={(e) => {
-            setForm({ ...form, lastName: e.target.value });
+            setForm({ ...form, "Last Name": e.target.value });
           }}
         />
       </div>
@@ -69,7 +69,7 @@ function AddressForm({setDisplayResults, form, setForm}) {
           type="text"
           className="form-control"
           onChange={(e) => {
-            setForm({ ...form, address: e.target.value });
+            setForm({ ...form, "Address": e.target.value });
           }}
         />
         <p className="help-block text-muted">
@@ -87,7 +87,7 @@ function AddressForm({setDisplayResults, form, setForm}) {
           type="text"
           className="form-control"
           onChange={(e) => {
-            setForm({ ...form, city: e.target.value });
+            setForm({ ...form, "City": e.target.value });
           }}
         />
       </div>
@@ -100,7 +100,7 @@ function AddressForm({setDisplayResults, form, setForm}) {
           name="state"
           className="form-control"
           onChange={(e) => {
-            setForm({ ...form, state: e.target.value });
+            setForm({ ...form, "State": e.target.value });
           }}
         >
           <option></option>
@@ -120,7 +120,7 @@ function AddressForm({setDisplayResults, form, setForm}) {
           type="text"
           className="form-control"
           onChange={(e) => {
-            setForm({ ...form, zipCode: e.target.value });
+            setForm({ ...form, "Zip Code": e.target.value });
           }}
         />
       </div>
@@ -134,7 +134,7 @@ function AddressForm({setDisplayResults, form, setForm}) {
           name="country"
           className="form-control"
           onChange={(e) => {
-            setForm({ ...form, country: e.target.value });
+            setForm({ ...form, "Country": e.target.value });
           }}
         >
           <option></option>
