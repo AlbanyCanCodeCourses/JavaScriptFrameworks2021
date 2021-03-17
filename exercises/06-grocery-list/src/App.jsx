@@ -2,9 +2,9 @@ import { useState } from "react";
 import "./App.css";
 
 const GroceryList = () => {
-  // groceryList = [{name: 'name', price: $}, ...]
+  // groceryList = [{name: 'name', price: 0.00}, ...]
   const [ groceryList, setGroceryList ] = useState([]);
-  // currentItem = {name: 'name', price: $}
+  // currentItem = {name: 'name', price: 0.00}
   const [ currentItem, setCurrentItem ] = useState({});
   // Reset groceryList to empty array
   const clearGroceryList = () => setGroceryList([]);
@@ -73,18 +73,16 @@ const GroceryList = () => {
             {
               // For each item in groceryList, map a table row
               groceryList.map((item, index) => 
-                <tr key={index}>
+                <tr key={`${item.name}-${index}`}>
                   <td>{item.name}</td>
                   <td>{item.price}</td>
-                  <td>
+                  <td className="d-flex justify-content-end">
                     <button
                       className="btn btn-sm btn-danger"
                       aria-label="Delete" 
                       title="Delete" 
-                      onClick={// Filter this entry out
-                        () => removeItem(index)
-                      }
-                      >Remove
+                      onClick={() => removeItem(index)}>
+                        Remove
                     </button>
                   </td>
                 </tr>
@@ -93,7 +91,7 @@ const GroceryList = () => {
           </tbody>
         </table>
         <p className="lead">
-          <strong>Total Cost: {groceryList.reduce((accumulator, item) => (parseFloat(accumulator) + parseFloat(item.price)).toFixed(2), 0)}</strong>
+          <strong>Total Cost: ${groceryList.reduce((accumulator, item) => (parseFloat(accumulator) + parseFloat(item.price)).toFixed(2), 0)}</strong>
         </p>
         <div className="d-flex justify-content-end">
           <button type="button" className="btn btn-outline-success" onClick={event => clearGroceryList(event)}> 
