@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 function TemperatureScale(props) {
   // Complete me
-  return <></>;
+  return <>  </>;
 }
 
 TemperatureScale.propTypes = {
@@ -10,3 +10,4 @@ TemperatureScale.propTypes = {
 };
 
 export default TemperatureScale;
+ 
