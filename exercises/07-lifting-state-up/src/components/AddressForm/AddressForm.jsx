@@ -152,7 +152,8 @@ function AddressForm({setDisplayResults, form, setForm}) {
 
 AddressForm.propTypes = {
   setDisplayResults: PropTypes.func.isRequired,
-  // And others that you will need to pass in
+  form: PropTypes.object,
+  setForm: PropTypes.func
 };
 
 export default AddressForm;
