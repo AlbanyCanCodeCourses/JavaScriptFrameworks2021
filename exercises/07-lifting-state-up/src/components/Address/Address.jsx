@@ -29,7 +29,7 @@ function App() {
    */ 
 
   /**
-   * You will need to pass props to <AddressResults /> and <AddressForm />
+   * You will need to pass props to <AddressResults /> and <AddressForm /> 
    */
   return <>{displayResults ? <AddressResults firstName={firstName} lastName = {lastName} address = {address} city ={city} yourState = {yourState} zipCode = {zipCode} country = {country}/> : <AddressForm handleForm={handleForm} setFirstName = {setFirstName} setLastName = {setLastName} setAddress = {setAddress} setCity = {setCity} setYourState = {setYourState} setZipCode = {setZipCode} setCountry = {setCountry} firstName = {firstName} lastName = {lastName} address = {address} city = {city} yourState = {yourState} zipCode = {zipCode} country = {country} />}</>;
 }

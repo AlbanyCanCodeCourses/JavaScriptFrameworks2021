@@ -2,27 +2,60 @@
 import { useState } from "react";
 import "./App.css";
 import translations from "./assets/translations.json";
+import { useContext, createContext } from 'react';
+import DisplayInfo from '../src/components/DisplayInfo'
+ 
+
+const languageContext = createContext();
 
 /**
  * Declare createContext() here.
  */
 
 function App() {
+  
   /**
    * Set state here. (See useState in "CreateAccount" below.)
    */
+   const [language, setLanguage] = useState("en");
+   
+ 
 
   /**
    * You will need to return more than just <CreateAccount />.
    */
-  return <CreateAccount />;
+  return<>(
+    
+    <languageContext.Provider value = {{language, setLanguage}} >
+     <CreateAccount />;
+     </languageContext.Provider>
+  
+  )</>
 }
 
 function CreateAccount() {
   /**
    * You will need to replace "useState" with something else.
    */
-  const [language, setLanguage] = useState("en");
+  const {language, setLanguage} = useContext(languageContext);
+ 
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail]= useState('');
+  const [password, setPassword] = useState('');
+  const [displayInfo, setDisplayInfo] = useState(false);
+
+  const handleForm = (e) =>{
+    e.preventDefault();
+    setDisplayInfo(true)
+    
+
+  }
+ 
+  // return(
+  //   displayInfo ? setDisplayInfo(true) : console.log('it doesn"t work')
+  // )
+  
 
   /**
    * @see src/assets/translations.json
@@ -40,7 +73,7 @@ function CreateAccount() {
    * }
    */
   const t = translations[language];
-
+  
   /**
    * You will not need to change anything below this line.
    */
@@ -69,24 +102,31 @@ function CreateAccount() {
           </button>
         </div>
       </div>
-      <form>
+      <form onSubmit={handleForm}>
         <div className="row g-3">
           <div className="col-sm-6">
             <label htmlFor="firstName">{t["First Name"]}</label>
             <input
+              required
               type="text"
               className="form-control"
               id="firstName"
               name="firstName"
+              value = {firstName}
+              onChange = {(e)=>{setFirstName(e.target.value)}}
+
             />
           </div>
           <div className="col-sm-6">
             <label htmlFor="lastName">{t["Last Name"]}</label>
             <input
+              required
               type="text"
               className="form-control"
               id="lastName"
               name="lastName"
+              value = {lastName}
+              onChange = {(e)=>setLastName(e.target.value)}
             />
           </div>
         </div>
@@ -94,10 +134,13 @@ function CreateAccount() {
           <div className="col-sm-6">
             <label htmlFor="email">{t["Email"]}</label>
             <input
+             required
               type="email"
               className="form-control"
               id="email"
               name="email"
+              value = {email}
+              onChange = {(e)=>setEmail(e.target.value)}
             />
           </div>
         </div>
@@ -105,10 +148,13 @@ function CreateAccount() {
           <div className="col-sm-6">
             <label htmlFor="password">{t["Password"]}</label>
             <input
+              required
               type="password"
               className="form-control"
               id="password"
               name="password"
+              value = {password}
+              onChange = {(e)=>setPassword(e.target.value)}
             />
           </div>
         </div>
@@ -125,8 +171,10 @@ function CreateAccount() {
           {t["Sign Up"]}
         </button>
       </form>
+     {displayInfo ? <DisplayInfo firstName ={firstName} lastName={lastName} email={email} password={password}/> : console.log('oops')}
     </div>
   );
+  
 }
 
 export default App;
