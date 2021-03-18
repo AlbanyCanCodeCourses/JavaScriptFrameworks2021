@@ -59,7 +59,6 @@ const clear = () => {
   // input => (input.value =""));
     setList([])
 };
-
 // const validLabelorPrice = RegExp(
 //   "ab+c", "i"
 // );
@@ -68,6 +67,18 @@ const clear = () => {
 //   Object.values(errors).forEach(val => val.length > 0 & (valid = false));
 //   return valid;
 // }
+
+const validateItem = () => {
+  console.log(name)
+  if(!name.length>0){
+    alert("Item must be greater than 0 characters!")
+  }
+} 
+const validateCost = () => {
+  if(!cost>0){
+    alert("Cost must be greater than 0!")
+  }
+}
 const handleSubmit = (e) => {
   e.preventDefault();
   // const {key, value} = e.target
@@ -83,6 +94,8 @@ const handleSubmit = (e) => {
   //     break;
   // }
   add()
+  validateItem()
+  validateCost()
 }
 
 
@@ -135,7 +148,7 @@ const handleSubmit = (e) => {
 
             {list.map((item, idx) => {
             return( 
-            <tr key={"grocery-item-${idx}"}>
+            <tr key={`grocery-item-${idx}`}>
               <td>{item.name}</td>
               <td>{item.cost}</td>
               <td>

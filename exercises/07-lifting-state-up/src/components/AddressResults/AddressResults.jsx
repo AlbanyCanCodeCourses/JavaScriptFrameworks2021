@@ -9,11 +9,14 @@
  * - zipcode / postal code
  * - country
  */
-function AddressResults(props) {
+function AddressResults(formValues) {
   return (
     <div className="card card-body bg-light mt-4 mb-4">
       Results:
-      <ul className="list-unstyled mb-0">{/* Add <li></li> tags here */}</ul>
+      <ul className="list-unstyled mb-0">{Object.values(formValues).map((formValue,index) => {
+        return <li key={`form-value-${index}`}>{formValue}</li>
+      })}
+      </ul>
     </div>
   );
 }
