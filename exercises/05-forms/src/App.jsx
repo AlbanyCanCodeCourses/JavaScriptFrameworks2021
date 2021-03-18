@@ -58,7 +58,7 @@ function App() {
         </label>
         <input
           id="addressLine1"
-          name="addressLine1"
+          name="address"
           type="text"
           className="form-control"
           value={state.address}
@@ -85,7 +85,7 @@ function App() {
         <select id="state" name="state" className="form-control" value={state.state}
           onChange = {handleChange}>{states.map((x) => {
           return(
-            <option value="value">{x}</option>
+            <option value={x}>{x}</option>
           )})}</select>
       </div>
 
@@ -95,7 +95,7 @@ function App() {
         </label>
         <input
           id="postalCode"
-          name="postalCode"
+          name="zip"
           type="text"
           className="form-control"
           value={state.zip}
@@ -111,7 +111,7 @@ function App() {
         <select id="country" name="country" className="form-control"value={state.country}
           onChange = {handleChange}>{countries.map((x) => {
           return(
-            <option value="value">{x}</option>
+            <option value={x}>{x}</option>
           )})}</select>
       </div>
       <button type="submit" className="btn btn-primary">
