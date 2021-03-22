@@ -5,15 +5,25 @@ import AddressResults from "../AddressResults/AddressResults";
 
 function App() {
   const [displayResults, setDisplayResults] = useState(false);
-  /**
-   * You will need to call on useState here for form fields
-   * e.g. first name, last name, etc.
-   */
+  const [formValues, setFormValues] = useState({});
 
-  /**
-   * You will need to pass props to <AddressResults /> and <AddressForm />
-   */
-  return <>{displayResults ? <AddressResults /> : <AddressForm />}</>;
+  // Take a key and value, update value at key (create if doesn't exist yet)
+  const updateFormValue = (key, value) => {
+    const newFormValues = {
+      ...formValues,
+      [key]: value
+    }
+    setFormValues(newFormValues);
+    console.log(newFormValues)
+  }
+
+  return (
+    <>
+      {displayResults 
+        ? <AddressResults formValues={formValues}/>
+        : <AddressForm setDisplayResults={() => setDisplayResults(true)} formValues={formValues} updateFormValue={updateFormValue}/>}
+    </>
+  );
 }
 
 export default App;

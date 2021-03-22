@@ -2,16 +2,40 @@ import { useState } from "react";
 import "./App.css";
 
 const GroceryList = () => {
+  // groceryList = [{name: 'name', price: 0.00}, ...]
+  const [ groceryList, setGroceryList ] = useState([]);
+  // currentItem = {name: 'name', price: 0.00}
+  const [ currentItem, setCurrentItem ] = useState({});
+  // Reset groceryList to empty array
+  const clearGroceryList = () => setGroceryList([]);
+  // Remove a single item from groceryList
+  const removeItem = (itemIndex) => {
+    // Filter out the item at desired index
+    const newGroceryList = groceryList.filter((item, index) => !(index === itemIndex));
+    setGroceryList(newGroceryList);
+  }
+
+  // Handle submit
+  const addItem = event => {
+    event.preventDefault();
+    // Check current item for completeness before setting
+    (currentItem.name && currentItem.price) && setGroceryList([...groceryList, currentItem]);
+  }
+
   return (
-    <div className="container">
+    <div className="container mt-5">
       <div className="card card-body bg-light mb-2">
-        <form method="POST" className="row g-3">
+        <form method="POST" className="row g-3" onSubmit={event => addItem(event)}>
           <div className="col">
             <input
               className="form-control"
               type="text"
               placeholder="Name of grocery item..."
               aria-label="Name of grocery item..."
+              onChange={event => setCurrentItem({
+                ...currentItem,
+                name: event.target.value,
+              })}
             />
           </div>
           <div className="col">
@@ -22,6 +46,10 @@ const GroceryList = () => {
               step=".01"
               placeholder="Cost of grocery item..."
               aria-label="Cost of grocery item..."
+              onChange={event => setCurrentItem({
+                ...currentItem,
+                price: event.target.value,
+              })}
             />
           </div>
           <div className="col-md-auto">
@@ -42,26 +70,31 @@ const GroceryList = () => {
             </tr>
           </thead>
           <tbody>
-            {/**
-             * Complete me. (You can use something else instead of a table if you like)
-             * @example
-             * <tr>
-             *   <td>Toilet Paper</td>
-             *   <td>$1.99</td>
-             *   <td>
-             *     <button aria-label="Delete" title="Delete" ... >
-             *       &times;
-             *     </button>
-             *   </td>
-             * </tr>
-             */}
+            {
+              // For each item in groceryList, map a table row
+              groceryList.map((item, index) => 
+                <tr key={`${item.name}-${index}`}>
+                  <td>{item.name}</td>
+                  <td>{item.price}</td>
+                  <td className="d-flex justify-content-end">
+                    <button
+                      className="btn btn-sm btn-danger"
+                      aria-label="Delete" 
+                      title="Delete" 
+                      onClick={() => removeItem(index)}>
+                        Remove
+                    </button>
+                  </td>
+                </tr>
+              )
+            }
           </tbody>
         </table>
         <p className="lead">
-          <strong>Total Cost: {/* Complete me */}</strong>
+          <strong>Total Cost: ${groceryList.reduce((accumulator, item) => (parseFloat(accumulator) + parseFloat(item.price)).toFixed(2), 0)}</strong>
         </p>
         <div className="d-flex justify-content-end">
-          <button type="button" className="btn btn-outline-success">
+          <button type="button" className="btn btn-outline-success" onClick={event => clearGroceryList(event)}> 
             Clear
           </button>
         </div>

@@ -8,7 +8,7 @@
  *
  **/
 
-function highestNumber(array) {}
+const highestNumber = array => array.reduce((max, current) => current > max ? current : max, Number.NEGATIVE_INFINITY);
 
 /**
  * Refactor this to use ES6 Modules with default exports
@@ -22,13 +22,10 @@ function highestNumber(array) {}
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
  * @see https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export
  */
-function Greeter() {
-  return {
-    hello: (name) => {
-      return `Hello ${name}!`;
-    },
-  };
-}
+
+import Greeter from './Greeter.js';
+const myGreeter = Greeter();
+console.log(myGreeter.hello("Sean"));
 
 /**
  * Combine an array by using the spread operator
@@ -39,7 +36,7 @@ function Greeter() {
  * combineArray(['Japan','China','India'], ['USA','UK']) // ['Japan','China','India','USA','UK']
  **/
 
-function combineArray(array1, array2) {}
+const combineArray = (array1, array2) => [...array1, ...array2];
 
 /**
  * Combine two objects into one
@@ -48,7 +45,7 @@ function combineArray(array1, array2) {}
  * @return {object} obj1 and obj2 combined
  */
 
-function combineObject(obj1, obj2) {}
+const combineObject = (obj1, obj2) => ({...obj1, ...obj2});
 
 /**
  * Please use the higher order function map to solve this problem.
@@ -57,7 +54,7 @@ function combineObject(obj1, obj2) {}
  * @returns {array} new array, with each value doubled e.g. [2, 5, 10]
  */
 
-const doubleValues = (arr) => {};
+const doubleValues = arr => arr.map(number => 2 * number);
 
 /**
  * * Please use the higher order function filter to solve this problem.
@@ -68,10 +65,14 @@ const doubleValues = (arr) => {};
  *   onlyEvenValues([1,2,3]) // [2]
  *   onlyEvenValues([5,1,2,3,10]) // [2,10]
  */
-function onlyEvenValues(arr) {}
+
+  // even_number % 2 = 0; !0 = true
+const onlyEvenValues = arr => arr.filter(number => (!(number % 2) && (number !== 0)));
 
 /*
-Write a function called removeVowels which accepts a string and returns a new string with all of the vowels (both uppercased and lowercased) removed. Every character in the new string should be lowercased.
+Write a function called removeVowels which accepts a string and returns
+a new string with all of the vowels (both uppercased and lowercased) removed. 
+Every character in the new string should be lowercased.
 Examples:
     removeVowels('Elie') // ('l')
     removeVowels('TIM') // ('tm')
@@ -87,7 +88,9 @@ Examples:
  *  removeVowels('TIM') // ('tm')
  *  removeVowels('ZZZZZZ') // ('zzzzzz')
  */
-function removeVowels(str) {}
+
+// Lowercase string, split into array, filter out vowels, join back to string and return
+const removeVowels = str => str.toLowerCase().split('').filter(char => !('aeiou'.includes(char))).join('');
 
 /**
  *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
@@ -100,12 +103,7 @@ function getIsHungryText() {
   let isStomachEmpty = false;
   /* convert this if else statement into a ternary expression */
 
-  // let isHungry;
-  // if (isStomachEmpty) {
-  //   isHungry = "Go eat something.";
-  // } else {
-  //   isHungry = "Keep coding!";
-  // }
+  const isHungry = isStomachEmpty ? "Go eat something" : "Keep coding!"
 
   return isHungry;
 }
@@ -123,10 +121,8 @@ function getTempOfTmrw() {
     tomorrow: 79,
   };
 
-  // Start of what you should change
-  const today = AVG_TEMPERATURES.today;
-  const tomorrow = AVG_TEMPERATURES.tomorrow;
-  // End of what you should change
+  const { today, tomorrow } = AVG_TEMPERATURES;
+
   return `Today's temperature is ${today}.\nTomorrow's temperature is ${tomorrow}`;
 }
 
@@ -139,7 +135,7 @@ function getTempOfTmrw() {
  *  addItems([1,5,6]) // 12
  *  addItems([1,-2,-3]) // -4
  */
-function addItems(arr) {}
+const addItems = arr => arr.reduce((a, b) => a + b, 0)
 
 /**
  * @example
@@ -152,10 +148,7 @@ function addItems(arr) {}
  *
  */
 
-function removeDuplicates(array) {
-  /** Return the an array of unique values */
-  return;
-}
+const removeDuplicates = array => [...new Set(array)];
 
 /**
  * Ignore this. It is for the tests.
