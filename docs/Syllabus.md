@@ -113,14 +113,14 @@ During the first few weeks, we will learn the basics of React. Our lectures will
 - Events in React
 - Forms in React
 
-### Week 4
+### Week 4 - 5
 
 We will then looks into some out-of-the-box ways in which you can share state between React components. We will teach:
 
 - Lifting State Up
 - Context API
 
-### Week 5
+### Week 5 - 6
 
 In the beginning of the second half of the class, we will learn about how to handle AJAX and asynchronous code within React. We will also talk how and when to break out of the normal React flow.
 
