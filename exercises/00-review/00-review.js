@@ -8,7 +8,19 @@
  *
  **/
 
+<<<<<<< HEAD
+function highestNumber(array) {
+  let largestNum = array[0]
+  for(let i = 0; i < array.length; i++){
+    if (array[i] > largestNum){
+      largestNum = array[i];
+    }
+  }
+  return largestNum;
+}
+=======
 function highestNumber(array) {}
+>>>>>>> 0c70692fd01c83c3207195e97c2de5a53dd3ac56
 
 /**
  * Refactor this to use ES6 Modules with default exports
@@ -22,13 +34,7 @@ function highestNumber(array) {}
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
  * @see https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export
  */
-function Greeter() {
-  return {
-    hello: (name) => {
-      return `Hello ${name}!`;
-    },
-  };
-}
+import Greeter from "./Greeter.js";
 
 /**
  * Combine an array by using the spread operator
@@ -39,7 +45,10 @@ function Greeter() {
  * combineArray(['Japan','China','India'], ['USA','UK']) // ['Japan','China','India','USA','UK']
  **/
 
-function combineArray(array1, array2) {}
+function combineArray(array1, array2) {
+  let combArr = [...array1,...array2];
+  return combArr;
+}
 
 /**
  * Combine two objects into one
@@ -48,7 +57,10 @@ function combineArray(array1, array2) {}
  * @return {object} obj1 and obj2 combined
  */
 
-function combineObject(obj1, obj2) {}
+function combineObject(obj1, obj2) {
+  let combObj = {...obj1,...obj2};
+  return combObj;
+}
 
 /**
  * Please use the higher order function map to solve this problem.
@@ -57,7 +69,10 @@ function combineObject(obj1, obj2) {}
  * @returns {array} new array, with each value doubled e.g. [2, 5, 10]
  */
 
-const doubleValues = (arr) => {};
+const doubleValues = (arr) => {
+  let dblVal = arr.map(x => x * 2);
+  return dblVal;
+}
 
 /**
  * * Please use the higher order function filter to solve this problem.
@@ -68,7 +83,10 @@ const doubleValues = (arr) => {};
  *   onlyEvenValues([1,2,3]) // [2]
  *   onlyEvenValues([5,1,2,3,10]) // [2,10]
  */
-function onlyEvenValues(arr) {}
+function onlyEvenValues(arr) {
+  let evenVal = arr.filter(x => x%2 == 0);
+  return evenVal;
+};
 
 /*
 Write a function called removeVowels which accepts a string and returns a new string with all of the vowels (both uppercased and lowercased) removed. Every character in the new string should be lowercased.
@@ -87,7 +105,10 @@ Examples:
  *  removeVowels('TIM') // ('tm')
  *  removeVowels('ZZZZZZ') // ('zzzzzz')
  */
-function removeVowels(str) {}
+function removeVowels(str) {
+  let word = str.toLowerCase();
+  return word.replace(/[aeiou]/g,"");
+}
 
 /**
  *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
@@ -107,7 +128,8 @@ function getIsHungryText() {
   //   isHungry = "Keep coding!";
   // }
 
-  return isHungry;
+  
+  return (isStomachEmpty ? "Go eat something" : "Keep coding!");
 }
 
 /**
@@ -124,8 +146,7 @@ function getTempOfTmrw() {
   };
 
   // Start of what you should change
-  const today = AVG_TEMPERATURES.today;
-  const tomorrow = AVG_TEMPERATURES.tomorrow;
+  const { today , tomorrow} = AVG_TEMPERATURES
   // End of what you should change
   return `Today's temperature is ${today}.\nTomorrow's temperature is ${tomorrow}`;
 }
@@ -139,7 +160,13 @@ function getTempOfTmrw() {
  *  addItems([1,5,6]) // 12
  *  addItems([1,-2,-3]) // -4
  */
-function addItems(arr) {}
+function addItems(arr) {
+  
+  let sum = arr.reduce(( x, y) => {
+    return x + y;
+  }, 0);
+return sum;
+}
 
 /**
  * @example
@@ -154,7 +181,8 @@ function addItems(arr) {}
 
 function removeDuplicates(array) {
   /** Return the an array of unique values */
-  return;
+  let uniqueArr = [...new Set(array)];
+  return uniqueArr;
 }
 
 /**
