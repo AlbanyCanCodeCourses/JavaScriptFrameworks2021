@@ -1,3 +1,4 @@
-/**
- * Write your CSS here
- */
+.list {
+  text-align: center;
+  list-style: none;
+}

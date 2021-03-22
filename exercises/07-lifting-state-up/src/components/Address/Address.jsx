@@ -5,15 +5,37 @@ import AddressResults from "../AddressResults/AddressResults";
 
 function App() {
   const [displayResults, setDisplayResults] = useState(false);
-  /**
-   * You will need to call on useState here for form fields
-   * e.g. first name, last name, etc.
-   */
 
-  /**
-   * You will need to pass props to <AddressResults /> and <AddressForm />
-   */
-  return <>{displayResults ? <AddressResults /> : <AddressForm />}</>;
+  const [values, setValues] = useState({
+    firstName: "",
+    lastName: "",
+    addressLine1: "",
+    city: "",
+    state: "",
+    postalCode: "",
+    country: "",
+  });
+
+  const handleChange = (e) => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  return (
+    <>
+      {displayResults ? (
+        <AddressResults values={values} />
+      ) : (
+        <AddressForm
+          setDisplayResults={setDisplayResults}
+          values={values}
+          handleChange={handleChange}
+        />
+      )}
+    </>
+  );
 }
 
 export default App;

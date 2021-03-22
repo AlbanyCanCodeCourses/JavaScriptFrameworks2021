@@ -4,13 +4,13 @@ const {
   highestNumber,
   combineArray,
   combineObject,
+  doubleValues,
   onlyEvenValues,
   removeVowels,
   getIsHungryText,
   getTempOfTmrw,
   addItems,
   removeDuplicates,
-  doubleValues,
 } = require("../00-review");
 
 const path = require("path");
