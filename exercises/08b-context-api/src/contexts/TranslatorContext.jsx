@@ -7,9 +7,16 @@ import { createContext, useState } from "react";
 export const TranslatorContext = createContext();
 
 export function TranslatorProvider({ children }) {
+  const [language, setLanguage] = useState("en")
+
   /**
    * Complete me. This component should be similar to the "App" component in the first context API exercise.
    * @see exercises/08a-context-api/src/App.jsx
    * @see solutions/08a-context-api/App.solutions.jsx
    */
+ return (
+     <TranslatorContext.Provider value={[language, setLanguage]}>
+       {children}
+     </TranslatorContext.Provider>
+ )
 }
