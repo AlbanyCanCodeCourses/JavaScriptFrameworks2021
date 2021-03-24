@@ -1,5 +1,7 @@
 // Import what you need from React
 import React from "react";
+import { useContext } from 'react';
+import { TranslatorContext } from '../../contexts/TranslatorContext.jsx'
 import translations from "./LoginTranslations.json";
 // Import "TranslatorContext"
 
@@ -9,11 +11,12 @@ function Login() {
    * @see exercises/08a-context-api/src/App.jsx
    * @see solutions/08a-context-api/App.solutions.jsx
    */
+   const { language } = useContext(TranslatorContext);
 
   /**
    * Replace "en" with a constant or variable.
    */
-  const t = translations["en"];
+  const t = translations[language];
 
   /**
    * You do not have to change anything below this line.
