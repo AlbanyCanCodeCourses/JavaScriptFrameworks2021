@@ -1,7 +1,7 @@
 // Import useEffect here
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-// import Axios (or use Fetch)
+import axios from "axios";
 
 function App() {
   /**
@@ -14,6 +14,7 @@ function App() {
    * ]
    */
   const [dogImages, setDogImages] = useState([]);
+  const [dogNumber, setDogNumbers] = useState(1);
 
   /**
    * You may need to set something else in state
@@ -23,11 +24,20 @@ function App() {
    * Make an AJAX call with the useEffect hook
    */
 
+  useEffect(() => {
+    axios(`https://dog.ceo/api/breeds/image/random/${dogNumber}`).then(
+      (res) => {
+        console.log(res);
+        setDogImages(res.data.message);
+      }
+    );
+  }, [dogNumber]);
+
   return (
     <div className="App">
       <h1>Dogs</h1>
       {/* Make me a controlled input */}
-      <select>
+      <select onChange={(e) => setDogNumbers(e.target.value)}>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -41,7 +51,7 @@ function App() {
       </select>
       <div className="container">
         {dogImages.map((dogImage, idx) => {
-          return <img key={`dog-${idx}`} height="200" src={dogImage} />;
+          return <img alt="" key={`dog-${idx}`} height="200" src={dogImage} />;
         })}
       </div>
     </div>
