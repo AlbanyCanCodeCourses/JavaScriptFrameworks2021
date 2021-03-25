@@ -1,6 +1,7 @@
 // Import useEffect here
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
+import axios from 'axios';
 // import Axios (or use Fetch)
 
 function App() {
@@ -13,8 +14,22 @@ function App() {
    *     "https://images.dog.ceo/breeds/lhasa/n02098413_1137.jpg"
    * ]
    */
-  const [dogImages, setDogImages] = useState([]);
+  const [dogImages, setDogImages] = useState();
+  const [howMany, setHowMany] = useState();
+  
+  useEffect(() => {
+    async function getData(){
+      try{
+        setDogImages(await axios(`https://dog.ceo/api/breeds/image/random/${howMany}`));
+      }
+      catch(error){
+        console.error(error);
+      }
+    }
+    getData();
+  }, [howMany]);
 
+  
   /**
    * You may need to set something else in state
    */
@@ -27,7 +42,7 @@ function App() {
     <div className="App">
       <h1>Dogs</h1>
       {/* Make me a controlled input */}
-      <select>
+      <select onChange={(e)=>{setHowMany(e.target.value)}}>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -40,8 +55,8 @@ function App() {
         <option value="10">10</option>
       </select>
       <div className="container">
-        {dogImages.map((dogImage, idx) => {
-          return <img key={`dog-${idx}`} height="200" src={dogImage} />;
+        {dogImages && dogImages.data.message.map((dogImage, idx) => {
+          return <><img key={`dog-${idx}`} height="200" src={dogImage} alt="" /><br /></>;
         })}
       </div>
     </div>
