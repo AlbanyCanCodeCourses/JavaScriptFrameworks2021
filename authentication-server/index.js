@@ -14,6 +14,12 @@ const UUID = "341a2be5-9a98-4f08-8ac9-affd5c5cd1b0";
 const fakeUsers = require("./fakeUsers.json");
 const movies = require("./movies.json");
 
+const EXPIRATION_IN_MILLISECONDS = 900000; // 15 minutes
+const getExpirationTimestamp = () => {
+  const date = new Date();
+  return Math.floor((date.getTime() + EXPIRATION_IN_MILLISECONDS) / 1000);
+};
+
 const app = express();
 
 app.use(express.json());
@@ -45,7 +51,7 @@ const methodNotAllowedError = (req, res) => {
 };
 
 app
-  .route(["/jwt/login", "/cookie/login"])
+  .route("/api/login")
   .post((req, res) => {
     // Slowing down so that you can see if the button has been disabled
     setTimeout(() => {
@@ -59,18 +65,14 @@ app
       }
 
       if (username === USERNAME && password === PASSWORD) {
-        if (req.originalUrl === "/jwt/login") {
-          const token = jwt.sign({ sub: USER_ID.toString() }, JWT_SECRET);
-          return res.status(200).send({
-            message: "You did it! Success!",
-            token,
-          });
-        } else if (req.originalUrl === "/cookie/login") {
-          return res.status(200).send({
-            message: "You did it! Success!",
-            uuid: UUID,
-          });
-        }
+        const token = jwt.sign({ sub: USER_ID }, JWT_SECRET, {
+          expiresIn: `${EXPIRATION_IN_MILLISECONDS}ms`,
+        });
+        return res.status(200).send({
+          message: "You did it! Success!",
+          token,
+          expiration: getExpirationTimestamp(),
+        });
       }
 
       return res.status(401).send({
@@ -81,7 +83,7 @@ app
   .all(methodNotAllowedError);
 
 app
-  .route(["/jwt/users", "/jwt/movies"])
+  .route(["/api/users", "/api/movies"])
   .get((req, res) => {
     try {
       const { authorization } = req.headers;
@@ -89,35 +91,20 @@ app
         throw new Error("UnauthorizedError");
       const token = authorization.replace(/^Bearer /, "");
       const { sub: decodedUserId } = jwt.verify(token, JWT_SECRET);
-      if (decodedUserId !== USER_ID) throw new Error("UnauthorizedError");
+      if (decodedUserId !== USER_ID) {
+        return res.status(403).send({
+          message:
+            "Forbidden. This means that you are not authorized, or you don't have permission to view the content.",
+        });
+      }
     } catch (err) {
-      return res.status(403).send({
+      return res.status(401).send({
         message:
-          "Forbidden. This means you are either missing your JWT token or your token is not correct. Setup a header called 'Authorization' and set the value equal to 'Bearer mytoken'.",
+          "Unauthorized. This means you are either missing your JWT token, your token has expired, or your token is not correct. Setup a header called 'Authorization' and set the value equal to 'Bearer mytoken'. If your token has expired, you need to get a new one with the '/api/refresh' API or by having the user login again.",
       });
     }
 
-    const content = req.originalUrl === "/jwt/movies" ? movies : fakeUsers;
-    return res.send(content);
-  })
-  .all(methodNotAllowedError);
-
-app
-  .route(["/cookie/users", "/cookie/movies"])
-  .get((req, res) => {
-    try {
-      const { id } = req.query;
-      if (id !== UUID) throw new Error("UnauthorizedError");
-    } catch (err) {
-      return res.status(403).send({
-        message:
-          "Forbidden. This means you are either missing the UUID, the UUID is not being passed the right way or your UUID is not correct. Change your url so that it looks like this: 'http://localhost:7000/cookie/users?id=myuuid'.",
-      });
-    }
-
-    const content = RegExp(/^\/cookie\/movies/).test(req.originalUrl)
-      ? movies
-      : fakeUsers;
+    const content = req.originalUrl === "/api/movies" ? movies : fakeUsers;
     return res.send(content);
   })
   .all(methodNotAllowedError);
@@ -131,7 +118,9 @@ app.all("*", (req, res) => {
 
 const server = app.listen(7000, () => {
   console.log(
-    `\nYour server is running on http://localhost:${server.address().port}/`
+    `\nYour server is running on http://${server.address()}:${
+      server.address().port
+    }/`
   );
   console.log(`Press ctrl+c to stop.\n`);
 });

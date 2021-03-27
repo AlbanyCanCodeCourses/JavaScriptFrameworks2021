@@ -9,47 +9,42 @@
       "email": "george.bluth@reqres.in",
       "firstName": "George",
       "lastName": "Bluth",
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg"
+      "avatar": "https://randomuser.me/api/portraits/men/74.jpg"
     },
     {
       "id": 2,
       "email": "janet.weaver@reqres.in",
       "firstName": "Janet",
       "lastName": "Weaver",
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg"
+      "avatar": "https://randomuser.me/api/portraits/women/18.jpg"
     },
     {
       "id": 3,
       "email": "emma.wong@reqres.in",
       "firstName": "Emma",
       "lastName": "Wong",
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/olegpogodaev/128.jpg"
+      "avatar": "https://randomuser.me/api/portraits/women/2.jpg"
     },
     {
       "id": 4,
       "email": "eve.holt@reqres.in",
       "firstName": "Eve",
       "lastName": "Holt",
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/marcoramires/128.jpg"
+      "avatar": "https://randomuser.me/api/portraits/women/34.jpg"
     },
     {
       "id": 5,
       "email": "charles.morris@reqres.in",
       "firstName": "Charles",
       "lastName": "Morris",
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/stephenmoon/128.jpg"
+      "avatar": "https://randomuser.me/api/portraits/men/17.jpg"
     },
     {
       "id": 6,
       "email": "tracey.ramos@reqres.in",
       "firstName": "Tracey",
       "lastName": "Ramos",
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/bigmancho/128.jpg"
+      "avatar": "https://randomuser.me/api/portraits/women/77.jpg"
     }
-  ],
-  "ad": {
-    "company": "StatusCode Weekly",
-    "url": "http://statuscode.org/",
-    "text": "A weekly newsletter focusing on software development, infrastructure, the server, performance, and the stack end of things."
-  }
+  ]
 }
