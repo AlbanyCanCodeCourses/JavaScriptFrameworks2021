@@ -1,7 +1,7 @@
 /**
  * This is a quick and dirty mock server for authentication.
  * If plan on building authentication into a Node.js express app,
- * I suggest you look else where.
+ * I suggest you look else where for inspiration.
  * Here are some resources on authentication:
  * - https://dev.to/cotter/localstorage-vs-cookies-all-you-need-to-know-about-storing-jwt-tokens-securely-in-the-front-end-15id
  * - https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
