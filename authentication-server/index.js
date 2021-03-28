@@ -1,28 +1,87 @@
+/**
+ * This is a quick and dirty mock server for authentication.
+ * If plan on building authentication into a Node.js express app,
+ * I suggest you look else where.
+ * Here are some resources on authentication:
+ * - https://dev.to/cotter/localstorage-vs-cookies-all-you-need-to-know-about-storing-jwt-tokens-securely-in-the-front-end-15id
+ * - https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
+ * - https://marmelab.com/blog/2020/07/02/manage-your-jwt-react-admin-authentication-in-memory.html
+ * - https://www.taniarascia.com/full-stack-cookies-localstorage-react-express/
+ * - https://medium.com/@kennch/example-of-restful-apis-81fb344f9d04
+ */
 const express = require("express");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+const { v4: generateUuid } = require("uuid");
+const parseCommandLineArgs = require("command-line-args");
 const path = require("path");
 const fs = require("fs");
+
+const commandLineDef = [{ name: "expiry", alias: "e", type: Number }];
+const commandLineArgs = parseCommandLineArgs(commandLineDef);
 
 // You should never hardcode this in your repo in the real world!
 const JWT_SECRET = "SECRET_SAUCE";
 const USER_ID = "1234";
 const USERNAME = "username";
 const PASSWORD = "password";
-const UUID = "341a2be5-9a98-4f08-8ac9-affd5c5cd1b0";
 
 const fakeUsers = require("./fakeUsers.json");
 const movies = require("./movies.json");
 
-const EXPIRATION_IN_MILLISECONDS = 900000; // 15 minutes
-const getExpirationTimestamp = () => {
-  const date = new Date();
-  return Math.floor((date.getTime() + EXPIRATION_IN_MILLISECONDS) / 1000);
+// Normally, we would store this in a database session
+let uuid;
+const setCookie = (res) => {
+  uuid = generateUuid();
+  res.cookie("refresh", uuid, {
+    maxAge: 3600000, // 1 hour
+    httpOnly: true,
+    secure: false, // Normally, we would want this to be true
+  });
+};
+
+const sendTokenResponse = (res) => {
+  setCookie(res);
+
+  const JWT_EXPIRY_IN_MILLISECONDS = commandLineArgs.expiry || 900000; // 15 minutes by default
+  const getJwtExpiryTimestamp = () => {
+    const date = new Date();
+    return date.getTime() + JWT_EXPIRY_IN_MILLISECONDS;
+  };
+
+  const token = jwt.sign({ sub: USER_ID }, JWT_SECRET, {
+    expiresIn: `${JWT_EXPIRY_IN_MILLISECONDS}ms`,
+  });
+
+  return res.status(200).send({
+    message: "You did it! Success!",
+    token,
+    expiry: getJwtExpiryTimestamp(),
+  });
+};
+
+const validateJwt = (req, res) => {
+  try {
+    if (!uuid) throw new Error("ForbiddenError");
+    const { authorization } = req.headers;
+    if (!RegExp(/^Bearer /).test(authorization))
+      throw new Error("ForbiddenError");
+    const token = authorization.replace(/^Bearer /, "");
+    const { sub: decodedUserId } = jwt.verify(token, JWT_SECRET);
+    if (decodedUserId !== USER_ID) throw new Error("ForbiddenError");
+  } catch (err) {
+    return res.status(401).send({
+      message:
+        "Forbidden. This means you are either missing your JWT token, your token has expired, or your token is not correct. Setup a header called 'Authorization' and set the value equal to 'Bearer mytoken'. If your token has expired, you need to get a new one with the '/api/refresh' API or by having the user login again.",
+    });
+  }
 };
 
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 
 // Error handler
@@ -65,14 +124,7 @@ app
       }
 
       if (username === USERNAME && password === PASSWORD) {
-        const token = jwt.sign({ sub: USER_ID }, JWT_SECRET, {
-          expiresIn: `${EXPIRATION_IN_MILLISECONDS}ms`,
-        });
-        return res.status(200).send({
-          message: "You did it! Success!",
-          token,
-          expiration: getExpirationTimestamp(),
-        });
+        return sendTokenResponse(res);
       }
 
       return res.status(401).send({
@@ -83,29 +135,38 @@ app
   .all(methodNotAllowedError);
 
 app
-  .route(["/api/users", "/api/movies"])
+  .route("/api/refresh")
   .get((req, res) => {
-    try {
-      const { authorization } = req.headers;
-      if (!RegExp(/^Bearer /).test(authorization))
-        throw new Error("UnauthorizedError");
-      const token = authorization.replace(/^Bearer /, "");
-      const { sub: decodedUserId } = jwt.verify(token, JWT_SECRET);
-      if (decodedUserId !== USER_ID) {
-        return res.status(403).send({
-          message:
-            "Forbidden. This means that you are not authorized, or you don't have permission to view the content.",
-        });
-      }
-    } catch (err) {
+    const isRefreshValid = (req) => {
+      return req.cookies.refresh && req.cookies.refresh === uuid;
+    };
+    if (isRefreshValid(req)) return sendTokenResponse(res);
+    else
       return res.status(401).send({
         message:
-          "Unauthorized. This means you are either missing your JWT token, your token has expired, or your token is not correct. Setup a header called 'Authorization' and set the value equal to 'Bearer mytoken'. If your token has expired, you need to get a new one with the '/api/refresh' API or by having the user login again.",
+          "Unauthorized. This means that you do not have a session or your session expired. (Your session will be lost when you restart the authentication server). To renew your session, login with with the '/api/login' API.",
       });
-    }
+  })
+  .all(methodNotAllowedError);
 
+app
+  .route(["/api/users", "/api/movies"])
+  .get((req, res) => {
+    const invalidResponse = validateJwt(req, res);
+    if (invalidResponse) return invalidResponse;
     const content = req.originalUrl === "/api/movies" ? movies : fakeUsers;
     return res.send(content);
+  })
+  .all(methodNotAllowedError);
+
+app
+  .route("/api/logout")
+  .delete((req, res) => {
+    uuid = undefined;
+    res.clearCookie("refresh");
+    return res.send({
+      message: "Bye bye session. You have logged out.",
+    });
   })
   .all(methodNotAllowedError);
 
@@ -118,9 +179,7 @@ app.all("*", (req, res) => {
 
 const server = app.listen(7000, () => {
   console.log(
-    `\nYour server is running on http://${server.address()}:${
-      server.address().port
-    }/`
+    `\nYour server is running on http://localhost:${server.address().port}/`
   );
   console.log(`Press ctrl+c to stop.\n`);
 });
