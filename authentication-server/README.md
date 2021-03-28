@@ -49,7 +49,10 @@ axios
       password: "1234",
     }),
   })
-  .then((response) => console.log(response))
+  .then((response) => {
+    // This is how you get the token
+    console.log(response.data.token);
+  })
   .catch((error) => {
     console.log("error", error);
     if (error.response && error.response.status === 401) {
@@ -80,7 +83,8 @@ axios.request({
   url: "http://localhost:7000/api/movies",
   headers: {
     Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`,
-  }.then((response) => console.log(response))
+  })
+  .then((response) => console.log(response))
   .catch((error) => {
     console.log("error", error);
     if (error.response && error.response.status === 401) {
@@ -143,7 +147,10 @@ axios
     method: "GET",
     url: "http://localhost:7000/api/refresh",
   })
-  .then((response) => console.log(response))
+  .then((response) => {
+    // This is how you get the token
+    console.log(response.data.token);
+  })
   .catch((error) => {
     console.log("error", error);
     if (error.response && error.response.status === 401) {
@@ -186,4 +193,5 @@ If you like, you can mimic a real life scenario with a monolithic app (where the
 
 - [Introduction to JSON Web Tokens](https://jwt.io/introduction)
 - [The Ultimate Guide to handling JWTs on frontend clients (GraphQL)](https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/)
+- [Authentication in SPA (ReactJS and VueJS) the right way](https://medium.com/@jcbaey/authentication-in-spa-reactjs-and-vuejs-the-right-way-e4a9ac5cd9a3)
 - [Handling JWT in Admin Apps the Right Way](https://marmelab.com/blog/2020/07/02/manage-your-jwt-react-admin-authentication-in-memory.html)

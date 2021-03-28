@@ -5,6 +5,7 @@
  * Here are some resources on authentication:
  * - https://dev.to/cotter/localstorage-vs-cookies-all-you-need-to-know-about-storing-jwt-tokens-securely-in-the-front-end-15id
  * - https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
+ * - https://medium.com/@jcbaey/authentication-in-spa-reactjs-and-vuejs-the-right-way-e4a9ac5cd9a3
  * - https://marmelab.com/blog/2020/07/02/manage-your-jwt-react-admin-authentication-in-memory.html
  * - https://www.taniarascia.com/full-stack-cookies-localstorage-react-express/
  * - https://medium.com/@kennch/example-of-restful-apis-81fb344f9d04
