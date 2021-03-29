@@ -11,7 +11,7 @@ export const todos = [
     title: "take trash out",
     completed: false
   },
-  {
+  { 
     userId: 1,
     id: 3,
     title: "walk the dog",

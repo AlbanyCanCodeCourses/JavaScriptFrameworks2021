@@ -14,7 +14,7 @@ When you "lift state up", you create a two-way data flow:
 ## Getting Started
 
 Using your command line, you will need to navigate to the this folder, install all dependencies, and start the app.
-
+ 
 ```bash
 cd exercises/07-lifting-state-up/
 code . # if you would like to open this in a separate VSCode window

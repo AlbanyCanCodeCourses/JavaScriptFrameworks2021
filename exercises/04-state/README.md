@@ -1,4 +1,4 @@
-# State Challenge
+git# State Challenge
 
 In Visual Studio code, press `command+shift+v` (Mac) or `ctrl+shift+v` (Windows) to open a Markdown preview.
 
@@ -37,7 +37,7 @@ As a developer, I would like a component that has the ability to truncate text.
 The component will have two buttons. The first button will say "Read More". The second button will say "Read Less".
 
 The "Read More" button will display the entire text. The "Read Less" button will truncate the set by the "maxLength" prop.
-
+ 
 ![](less-text.gif)
 
 ## Challenge 2

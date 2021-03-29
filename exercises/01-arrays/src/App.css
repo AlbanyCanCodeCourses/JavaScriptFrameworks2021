@@ -1,3 +1,25 @@
 /**
  * Write your CSS here
  */
+body{
+    background-color:blanchedalmond;
+}
+
+ img{
+    padding-left: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-right: 40px;
+    height: 400px;
+    width: 550px;
+ }
+
+ img:hover{
+     opacity: .85;
+ }
+ .App{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-wrap:wrap;
+ }

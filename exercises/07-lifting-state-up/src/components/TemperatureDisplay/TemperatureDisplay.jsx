@@ -1,7 +1,10 @@
 import PropTypes from "prop-types";
 
+
 function TemperatureDisplay(props) {
-  return <>{/* Complete me */}</>;
+ 
+ 
+  return <>{ }</>;
 }
 
 TemperatureDisplay.propTypes = {
@@ -10,3 +13,4 @@ TemperatureDisplay.propTypes = {
 };
 
 export default TemperatureDisplay;
+ 

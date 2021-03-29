@@ -1,6 +1,7 @@
 // Import useEffect here
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
+import axios from 'axios';
 // import Axios (or use Fetch)
 
 function App() {
@@ -14,20 +15,28 @@ function App() {
    * ]
    */
   const [dogImages, setDogImages] = useState([]);
+  const [numberOfDogs, setNumberOfDogs] = useState([]); 
 
   /**
    * You may need to set something else in state
    */
 
+  useEffect( ()=>{
+    axios(`https://dog.ceo/api/breeds/image/random/${numberOfDogs}`)
+    .then(response=>{
+     setDogImages(response.data.message)   
+    })
+
+  }, [numberOfDogs] )
   /**
    * Make an AJAX call with the useEffect hook
-   */
-
+   */ 
+ 
   return (
     <div className="App">
       <h1>Dogs</h1>
       {/* Make me a controlled input */}
-      <select>
+      <select onChange = {e=>setNumberOfDogs(e.target.value)}>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>

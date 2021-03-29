@@ -2,26 +2,67 @@ import { useState } from "react";
 import "./App.css";
 
 const GroceryList = () => {
+  const [groceryItem, setGroceryItem] = useState([
+    { item: "carrots", cost: 5 },
+  ]);
+
+  const [groceryName, setGroceryName] = useState("");
+  const [groceryPrice, setGroceryPrice] = useState("");
+
+  const addGroceryItem = () => {
+    setGroceryItem([...groceryItem, { item: groceryName, cost: groceryPrice }]);
+  };
+
+  function deleteItem(index) {
+    setGroceryItem(
+      groceryItem.filter((currItem, currIndex) => currIndex !== index)
+    );
+  }
+
+  function getTotalCost(groceryPrice) {
+    return groceryPrice.reduce((totalCost, itemCost) => {
+      return totalCost + parseFloat(itemCost.cost);
+    }, 0);
+  }
+
+  function handleForm(e) {
+    e.preventDefault();
+    addGroceryItem();
+  }
+
   return (
     <div className="container">
       <div className="card card-body bg-light mb-2">
-        <form method="POST" className="row g-3">
+        <form
+          onSubmit={handleForm}
+          method="POST"
+          id="myForm"
+          className="row g-3"
+        >
           <div className="col">
             <input
+              required
+              onChange={(e) => setGroceryName(e.target.value)}
+              onFocus = {()=>setGroceryName('')}
               className="form-control"
               type="text"
               placeholder="Name of grocery item..."
               aria-label="Name of grocery item..."
+              value={groceryName}
             />
           </div>
           <div className="col">
             <input
+              required
+              onChange={(e) => setGroceryPrice(e.target.value)}
+              onFocus = {()=>setGroceryPrice('')}
               className="form-control"
               type="number"
               min="0"
               step=".01"
               placeholder="Cost of grocery item..."
               aria-label="Cost of grocery item..."
+              value={groceryPrice}
             />
           </div>
           <div className="col-md-auto">
@@ -42,26 +83,44 @@ const GroceryList = () => {
             </tr>
           </thead>
           <tbody>
-            {/**
-             * Complete me. (You can use something else instead of a table if you like)
-             * @example
-             * <tr>
-             *   <td>Toilet Paper</td>
-             *   <td>$1.99</td>
-             *   <td>
-             *     <button aria-label="Delete" title="Delete" ... >
-             *       &times;
-             *     </button>
-             *   </td>
-             * </tr>
-             */}
+            {}
+            {
+              groceryItem.map((oneItem, index) => {
+                return (
+                  <tr>
+                    <td>{oneItem.item}</td>
+                    <td>${oneItem.cost}</td>
+                    <td>
+                      <button
+                        onClick={() => deleteItem(index)}
+                        aria-label="Delete"
+                        title="Delete"
+                      >
+                        &times;
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+              // <tr>
+
+              // <td>{}</td>
+              // <th>{}</th>
+              // </tr>
+            }
           </tbody>
         </table>
         <p className="lead">
-          <strong>Total Cost: {/* Complete me */}</strong>
+          <strong>Total Cost: ${getTotalCost(groceryItem)}</strong>
         </p>
         <div className="d-flex justify-content-end">
-          <button type="button" className="btn btn-outline-success">
+          <button
+            onClick={() => {
+              setGroceryItem([]);
+            }}
+            type="button"
+            className="btn btn-outline-success"
+          >
             Clear
           </button>
         </div>

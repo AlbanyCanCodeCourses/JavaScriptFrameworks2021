@@ -27,7 +27,7 @@ Before starting, take a look at the file _exercises/03-conditional-rendering/src
 ```xml
 <Todo todos={todos} showCompleted={false} />
 ```
-
+ 
 5. The "Todo" component should iterate over the todos. If the "showCompleted" is true, it will render the completed items in the todo list. If the "showCompleted" is false, it will render all the todos that have not been completed.
 
 ![](demo.gif)

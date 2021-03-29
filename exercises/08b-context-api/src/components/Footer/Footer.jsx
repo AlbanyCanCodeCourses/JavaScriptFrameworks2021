@@ -1,9 +1,12 @@
 // Import what you need from React
+import {useContext, createContext} from 'react';
 import Languages from "../Languages/Languages";
 import translations from "./FooterTranslations.json";
+import {TranslatorContext} from '../../contexts/TranslatorContext'
 // Import "TranslatorContext"
 
 function Footer() {
+  const {language} = useContext(TranslatorContext);
   /**
    * You will need to add something here. This component should be similar to the "CreateAccount" component in the first context API exercise.
    * @see exercises/08a-context-api/src/App.jsx
@@ -13,7 +16,7 @@ function Footer() {
   /**
    * Replace "en" with a constant or variable.
    */
-  const t = translations["en"];
+  const t = translations[language];
 
   /**
    * You do not have to change anything below this line.
