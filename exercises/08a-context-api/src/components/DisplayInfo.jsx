@@ -1,6 +1,3 @@
-
-
-
 function Displayinfo(props){
     return(
         <div>

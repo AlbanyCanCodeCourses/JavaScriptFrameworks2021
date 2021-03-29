@@ -4,12 +4,19 @@ import "./App.css";
 import NavBar from "../NavBar/NavBar";
 import CreateAccount from "../CreateAccount/CreateAccount";
 import Footer from "../Footer/Footer";
+import { useContext, createContext} from 'react';
+import { TranslatorProvider } from '../../contexts/TranslatorContext'
 
-function App() {
+function App() { 
+  
+   
+  
   /**
    * Handle the Provider here
    */
   return (
+    <TranslatorProvider>
+   
     <div className="App d-flex flex-column">
       <NavBar />
       <div className="container pt-4 pb-4">
@@ -19,7 +26,9 @@ function App() {
         <Footer />
       </div>
     </div>
+    </TranslatorProvider>
   );
+  
 }
 
 export default App;
