@@ -40,6 +40,6 @@ Follow the guide [Creating a pull request from a fork](https://help.github.com/a
 - Installation Guide: [Mac](docs/InstallationGuideMac.md) | [Windows](docs/InstallationGuideWindows.md) | [Linux](docs/InstallationGuideLinuxAndNVM.md)
 - React: [Manual](https://reactjs.org/) | [Create React App](https://create-react-app.dev/)
 - [MDN](https://developer.mozilla.org/en-US/) (Unofficial JavaScript Manual)
-- Command Line: [NPM Guide](https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/) | [Unix Crash Course](https://www.vikingcodeschool.com/web-development-basics/a-command-line-crash-course) | [Unix Summary](https://swcarpentry.github.io/shell-novice/reference/)
+- Command Line: [NPM Guide](https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/) | [Unix Crash Course](https://www.vikingcodeschool.com/web-development-basics/a-command-line-crash-course) | [Unix Cheat Sheet](http://www.mathcs.emory.edu/~valerie/courses/fall10/155/resources/unix_cheatsheet.html)
 - [Git Basics](http://rogerdudler.github.io/git-guide/)
 - Visual Studio Code: [Mac Keyboard Shortcuts](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf) | [Windows Keyboard Shortcuts](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf) | [Getting Started](https://code.visualstudio.com/docs/getstarted/introvideos)
