@@ -4,6 +4,7 @@ import states from "./assets/states.json"
 import countries from "./assets/countries.json"// Import data from "assets/countries.json" and "assets/states.json" here
 
 function App() {
+  const[submit, setSubmit] = useState(false);
   const[state, setState] = useState({
     firstName: "",
     lastName: "",
@@ -21,10 +22,12 @@ function App() {
       [e.target.name]: e.target.value
     })
   }
-  
+  const submit = (e) => {
+    e.preventDefault()
+  };
   
   return (
-    <form className="container mt-4" method="POST">
+    <form className="container mt-4" method="POST" onSubmit={submit}>
       {/* You will need to handle form submission */}
       <div className="mb-3">
         <label htmlFor="firstName" className="control-label">
@@ -114,7 +117,7 @@ function App() {
             <option value={x}>{x}</option>
           )})}</select>
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn btn-primary" onClick={() => setSubmit(true)}>
         Submit
       </button>
 
@@ -122,7 +125,7 @@ function App() {
        * Find a way to only display this once the form has been submitted.
        * Hint: You will need to change "false" below with something else
        */}
-      {false && (
+      {true && (
         <div className="card card-body bg-light mt-4 mb-4">
           Results:
           <ul className="list-unstyled mb-0">
