@@ -23,7 +23,7 @@ function App() {
         <div id="main-img">
           <a href="http://rickandmorty.wikia.com/wiki/Rick_Sanchez">
             {/* Add an alt and src to this image */}
-            <img height="250" src={character && character[0].image} />
+            <img height="250" src={character && character[0].image} alt={character && character.name}/>
           </a>
           <div className="linkfooter">
             <p>Select your favorite character</p>
