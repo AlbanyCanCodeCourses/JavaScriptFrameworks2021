@@ -110,7 +110,7 @@ const GroceryList = () => {
             }
           </tbody>
         </table>
-        <p className="lead">
+        <p className="lead"> 
           <strong>Total Cost: ${getTotalCost(groceryItem)}</strong>
         </p>
         <div className="d-flex justify-content-end">

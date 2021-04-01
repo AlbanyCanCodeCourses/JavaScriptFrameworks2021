@@ -24,7 +24,8 @@ function App() {
   useEffect( ()=>{
     axios(`https://dog.ceo/api/breeds/image/random/${numberOfDogs}`)
     .then(response=>{
-     setDogImages(response.data.message)   
+     setDogImages(response.data.message)
+    
     })
 
   }, [numberOfDogs] )
