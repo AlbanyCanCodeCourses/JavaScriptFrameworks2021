@@ -40,7 +40,7 @@ To login, send the user's username and password in a POST request to http://loca
 axios
   .request({
     method: "POST",
-    url: "/http://localhost:7000/api/login",
+    url: "http://localhost:7000/api/login",
     headers: {
       "Content-Type": "application/json",
     },

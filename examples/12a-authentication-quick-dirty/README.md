@@ -9,7 +9,7 @@ In one terminal window, you will need to run the authentication server. Please f
 In the other terminal window, you will need to navigate to the this folder, install all dependencies, and start this example.
 
 ```bash
-cd examples/11a-authentication-quick-dirty/
+cd examples/12a-authentication-quick-dirty/
 yarn install
 yarn start
 ```

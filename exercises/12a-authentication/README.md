@@ -8,7 +8,7 @@ Many application need a user login or signin process of some kind. This challeng
 
 ### Examples and Documentation
 
-See [quick and dirty authentication example](../../examples/11a-authentication-quick-dirty/).
+See [quick and dirty authentication example](../../examples/12a-authentication-quick-dirty/).
 
 ## Getting Started
 
@@ -21,7 +21,7 @@ In one terminal window, you will need to run the authentication server. Please f
 In the other terminal window, you will need to navigate to the this folder, install all dependencies, and start this exercise.
 
 ```bash
-cd exercises/11a-authentication/
+cd exercises/12a-authentication/
 code . # if you would like to open this in a separate VSCode window
 yarn install
 yarn start
