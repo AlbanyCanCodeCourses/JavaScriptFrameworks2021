@@ -1,21 +1,18 @@
 import { useState } from "react";
 import { subscribe } from "../../services/subscribe";
-// Import something here
+import { useHistory } from "react-router-dom";
 
 function Subscribe() {
   const [email, setEmail] = useState("");
-  /**
-   * Should something go here?
-   */
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
     try {
       await subscribe(email);
-      /**
-       * Complete me
-       */
+      history.push('/thank-you')
     } catch (error) {
       console.error(error);
     }
