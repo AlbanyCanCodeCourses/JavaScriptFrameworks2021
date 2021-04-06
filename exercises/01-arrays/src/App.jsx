@@ -1,8 +1,12 @@
 import "./App.css";
-// import something here
+import { images } from "./images/images.js"
+
+// const handleArray = images.map((imgURL) => { return (<img src={imgURL}/>)})
 
 function App() {
-  return <div className="App">{/* Complete me */}</div>;
+  return <div className="App">
+    {images.map((imgURL) => { return (<img src={imgURL}/>)})}
+  </div>;
 }
 
 export default App;

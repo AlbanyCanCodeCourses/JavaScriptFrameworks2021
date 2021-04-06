@@ -87,7 +87,14 @@ Examples:
  *  removeVowels('TIM') // ('tm')
  *  removeVowels('ZZZZZZ') // ('zzzzzz')
  */
-function removeVowels(str) {}
+function removeVowels(str) {
+  vowels = ['a','e','i','o','u']
+  
+  for (let vowel of vowels) {
+    str.replace(vowel, "")
+  }
+  return str
+}
 
 /**
  *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator

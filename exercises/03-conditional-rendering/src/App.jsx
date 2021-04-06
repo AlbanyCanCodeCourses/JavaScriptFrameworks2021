@@ -1,9 +1,11 @@
 import "./App.css";
-// import something
-// import another thing
+import todos from "./data/todos.js"
+import Todo from "./components/Todo"
 
 function App() {
-  return <div className="App">{/* complete me */}</div>;
+  return <div className="App">
+    <Todo todos={todos} showCompleted={true} />
+  </div>;
 }
 
 export default App;

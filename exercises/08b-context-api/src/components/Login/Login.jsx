@@ -2,8 +2,11 @@
 import React from "react";
 import translations from "./LoginTranslations.json";
 // Import "TranslatorContext"
+import {useContext} from "react";
+import {TranslatorContext} from "../../contexts/TranslatorContext.jsx";
 
 function Login() {
+  const [language, setLanguage]  = useContext(TranslatorContext);
   /**
    * You will need to add something here. This component should be similar to the "CreateAccount" component in the first context API exercise.
    * @see exercises/08a-context-api/src/App.jsx
@@ -13,7 +16,7 @@ function Login() {
   /**
    * Replace "en" with a constant or variable.
    */
-  const t = translations["en"];
+   const t = translations[language];
 
   /**
    * You do not have to change anything below this line.
