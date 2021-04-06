@@ -9,43 +9,38 @@ function App() {
    * Set up state and make AJAX requests here
    */
 
-  const [results, setResults] = useState([]);
-  const [characters, setCharacters] = useState({
-    name: "",
-    idx: 0,
-    img: "https://i.ytimg.com/vi/UFFi9PWKDjg/maxresdefault.jpg",
+  const [results, setResults] = useState({
+    results: [],
   });
 
-  useEffect(() => {
-    getResults();
-    getCharacter();
-  }, []);
+  const [characters, setCharacters] = useState({
+    name: "",
+    image: "",
+    index: "",
+  });
 
-  const getResults = () => {
-    axios("https://rickandmortyapi.com/api/character/").then((res) => {
-      // console.log(res.data.results);
-      setResults(res.data.results);
+  // const [name, setName] = useState("");
+  // const [image, setImage] = useState("");
+  // const [index, setIndex] = useState("");
+
+  useEffect(() => {
+    axios(`https://rickandmortyapi.com/api/character/`).then((res) => {
+      setResults({
+        results: res.data,
+      });
+      // console.log(characters.results);
+    });
+  }, [characters]);
+
+  const onChange = (e) => {
+    setCharacters({
+      name: e.target.value,
     });
   };
 
-  const getCharacter = () => {
-    axios(`https://rickandmortyapi.com/api/character/${characters.idx}`).then(
-      (res) => {
-        // setCharacters({ ...characters }, { img: res.data.image });
-        setCharacters({
-          img: res.data.image,
-        });
-        console.log(res.data.image);
-      }
-    );
-  };
-
-  const onChange = (e) => {
-    setCharacters(JSON.parse(e.target.value));
-    getCharacter();
-  };
-
-  console.log(characters.idx);
+  // console.log(name);
+  // console.log(name.name);
+  console.log(characters);
 
   return (
     <div className="container">
@@ -54,11 +49,7 @@ function App() {
         <div id="main-img">
           <a href="http://rickandmorty.wikia.com/wiki/Rick_Sanchez">
             {/* Add an alt and src to this image */}
-            <img
-              height="250"
-              alt="rick&Morty-character-img"
-              src={characters.img}
-            />
+            <img height="250" src={characters.image} alt="" />
           </a>
           <div className="linkfooter">
             <p>Select your favorite character</p>
@@ -70,13 +61,10 @@ function App() {
                * @example in HTML
                * <option value="2" key="character-1">Morty Smith</option>
                */}
-              {results &&
-                results.map((items, idx) => {
+              {results.results.results &&
+                results.results.results.map((items, idx) => {
                   return (
-                    <option
-                      key={idx}
-                      value={JSON.stringify({ idx, name: items.name })}
-                    >
+                    <option key={idx} value={items.name}>
                       {items.name}
                     </option>
                   );
