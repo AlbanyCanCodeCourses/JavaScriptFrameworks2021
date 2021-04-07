@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import CharacterCount from './components/CharacterCount';
 const text =  "Ad proident ad minim eiusmod esse officia in ad ut ut. Voluptate do eiusmod tempor minim eiusmod commodo fugiat et. Reprehenderit cupidatat id incididunt pariatur nulla. Sit dolor aliqua consequat labore excepteur laborum elit enim sit ipsum laborum labore ipsum."
 // Import CharacterCount here
+import CharacterCount from "./components/CharacterCount"
 
 function App() {
   const [maxLength, setMaxLength] = useState(25);

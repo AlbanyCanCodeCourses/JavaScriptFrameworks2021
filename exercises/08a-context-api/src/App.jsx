@@ -6,6 +6,12 @@ import translations from "./assets/translations.json";
 /**
  * Declare createContext() here.
  */
+const LanguageContext = createContext(
+  {
+    language: "en",
+    setLanguage: () => {}
+  }
+)
 
 const StateContext = createContext()
 

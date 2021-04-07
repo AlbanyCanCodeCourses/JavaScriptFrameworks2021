@@ -1,4 +1,8 @@
 // You will need to import the "TranslatorContext" and "TranslatorProvider" from src/contexts/TranslatorContext.js
+import {
+  TranslatorContext,
+  TranslatorProvider,
+} from "../../contexts/TranslatorContext.jsx";
 import "./App.css";
 import TranslatorProvider from '../../contexts/TranslatorContext';
 import NavBar from "../NavBar/NavBar";
@@ -6,9 +10,7 @@ import CreateAccount from "../CreateAccount/CreateAccount";
 import Footer from "../Footer/Footer";
 
 function App() {
-  /**
-   * Handle the Provider here
-   */
+
   return (
     <TranslatorProvider>
       <div className="App d-flex flex-column">

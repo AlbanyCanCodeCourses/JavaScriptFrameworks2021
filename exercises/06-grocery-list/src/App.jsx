@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 
+
 const GroceryList = () => {
   const [list, setList] = useState([
     {
@@ -45,6 +46,9 @@ const GroceryList = () => {
             <input
               name="Item Name"
               className="form-control"
+              name="product"
+              onChange={handleChange}
+              value={formValues.product}
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -56,6 +60,9 @@ const GroceryList = () => {
             <input
               name="Cost"
               className="form-control"
+              name="price"
+              onChange={handleChange}
+              value={formValues.price}
               type="number"
               min="0"
               step=".01"
@@ -66,7 +73,7 @@ const GroceryList = () => {
             />
           </div>
           <div className="col-md-auto">
-            <button type="submit" className="btn btn-success">
+            <button type="submit" className="btn btn-success" disabled={!(formValues.product && formValues.price)}>
               Add
             </button>
           </div>

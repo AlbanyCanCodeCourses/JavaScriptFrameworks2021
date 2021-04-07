@@ -14,6 +14,7 @@ function Temperature() {
    * 2. "F" for Fahrenheit
    */
   const [scale, setScale] = useState("F");
+  // const [temperature, setTemperature] = useState(CURRENT_TEMPERATURE_CELSIUS)
   /**
    * Converts CURRENT_TEMPERATURE_CELSIUS to the selected temperature scale (Celsius or Fahrenheit)
    * @type number
