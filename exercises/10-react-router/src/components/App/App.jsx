@@ -10,6 +10,8 @@
  * First, you will need to import the packages you need from React Router.
  * Then, import some things from React Router.
  */
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "../Home/Home";
 import Category from "../Category/Category";
 
@@ -24,12 +26,21 @@ function App() {
    * - "/category/office" should map to "Category"
    */
   return (
-    <>
+    <Router>
       <div className="bg-success text-white pt-1 pb-1 mb-3">
         <h1 className="container h2">NoName E-Commerce</h1>
       </div>
-      <main className="container mb-4">{/* Complete me */}</main>
-    </>
+      <Switch>
+        <main className="container mb-4">
+          <Route exact path="/category/:category">
+            <Category />
+          </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
+        </main>
+      </Switch>
+    </Router>
   );
 }
 

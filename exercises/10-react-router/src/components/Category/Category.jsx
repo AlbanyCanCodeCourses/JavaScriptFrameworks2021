@@ -5,6 +5,7 @@
  */
 
 // import something here
+import { useParams } from "react-router-dom";
 
 /**
  * This imports a list of products.
@@ -16,7 +17,7 @@ function Category() {
    * Category is hardcoded here.
    * This is the only part you will need to change in this file.
    */
-  const category = "office"; // change me
+  const { category } = useParams(); // change me
   /**
    * All the products in a category. To see how this works, take a look at
    * @see exercises/10-react-router/src/assets/inventory.js
