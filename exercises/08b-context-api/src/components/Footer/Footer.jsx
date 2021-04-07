@@ -4,7 +4,7 @@ import Languages from "../Languages/Languages";
 import translations from "./FooterTranslations.json";
 import { TranslatorContext } from "../../contexts/TranslatorContext";
 // Import "TranslatorContext"
-import {TranslatorContext} from "../../contexts/TranslatorContext.jsx";
+// import {TranslatorContext} from "../../contexts/TranslatorContext.jsx";
 
 function Footer() {
   /**
