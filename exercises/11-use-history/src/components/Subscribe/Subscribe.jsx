@@ -1,5 +1,11 @@
 import { useState } from "react";
 import { subscribe } from "../../services/subscribe";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom";
 // Import something here
 
 function Subscribe() {
@@ -7,6 +13,8 @@ function Subscribe() {
   /**
    * Should something go here?
    */
+
+  let history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,6 +24,7 @@ function Subscribe() {
       /**
        * Complete me
        */
+      history.push("/thank-you");
     } catch (error) {
       console.error(error);
     }
@@ -44,7 +53,11 @@ function Subscribe() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <button className="uk-button uk-button-danger" type="submit">
+          <button
+            className="uk-button uk-button-danger"
+            type="submit"
+            onClick={handleSubmit}
+          >
             Subscribe
           </button>
         </form>
