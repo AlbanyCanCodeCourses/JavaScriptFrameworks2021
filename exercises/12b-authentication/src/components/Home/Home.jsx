@@ -1,10 +1,13 @@
 // You will need to import some things from React
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 // You will need to import something from AccessTokenContext
+import {AccessTokenContext} from '../../context/AccessTokenContext';
+import axios from 'axios';
 
 function Home() {
   const [movies, setMovies] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
+  const {token} = useContext(AccessTokenContext);
   /**
    * I should be getting something or things from the Context API
    */
@@ -14,6 +17,12 @@ function Home() {
    * Be sure to provide the token in the AJAX request.
    * @see exercises/12a-authentication/src/components/Home/Home.jsx
    */
+  useEffect(()=> {
+    const getMovies = async () => {
+        setMovies(await axios("http://localhost:7000/api/movies)"))
+    }
+    getMovies();
+  }, [])
 
   return (
     <div className="container mt-2 mb-5">

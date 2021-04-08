@@ -2,6 +2,9 @@
 import { useState } from "react";
 // You will need to import something from AccessTokenContext
 // You will need to import useHistory from react-router-dom
+import { AccessTokenContext} from '../../context/AccessTokenContext';
+import {useHistory} from 'react-router-dom';
+import axios from 'axios';
 
 function Login() {
   /**
@@ -25,10 +28,36 @@ function Login() {
    * If invalid username and password, display an error letting the user know it is invalid.
    * @see exercises/12a-authentication/src/components/App/App.jsx
    * @see examples/12a-authentication-quick-dirty/src/components/App/App.jsx
+   * 
+   * 
    */
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Complete me
+    setIsLoading(true);
+    const requestLogin = async() => {
+      try{
+       const asynResponse =  await axios({
+          method: 'POST',
+          url: "http://localhost:7000/api/login",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        },
+        {data: username, password}
+        )
+        const {token, timer} = asynResponse.data;
+        if(!token) throw Error("Missing JWT Token");
+        Login(token, timer)
+        setIsLoading(false);
+      }
+      catch(error) {
+        setErrorMessage("Sorry an error occurred")
+        console.log(error);
+      }
+    }
+    requestLogin();
   };
 
   return (

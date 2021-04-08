@@ -4,7 +4,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-// Import ProtectedRouter
+import ProtectedRoute from './ProtectedRoute';
 
 import Login from "../Login/Login";
 import Home from "../Home/Home";
@@ -14,12 +14,12 @@ function AppRouter() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-
         <Route exact path="/login">
           <Login />
+        </Route>
+
+        <Route exact path="/home">
+          <Home />
         </Route>
 
         {/* If no matches, redirect to home page */}
