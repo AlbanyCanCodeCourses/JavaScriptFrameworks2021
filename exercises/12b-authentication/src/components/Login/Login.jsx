@@ -1,12 +1,12 @@
-// You will need import something from React
-import { useState } from "react";
-// You will need to import something from AccessTokenContext
-// You will need to import useHistory from react-router-dom
+import { useState, useContext } from "react";
+import axios from "axios";
+import { AccessTokenContext } from "../../context/AccessTokenContext";
+import { useHistory } from "react-router-dom";
 
 function Login() {
-  /**
-   * I should be getting something or things from the Context API
-   */
+  const history = useHistory();
+
+  const { login } = useContext(AccessTokenContext);
 
   /**
    * User input
@@ -19,16 +19,30 @@ function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  /**
-   * Handle the form submission that will login the user here.
-   * If successful, store token in state and redirect to /movies
-   * If invalid username and password, display an error letting the user know it is invalid.
-   * @see exercises/12a-authentication/src/components/App/App.jsx
-   * @see examples/12a-authentication-quick-dirty/src/components/App/App.jsx
-   */
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Complete me
+    setIsLoading(true);
+
+    try {
+      const response = await axios({
+        method: "POST",
+        url: "http://localhost:7000/api/login",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: { username: username, password: password },
+      });
+      login(response.data.token);
+      history.push("/home");
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setErrorMessage("Invalid username or password");
+      } else {
+        setErrorMessage("An unexpected error occurred");
+      }
+    }
+
+    setIsLoading(false);
   };
 
   return (
