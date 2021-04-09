@@ -27,10 +27,10 @@ function App() {
   }
 
   const handleSubmit = (e) => {
-    setIsLoading(true);
     e.preventDefault();
     const login = async () => {
       try {
+        setIsLoading(true);
         const asyncResponse = await axios({
           method: "POST",
           url: "http://localhost:7000/api/login",

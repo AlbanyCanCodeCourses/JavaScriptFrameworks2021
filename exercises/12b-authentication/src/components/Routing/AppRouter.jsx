@@ -18,6 +18,7 @@ function AppRouter() {
       <Switch>
         <Route exact path="/login">
           <Login setIsLoggedIn={setIsLoggedIn}/>
+          {console.log(isLoggedIn)}
         </Route>
 
         <ProtectedRoute exact path="/home" isLoggedIn={isLoggedIn}>
