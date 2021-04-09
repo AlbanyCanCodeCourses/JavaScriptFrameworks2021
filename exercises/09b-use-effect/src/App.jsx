@@ -1,5 +1,5 @@
 // Import useEffect here
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 // import Axios (or use Fetch)
 
@@ -14,20 +14,25 @@ function App() {
    * ]
    */
   const [dogImages, setDogImages] = useState([]);
+  const [dogCount, setDogCount] = useState('1');
 
-  /**
-   * You may need to set something else in state
-   */
-
-  /**
-   * Make an AJAX call with the useEffect hook
-   */
+  useEffect(() => {
+    fetch(`https://dog.ceo/api/breeds/image/random/${dogCount}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to get response from quote API.");
+        }
+        return response.json();
+      })
+      .then((data) => setDogImages(data.message))
+      .catch((error) => console.log(error));
+  }, [dogCount]);
 
   return (
     <div className="App">
       <h1>Dogs</h1>
       {/* Make me a controlled input */}
-      <select>
+      <select value={dogCount} onChange={(e) => setDogCount(e.target.value)}>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
