@@ -5,22 +5,27 @@ import {
   Redirect,
 } from "react-router-dom";
 import ProtectedRoute from './ProtectedRoute';
-
 import Login from "../Login/Login";
 import Home from "../Home/Home";
+import { useState } from "react";
+
 
 function AppRouter() {
+  const [isLoggedIn, setIsLoggedIn] = useState(); 
   // You will need to use a ProtectedRoute somewhere
   return (
     <Router>
       <Switch>
         <Route exact path="/login">
-          <Login />
+          <Login setIsLoggedIn={setIsLoggedIn}/>
         </Route>
 
-        <Route exact path="/home">
+        <ProtectedRoute exact path="/home" isLoggedIn={isLoggedIn}>
           <Home />
-        </Route>
+        </ProtectedRoute>
+
+        {/* <Route exact path="/home"> */}
+        {/* </Route> */}
 
         {/* If no matches, redirect to home page */}
         <Route>

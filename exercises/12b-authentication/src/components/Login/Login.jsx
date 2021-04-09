@@ -1,12 +1,12 @@
 // You will need import something from React
-import { useState } from "react";
+import { useState, useContext } from "react";
 // You will need to import something from AccessTokenContext
 // You will need to import useHistory from react-router-dom
 import { AccessTokenContext} from '../../context/AccessTokenContext';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 
-function Login() {
+function Login({setIsLoggedIn}) {
   /**
    * I should be getting something or things from the Context API
    */
@@ -14,8 +14,10 @@ function Login() {
   /**
    * User input
    */
+  const {setToken} = useContext(AccessTokenContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
   /**
    * Handling AJAX loading and errors
    */
@@ -31,39 +33,44 @@ function Login() {
    * 
    * 
    */
-
+  const requestLogin = async() => {
+    try{
+     setIsLoading(true); 
+     const asyncResponse =  await axios({
+        method: 'POST',
+        url: "http://localhost:7000/api/login",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: JSON.stringify({
+          username: username, 
+          password: password
+          })
+      },
+      )
+      
+     if(asyncResponse.status === 200 && asyncResponse.data.token) {
+        setToken(asyncResponse.data.token);
+        history.push("/home");
+        setIsLoading(false);
+        setIsLoggedIn(true);
+     }
+    }
+    catch(error) {
+      if(error.response && error.response.status === 401);
+      setErrorMessage("Sorry an error occurred");
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    const requestLogin = async() => {
-      try{
-       const asynResponse =  await axios({
-          method: 'POST',
-          url: "http://localhost:7000/api/login",
-          headers: {
-            "Content-Type": "application/json"
-          }
-        },
-        {data: username, password}
-        )
-        const {token, timer} = asynResponse.data;
-        if(!token) throw Error("Missing JWT Token");
-        Login(token, timer)
-        setIsLoading(false);
-      }
-      catch(error) {
-        setErrorMessage("Sorry an error occurred")
-        console.log(error);
-      }
-    }
     requestLogin();
   };
 
   return (
     <div className="container mt-2 mb-5">
       <h1>Login</h1>
-      <form className="form-inline mb-2" method="POST" onSubmit={handleSubmit}>
+      <form className="form-inline mb-2" method="POST" onSubmit={(e)=>handleSubmit(e)}>
         <div className="form-group">
           <label htmlFor="username" className="mr-2">
             Username

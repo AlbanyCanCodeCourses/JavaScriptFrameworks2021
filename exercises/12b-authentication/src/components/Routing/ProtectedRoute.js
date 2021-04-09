@@ -1,11 +1,11 @@
-import {Broswerrouter as Router, Switch, Route} from 'react-router-dom';
+import {Redirect, Route} from 'react-router-dom';
 
-const ProtectedRoute = ({children}) => {
-    return (
-        <>
-            
-        </>
+const ProtectedRoute = ({children, isLoggedIn}) => {
+    return isLoggedIn ? (
+        <Route>{children}</Route>
+    ) : (
+        <Redirect to="/login" />
     )
 }
 
-export default ProtectedRoute
+export default ProtectedRoute;
