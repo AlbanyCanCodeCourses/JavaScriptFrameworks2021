@@ -7,28 +7,25 @@ import {
 import ProtectedRoute from './ProtectedRoute';
 import Login from "../Login/Login";
 import Home from "../Home/Home";
-import { useState } from "react";
+import { useContext } from "react";
+import {AccessTokenContext} from '../../context/AccessTokenContext';
 
 
 function AppRouter() {
-  const [isLoggedIn, setIsLoggedIn] = useState(); 
+  const { isLoggedIn } = useContext(AccessTokenContext);
+
   // You will need to use a ProtectedRoute somewhere
   return (
     <Router>
       <Switch>
         <Route exact path="/login">
-          <Login setIsLoggedIn={setIsLoggedIn}/>
-          {console.log(isLoggedIn)}
+          <Login/>
         </Route>
 
         <ProtectedRoute exact path="/home" isLoggedIn={isLoggedIn}>
           <Home />
         </ProtectedRoute>
 
-        {/* <Route exact path="/home"> */}
-        {/* </Route> */}
-
-        {/* If no matches, redirect to home page */}
         <Route>
           <Redirect to="/home" />
         </Route>

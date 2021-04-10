@@ -1,5 +1,5 @@
 // You will need to import some things from React
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 // You will need to import something from AccessTokenContext
 import {AccessTokenContext} from '../../context/AccessTokenContext';
 import axios from 'axios';
@@ -17,32 +17,32 @@ function Home() {
    * Be sure to provide the token in the AJAX request.
    * @see exercises/12a-authentication/src/components/Home/Home.jsx
    */
-  if(token){
-        const getMovies = async () => {
-          try {
-              const asyncResponse = await axios({
-                method: "GET",
-                url: "http://localhost:7000/api/movies",
-                headers: {
-                  Authorization: `Bearer ${token}`
+  useEffect(()=> {
+    if(token){
+          const getMovies = async () => {
+            try {
+                const asyncResponse = await axios({
+                  method: "GET",
+                  url: "http://localhost:7000/api/movies",
+                  headers: {
+                    Authorization: `Bearer ${token}`
+                  }
+                })
+                if(asyncResponse.status === 200 && asyncResponse.data){
+                  setMovies(asyncResponse.data);
                 }
-              })
-              if(asyncResponse.status === 200 && asyncResponse.data){
-                setMovies(asyncResponse.data);
-                console.log("getMovies ran successfully")
-              }
-          }
-    
-          catch(error) {
-            if(error.response && error.response.status === 401){
-              setErrorMessage(`There was an error in authorization.  Server responded with status code ${error.response.status}`)
-              console.log("catch error movies")
             }
-          }
       
-        }
-        getMovies();
-  }
+            catch(error) {
+              if(error.response && error.response.status === 401){
+                setErrorMessage(`There was an error in authorization.  Server responded with status code ${error.response.status}`)
+              }
+            }
+        
+          }
+          getMovies();
+    }
+  },[]);
 
   return (
     <div className="container mt-2 mb-5">

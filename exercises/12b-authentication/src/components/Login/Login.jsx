@@ -6,7 +6,7 @@ import { AccessTokenContext} from '../../context/AccessTokenContext';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 
-function Login({setIsLoggedIn}) {
+function Login(){
   /**
    * I should be getting something or things from the Context API
    */
@@ -14,7 +14,7 @@ function Login({setIsLoggedIn}) {
   /**
    * User input
    */
-  const {setToken} = useContext(AccessTokenContext);
+  const { setToken, setIsLoggedIn } = useContext(AccessTokenContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -51,14 +51,16 @@ function Login({setIsLoggedIn}) {
       
      if(asyncResponse.status === 200 && asyncResponse.data.token) {
         setToken(asyncResponse.data.token);
-        history.push("/home");
-        setIsLoading(false);
         setIsLoggedIn(true);
+        setIsLoading(false);
+        history.push("/home");
      }
     }
     catch(error) {
       if(error.response && error.response.status === 401);
       setErrorMessage("Sorry an error occurred");
+      setIsLoading(false);
+      setIsLoggedIn(false);
     }
   }
 
