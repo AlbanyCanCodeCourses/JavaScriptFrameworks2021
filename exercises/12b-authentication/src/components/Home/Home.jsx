@@ -42,7 +42,7 @@ function Home() {
           }
           getMovies();
     }
-  },[]);
+  });
 
   return (
     <div className="container mt-2 mb-5">
