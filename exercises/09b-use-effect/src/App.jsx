@@ -1,8 +1,6 @@
-// Import useEffect here
 import { useState, useEffect } from "react";
 import "./App.css";
 import axios from 'axios';
-// import Axios (or use Fetch)
 
 function App() {
   /**
