@@ -106,10 +106,19 @@ Examples:
  *  removeVowels('ZZZZZZ') // ('zzzzzz')
  */
 function removeVowels(str) {
+<<<<<<< HEAD
   str = str.replace( /[aeiouy]/gi, '' );
   let newStr = str.toLowerCase();
   return newStr;
 
+=======
+  vowels = ['a','e','i','o','u']
+  
+  for (let vowel of vowels) {
+    str.replace(vowel, "")
+  }
+  return str
+>>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
 }
 
 /**

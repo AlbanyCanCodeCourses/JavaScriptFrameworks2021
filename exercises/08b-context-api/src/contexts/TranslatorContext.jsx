@@ -16,4 +16,11 @@ export function TranslatorProvider({ children }) {
    * @see exercises/08a-context-api/src/App.jsx
    * @see solutions/08a-context-api/App.solutions.jsx
    */
+   const [language, setLanguage] = useState("en")
+
+   return (
+     <TranslatorContext.Provider value={[language, setLanguage]}>
+       {children}
+     </TranslatorContext.Provider>
+   )
 }

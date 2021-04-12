@@ -1,5 +1,5 @@
 // Import what you need from React
-import { useState } from "react";
+import { useState, useContext, createContext } from "react";
 import "./App.css";
 import translations from "./assets/translations.json";
 import { useContext, createContext } from 'react';
@@ -10,13 +10,24 @@ const languageContext = createContext();
 
 /**
  * Declare createContext() here.
+<<<<<<< HEAD
  */ 
+=======
+ */
+const LanguageContext = createContext(
+  {
+    language: "en",
+    setLanguage: () => {}
+  }
+)
+>>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
 
 function App() {
   
   /**
    * Set state here. (See useState in "CreateAccount" below.)
    */
+<<<<<<< HEAD
    const [language, setLanguage] = useState("en");
    
  
@@ -31,12 +42,25 @@ function App() {
      </languageContext.Provider>
   
   )</>
+=======
+  const [language, setLanguage] = useState("en")
+  const value = {language, setLanguage}
+  /**
+   * You will need to return more than just <CreateAccount />.
+   */
+  return (
+    <LanguageContext.Provider value={value}>
+      <CreateAccount />
+    </LanguageContext.Provider>
+  );
+>>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
 }
 
 function CreateAccount() {
   /**
    * You will need to replace "useState" with something else.
    */
+<<<<<<< HEAD
   const {language, setLanguage} = useContext(languageContext);
  
   const [firstName, setFirstName] = useState('');
@@ -56,6 +80,9 @@ function CreateAccount() {
   //   displayInfo ? setDisplayInfo(true) : console.log('it doesn"t work')
   // )
   
+=======
+  const { language, setLanguage }  = useContext(LanguageContext);
+>>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
 
   /**
    * @see src/assets/translations.json

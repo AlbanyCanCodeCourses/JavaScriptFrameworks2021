@@ -15,6 +15,7 @@ function App() {
    * ]
    */
   const [dogImages, setDogImages] = useState([]);
+<<<<<<< HEAD
   const [numberOfDogs, setNumberOfDogs] = useState([]); 
 
   /**
@@ -33,11 +34,31 @@ function App() {
    * Make an AJAX call with the useEffect hook
    */ 
  
+=======
+  const [dogCount, setDogCount] = useState('1');
+
+  useEffect(() => {
+    fetch(`https://dog.ceo/api/breeds/image/random/${dogCount}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to get response from quote API.");
+        }
+        return response.json();
+      })
+      .then((data) => setDogImages(data.message))
+      .catch((error) => console.log(error));
+  }, [dogCount]);
+
+>>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
   return (
     <div className="App">
       <h1>Dogs</h1>
       {/* Make me a controlled input */}
+<<<<<<< HEAD
       <select onChange = {e=>setNumberOfDogs(e.target.value)}>
+=======
+      <select value={dogCount} onChange={(e) => setDogCount(e.target.value)}>
+>>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>

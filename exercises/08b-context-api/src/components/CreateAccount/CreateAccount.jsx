@@ -3,9 +3,15 @@ import {useContext, createContext} from 'react';
 import translations from "./CreateAccountTranslations.json";
 import {TranslatorContext} from '../../contexts/TranslatorContext'
 // Import "TranslatorContext"
+import {useContext} from "react";
+import {TranslatorContext} from "../../contexts/TranslatorContext.jsx";
 
 function CreateAccount() {
+<<<<<<< HEAD
   const {language} = useContext(TranslatorContext);
+=======
+  const [language, setLanguage]  = useContext(TranslatorContext);
+>>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
   /**
    * You will need to add something here. This component should be similar to the "CreateAccount" component in the first context API exercise.
    * @see exercises/08a-context-api/src/App.jsx
@@ -15,7 +21,11 @@ function CreateAccount() {
   /**
    * Replace "en" with a constant or variable.
    */
+<<<<<<< HEAD
   const t = translations[language];
+=======
+   const t = translations[language];
+>>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
 
   /**
    * You do not have to change anything below this line.

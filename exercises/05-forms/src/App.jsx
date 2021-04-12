@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+<<<<<<< HEAD
 import countries from "./assets/countries.json"
 import states from "./assets/states.json"
 // Import data from "assets/countries.json" and "assets/states.json" here
@@ -13,6 +14,55 @@ function App() {
   return (
     <form onSubmit = {handleForm}className="container mt-4" method="POST">
       {}
+=======
+import states from "./assets/states.json";
+import countries from "./assets/countries.json";
+
+function App() {
+
+  const defaultFormValues = {
+    firstName: "",
+    lastName: "",
+    addressLine1: "",
+    city: "",
+    postalCode: "",
+    country: "",
+  }
+
+  const [submitted, setSubmitted] = useState(false);
+
+
+  const [formsValues, setFormsValues] = useState([
+    {firstName: "",
+    lastName: "",
+    addressLine1: "",
+    city: "",
+    postalCode: "",
+    country: "",}
+  ]
+  );
+
+
+  const [submittedValues,setSubmittedValues] = useState(defaultFormValues)
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setSubmittedValues({...formValues})
+    setFormValues(defaultFormValues)
+  };
+
+  const handleChange = (e) => {
+    setFormValues((prevValues) => {
+      return { 
+        ...prevValues, 
+        [e.target.name]: e.target.value };
+    });
+  };
+
+  return (
+    <form className="container mt-4" onSubmit={onSubmit}>
+>>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
       <div className="mb-3">
         <label htmlFor="firstName" className="control-label">
           First Name
@@ -22,6 +72,8 @@ function App() {
           name="firstName"
           type="text"
           className="form-control"
+          onChange={handleChange}
+          value={formValues.firstName}
         />
       </div>
       <div className="mb-3">
@@ -33,6 +85,8 @@ function App() {
           name="lastName"
           type="text"
           className="form-control"
+          onChange={handleChange}
+          value={formValues.lastName}
         />
       </div>
       <div className="mb-3">
@@ -44,6 +98,8 @@ function App() {
           name="addressLine1"
           type="text"
           className="form-control"
+          onChange={handleChange}
+          value={formValues.addressLine1}
         />
         <p className="help-block text-muted">
           Street Address, P.O. Box, Company Name, C/O
@@ -54,15 +110,40 @@ function App() {
         <label htmlFor="city" className="control-label">
           City / Town
         </label>
-        <input id="city" name="city" type="text" className="form-control" />
+        <input
+          id="city"
+          name="city"
+          type="text"
+          className="form-control"
+          onChange={handleChange}
+          value={formValues.city}
+        />
       </div>
       <div className="mb-3">
         <label htmlFor="state" className="control-label">
           State / Province / Region
         </label>
+<<<<<<< HEAD
         { 
         }
         <select value={state} onChange = {states.map( (individualState)=>{ <option></option>})}id="state" name="state" className="form-control" />
+=======
+        <select
+          id="state"
+          name="state"
+          className="form-control"
+          onChange={handleChange}
+          value={formValues.state}
+        >
+          {states.map((state) => {
+            return (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            );
+          })}
+        </select>
+>>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
       </div>
 
       <div className="mb-3">
@@ -74,6 +155,8 @@ function App() {
           name="postalCode"
           type="text"
           className="form-control"
+          onChange={handleChange}
+          value={formValues.postalCode}
         />
       </div>
 
@@ -81,26 +164,38 @@ function App() {
         <label htmlFor="country" className="control-label">
           Country
         </label>
+<<<<<<< HEAD
         
         {
         
         }        
         
         <select id="country" name="country" className="form-control"  ></select>
+=======
+        <select
+          id="country"
+          name="country"
+          className="form-control"
+          onChange={handleChange}
+          value={formValues.country}
+        >
+          {countries.map((country) => {
+            return <option value={country}>{country}</option>;
+          })}
+        </select>
+>>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
       </div>
       <button type="submit" className="btn btn-primary">
         Submit
       </button>
 
-      {/*
-       * Find a way to only display this once the form has been submitted.
-       * Hint: You will need to change "false" below with something else
-       */}
-      {false && (
+      {submitted && (
         <div className="card card-body bg-light mt-4 mb-4">
-          Results:
+          <h3>Results:</h3>
           <ul className="list-unstyled mb-0">
-            {/* Add <li></li> tags here */}
+            {Object.keys(submittedValues).map((key, index) => (
+              <li key={index}>{`${key}: ` + submittedValues[key]}</li>
+            ))}
           </ul>
         </div>
       )}
