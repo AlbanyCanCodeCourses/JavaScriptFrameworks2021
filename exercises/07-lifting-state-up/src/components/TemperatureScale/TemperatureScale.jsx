@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 
 function TemperatureScale(props) {
-  // Complete me
   return (
     <>
       <div className="btn-group" role="group" aria-label="Convert temperature">

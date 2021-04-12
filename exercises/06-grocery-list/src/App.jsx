@@ -2,65 +2,44 @@ import { useState } from "react";
 import "./App.css";
 
 const GroceryList = () => {
-  const [state, setState] = useState([{ name: "Empty", costs: 0.0 }]);
-  const [item, setItem] = useState("");
-  //const [costs, setCosts] = useState([]);
-  const [cost, setCost] = useState("");
+  const [groceries, setGroceries] = useState([]);
+  const [formValues, setFormValues] = useState({
+    product: "",
+    price: "",
+  });
 
-  const handelClick = () => {
-    // setItems((items) => [...items, item]);
-    // setCosts((costs) => [...costs, cost]);
-    setState([...state, { name: item, costs: cost }]);
-  };
-
-  // const updateFunction = ({ target }) => {
-  //   setItem(target.value);
-  // };
-
-  // const updateFunctionTwo = ({ target }) => {
-  //   setCost(target.value);
-  // };
-
-  const deleteItems = (idx) => {
-    setState(state.filter((item, currentIdx) => currentIdx !== idx));
-
-    // console.log({
-    //   state,
-    //   item,
-    //   cost,
-    // });
-
-    // console.log(Object.values);
-  };
-
-  const submitHandler = (e) => {
+  const handleForm = (e) => {
     e.preventDefault();
-    // sum();
+    console.log(e.target);
+    setGroceries([...groceries, formValues]);
+    setFormValues({
+      product: "",
+      price: "",
+    });
   };
 
-  // function sum(a) {
-  //   return (a.length && parseFloat(a[0]) + sum(a.slice(1))) || 0;
-  // }
+  const handleChange = (e) => {
+    setFormValues((prevValues) => {
+      return { ...prevValues, [e.target.name]: e.target.value };
+    });
+  };
 
-  const clearStates = () => {};
-
-  // const times = costs.length;
-  // const displayX = new Array(times).fill(null);
-
-  //const add = state.map((item) => item.costs);
-  const totalVar = Object.values(state).reduce((total, item) => {
-    console.log(total);
-    return parseFloat(total) + parseFloat(item.costs);
-  }, 0);
-  // console.log(totalVar);
+  const removeGrocery = (e) => {
+    let currentGroceries = [...groceries];
+    currentGroceries.splice(parseInt(e.target.id), 1);
+    setGroceries(currentGroceries);
+  };
 
   return (
     <div className="container">
       <div className="card card-body bg-light mb-2">
-        <form method="POST" className="row g-3" onSubmit={submitHandler}>
+        <form method="POST" className="row g-3" onSubmit={handleForm}>
           <div className="col">
             <input
               className="form-control"
+              name="product"
+              onChange={handleChange}
+              value={formValues.product}
               type="text"
               placeholder="Name of grocery item..."
               aria-label="Name of grocery item..."
@@ -77,6 +56,9 @@ const GroceryList = () => {
           <div className="col">
             <input
               className="form-control"
+              name="price"
+              onChange={handleChange}
+              value={formValues.price}
               type="number"
               min="0"
               step=".01"
@@ -90,7 +72,7 @@ const GroceryList = () => {
             <button
               type="submit"
               className="btn btn-success"
-              onClick={handelClick}
+              disabled={!(formValues.product && formValues.price)}
             >
               Add
             </button>
@@ -108,19 +90,41 @@ const GroceryList = () => {
             </tr>
           </thead>
           <tbody>
-            {/**
-             * Complete me. (You can use something else instead of a table if you like)
-             * @example
-             * <tr>
-             *   <td>Toilet Paper</td>
-             *   <td>$1.99</td>
-             *   <td>
-             *     <button aria-label="Delete" title="Delete" ... >
-             *       &times;
-             *     </button>
-             *   </td>
-             * </tr>
-             */}
+            {
+              groceries.map((grocery, index) => {
+                console.log(index);
+                return (
+                  <tr key={index}>
+                    <td>{grocery.product}</td>
+                    <td>{`$${grocery.price}`}</td>
+                    <td>
+                      <button
+                        id={index}
+                        aria-label="Delete"
+                        title="Delete"
+                        className="btn"
+                        onClick={removeGrocery}
+                      >
+                        &times;
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+              /**
+               * Complete me. (You can use something else instead of a table if you like)
+               * @example
+               * <tr>
+               *   <td>Toilet Paper</td>
+               *   <td>$1.99</td>
+               *   <td>
+               *     <button aria-label="Delete" title="Delete" ... >
+               *       &times;
+               *     </button>
+               *   </td>
+               * </tr>
+               */
+            }
             {state.map((items, idx) => {
               return (
                 <tr>
@@ -141,13 +145,19 @@ const GroceryList = () => {
           </tbody>
         </table>
         <p className="lead">
-          <strong>Total Cost: {totalVar}</strong>
+          <strong>
+            Total Cost:{" "}
+            {`$${groceries.reduce(
+              (acc, grocery) => acc + parseFloat(grocery.price),
+              0
+            )}`}
+          </strong>
         </p>
         <div className="d-flex justify-content-end">
           <button
             type="button"
             className="btn btn-outline-success"
-            onClick={clearStates}
+            onClick={() => setGroceries([])}
           >
             Clear
           </button>

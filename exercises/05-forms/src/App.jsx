@@ -1,39 +1,51 @@
 import { useState } from "react";
 import "./App.css";
-// Import data from "assets/countries.json" and "assets/states.json" here
 import states from "./assets/states.json";
 import countries from "./assets/countries.json";
 
 function App() {
-  const [state, setState] = useState({
+  const defaultFormValues = {
     firstName: "",
     lastName: "",
-    address: "",
+    addressLine1: "",
     city: "",
-    region: "",
-    zip: "",
+    postalCode: "",
     country: "",
-  });
+  };
 
-  const handleSubmit = (e) => {
+  const [submitted, setSubmitted] = useState(false);
+
+  const [formsValues, setFormsValues] = useState([
+    {
+      firstName: "",
+      lastName: "",
+      addressLine1: "",
+      city: "",
+      postalCode: "",
+      country: "",
+    },
+  ]);
+
+  const [submittedValues, setSubmittedValues] = useState(defaultFormValues);
+
+  const onSubmit = (e) => {
     e.preventDefault();
+    setSubmitted(true);
+    setSubmittedValues({ ...formValues });
+    setFormValues(defaultFormValues);
+  };
 
-    setState({
-      ...state,
-      [e.target.name]: e.target.value,
+  const handleChange = (e) => {
+    setFormValues((prevValues) => {
+      return {
+        ...prevValues,
+        [e.target.name]: e.target.value,
+      };
     });
   };
 
-  const userData = [state];
-
-  console.log({
-    state,
-    userData,
-  });
-
   return (
-    <form className="container mt-4" method="POST" onSubmit={handleSubmit}>
-      {/* You will need to handle form submission */}
+    <form className="container mt-4" onSubmit={onSubmit}>
       <div className="mb-3">
         <label htmlFor="firstName" className="control-label">
           First Name
@@ -43,13 +55,8 @@ function App() {
           name="firstName"
           type="text"
           className="form-control"
-          value={state.firstName}
-          onChange={(e) =>
-            setState({
-              ...state,
-              firstName: e.target.value,
-            })
-          }
+          onChange={handleChange}
+          value={formValues.firstName}
         />
       </div>
       <div className="mb-3">
@@ -61,13 +68,8 @@ function App() {
           name="lastName"
           type="text"
           className="form-control"
-          value={state.lastName}
-          onChange={(e) =>
-            setState({
-              ...state,
-              lastName: e.target.value,
-            })
-          }
+          onChange={handleChange}
+          value={formValues.lastName}
         />
       </div>
       <div className="mb-3">
@@ -79,13 +81,8 @@ function App() {
           name="addressLine1"
           type="text"
           className="form-control"
-          value={state.address}
-          onChange={(e) =>
-            setState({
-              ...state,
-              address: e.target.value,
-            })
-          }
+          onChange={handleChange}
+          value={formValues.addressLine1}
         />
         <p className="help-block text-muted">
           Street Address, P.O. Box, Company Name, C/O
@@ -96,29 +93,33 @@ function App() {
         <label htmlFor="city" className="control-label">
           City / Town
         </label>
-        <input id="city" name="city" type="text" className="form-control" />
+        <input
+          id="city"
+          name="city"
+          type="text"
+          className="form-control"
+          onChange={handleChange}
+          value={formValues.city}
+        />
       </div>
       <div className="mb-3">
         <label htmlFor="state" className="control-label">
           State / Province / Region
         </label>
-        {/* Loop through the states you imported here */}
         <select
           id="state"
           name="state"
           className="form-control"
-          onChange={(e) =>
-            setState({
-              ...state,
-              region: e.target.value,
-            })
-          }
+          onChange={handleChange}
+          value={formValues.state}
         >
-          {states.map((child, idx) => (
-            <option value={child} key={idx}>
-              {child}
-            </option>
-          ))}
+          {states.map((state) => {
+            return (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            );
+          })}
         </select>
       </div>
 
@@ -131,13 +132,8 @@ function App() {
           name="postalCode"
           type="text"
           className="form-control"
-          value={state.zip}
-          onChange={(e) =>
-            setState({
-              ...state,
-              zip: e.target.value,
-            })
-          }
+          onChange={handleChange}
+          value={formValues.postalCode}
         />
       </div>
 
@@ -145,48 +141,28 @@ function App() {
         <label htmlFor="country" className="control-label">
           Country
         </label>
-
         <select
           id="country"
           name="country"
           className="form-control"
-          onChange={(e) =>
-            setState({
-              ...state,
-              country: e.target.value,
-            })
-          }
+          onChange={handleChange}
+          value={formValues.country}
         >
-          {countries.map((child, idx) => (
-            <option value={child} key={idx}>
-              {child}
-            </option>
-          ))}
+          {countries.map((country) => {
+            return <option value={country}>{country}</option>;
+          })}
         </select>
       </div>
       <button type="submit" className="btn btn-primary" onChange={handleSubmit}>
         Submit
       </button>
 
-      {/*
-       * Find a way to only display this once the form has been submitted.
-       * Hint: You will need to change "false" below with something else
-       */}
-      {!false && (
+      {submitted && (
         <div className="card card-body bg-light mt-4 mb-4">
-          Results:
+          <h3>Results:</h3>
           <ul className="list-unstyled mb-0">
-            {/* Add <li></li> tags here */}
-            {userData.map((child, idx) => (
-              <>
-                <li>{child.firstName}</li>
-                <li>{child.lastName}</li>
-                <li>{child.address}</li>
-                <li>{child.city}</li>
-                <li>{child.region}</li>
-                <li>{child.zip}</li>
-                <li>{child.country}</li>
-              </>
+            {Object.keys(submittedValues).map((key, index) => (
+              <li key={index}>{`${key}: ` + submittedValues[key]}</li>
             ))}
           </ul>
         </div>

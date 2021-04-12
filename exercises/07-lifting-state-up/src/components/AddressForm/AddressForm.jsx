@@ -30,6 +30,15 @@ function AddressForm(props) {
     props.setDisplayResults(true);
   };
 
+  const handleChange = (e) => {
+    props.setValues((prevValues) => {
+      return {
+        ...prevValues,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+
   return (
     <form className="container mt-4" onSubmit={handleSubmit}>
       <div className="mb-3">
@@ -41,8 +50,8 @@ function AddressForm(props) {
           name="firstName"
           type="text"
           className="form-control"
-          value={props.FName}
-          onChange={(e) => props.setFName(e.target.value)}
+          onChange={handleChange}
+          value={props.values.firstName}
         />
       </div>
       <div className="mb-3">
@@ -54,8 +63,8 @@ function AddressForm(props) {
           name="lastName"
           type="text"
           className="form-control"
-          value={props.LName}
-          onChange={(e) => props.setLName(e.target.value)}
+          onChange={handleChange}
+          value={props.values.lastName}
         />
       </div>
       <div className="mb-3">
@@ -68,7 +77,8 @@ function AddressForm(props) {
           type="text"
           value={props.Address}
           className="form-control"
-          onChange={(e) => props.setAddress(e.target.value)}
+          onChange={handleChange}
+          value={props.values.addressLine1}
         />
         <p className="help-block text-muted">
           Street address, P.O. box, company name, c/o
@@ -84,8 +94,8 @@ function AddressForm(props) {
           name="city"
           type="text"
           className="form-control"
-          value={props.Town}
-          onChange={(e) => props.setTown(e.target.value)}
+          onChange={handleChange}
+          value={props.values.city}
         />
       </div>
       <div className="mb-3">
@@ -96,8 +106,8 @@ function AddressForm(props) {
           id="state"
           name="state"
           className="form-control"
-          value={props.State}
-          onChange={(e) => props.setState(e.target.value)}
+          onChange={handleChange}
+          value={props.values.state}
         >
           <option></option>
           {states.map((state, idx) => {
@@ -115,8 +125,8 @@ function AddressForm(props) {
           name="postalCode"
           type="text"
           className="form-control"
-          value={props.Zip}
-          onChange={(e) => props.setZip(e.target.value)}
+          onChange={handleChange}
+          value={props.values.postalCode}
         />
       </div>
 
@@ -128,8 +138,8 @@ function AddressForm(props) {
           id="country"
           name="country"
           className="form-control"
-          value={props.Country}
-          onChange={(e) => props.setCountry(e.target.value)}
+          onChange={handleChange}
+          value={props.values.country}
         >
           <option></option>
           {countries.map((state, idx) => {

@@ -1,16 +1,14 @@
 import "./App.css";
-// import something here
-import images from "./images/images";
+import { images } from "./images/images.js";
+
+// const handleArray = images.map((imgURL) => { return (<img src={imgURL}/>)})
 
 function App() {
   return (
     <div className="App">
-      {images.map((child, index) => (
-        <>
-          <img src={child} alt="" className="img" />
-          {/*<text>{index}</text>*/}
-        </>
-      ))}
+      {images.map((imgURL) => {
+        return <img src={imgURL} />;
+      })}
     </div>
   );
 }

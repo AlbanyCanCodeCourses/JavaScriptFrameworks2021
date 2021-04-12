@@ -54,3 +54,5 @@ export const todos = [
     completed: false,
   },
 ];
+
+export default todos;

@@ -1,13 +1,11 @@
 import "./App.css";
-// import something
-import { todos } from "./data/todos";
-// import another thing
-import Todo from "./Components/Todo";
+import todos from "./data/todos.js";
+import Todo from "./components/Todo";
 
-function App(props) {
+function App() {
   return (
     <div className="App">
-      <Todo items={todos} showCompleted={false} />
+      <Todo todos={todos} showCompleted={true} />
     </div>
   );
 }
