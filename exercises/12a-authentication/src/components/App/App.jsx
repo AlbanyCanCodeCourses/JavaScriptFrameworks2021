@@ -1,11 +1,12 @@
-import { useState } from "react";
-// import something here
-// import Axios (or use Fetch)
+import { useState, useEffect } from "react";
+import axios from 'axios';
+import Home from '../Home/Home';
 
 function App() {
   /**
    * User input
    */
+  const [token, setToken] = useState('');
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   /**
@@ -14,6 +15,33 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleForm = (e) =>{
+    e.preventDefault();
+    setIsLoading(true);
+    console.log('stop it')
+    axios.request({
+      method: 'POST',
+      url: 'http://localhost:7000/api/login',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: {username: username, password: password}
+    })
+    .then((response)=>{
+      setToken(response.data.token)
+    })
+    .catch( (error)=>{
+      console.error(error);
+      if(error.response && error.response.status === 401){
+        setErrorMessage("You done messed up parnter. Try the CORRECT information this time!");
+      } else{setErrorMessage("actually, i have no idea what's messed up. try again later!")}
+    })
+  }
+
+  const logout = ()=>{
+    setToken('');
+    setIsLoading(false);
+  }
   /**
    * Complete all the logging in and logout logic
    */
@@ -21,11 +49,14 @@ function App() {
   /**
    * If the user is logged in, you should render the <Home /> component instead.
    */
+  if(token){
+    return <Home token = {token} logout = {logout}/>
+  }else{
   return (
     <div className="container mt-2 mb-5">
       <h1>Login</h1>
       {/* Handle form submission */}
-      <form className="form-inline mb-2" method="POST">
+      <form className="form-inline mb-2" method="POST" onSubmit = {handleForm}>
         <div className="form-group">
           <label htmlFor="username" className="mr-2">
             Username
@@ -70,6 +101,7 @@ function App() {
       )}
     </div>
   );
+}
 }
 
 export default App;

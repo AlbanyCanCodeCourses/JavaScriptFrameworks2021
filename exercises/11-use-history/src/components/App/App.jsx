@@ -1,11 +1,25 @@
-// Import things from React Router
+import { BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 import Subscribe from "../Subscribe/Subscribe";
 import ThankYou from "../ThankYou/ThankYou";
 
 function App() {
   return (
     <div className="uk-height-1-1 uk-flex uk-flex-column uk-flex-center">
-      {/* Complete me */}
+      {
+        <Router>
+          <Switch>
+            <Route exact path="/thank-you">
+              <ThankYou />
+            </Route>
+            <Route exact path="/subscribe">
+              <Subscribe />
+            </Route>
+            <Route>
+              <Redirect to="/subscribe" />
+            </Route>
+          </Switch>
+        </Router>
+      }
     </div>
   );
 }

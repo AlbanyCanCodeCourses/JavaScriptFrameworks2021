@@ -7,6 +7,6 @@ function ThankYou() {
       </p>
     </div>
   );
-}
+} 
 
 export default ThankYou;

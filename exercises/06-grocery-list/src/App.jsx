@@ -18,7 +18,7 @@ const GroceryList = () => {
       groceryItem.filter((currItem, currIndex) => currIndex !== index)
     );
   }
-
+ 
   function getTotalCost(groceryPrice) {
     return groceryPrice.reduce((totalCost, itemCost) => {
       return totalCost + parseFloat(itemCost.cost);

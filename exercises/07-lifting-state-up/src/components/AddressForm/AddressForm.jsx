@@ -6,7 +6,7 @@ import countries from "../../assets/countries";
 import states from "../../assets/states";
 
 
-
+ 
 /**
  * After the user submit the form, this displays what the user entered.
  * @param {Object} props which should somehow include:
@@ -14,7 +14,7 @@ import states from "../../assets/states";
  * - first name
  * - last name
  * - address  
- * - city
+ *  - city
  * - state
  * - zipcode / postal code
  * - country
@@ -74,7 +74,7 @@ function AddressForm(props) {
         </p>
       </div>
 
-      <div className="mb-3">
+      <div className="mb-3"> 
         <label htmlFor="city" className="control-label">
           City / Town
         </label>

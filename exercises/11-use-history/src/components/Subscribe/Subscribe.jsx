@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { subscribe } from "../../services/subscribe";
+import { useHistory } from "react-router-dom";
 // Import something here
 
 function Subscribe() {
   const [email, setEmail] = useState("");
+  const history = useHistory();
   /**
    * Should something go here?
    */
@@ -13,6 +15,7 @@ function Subscribe() {
 
     try {
       await subscribe(email);
+      history.push("/thank-you");
       /**
        * Complete me
        */

@@ -11,7 +11,7 @@ function App() {
       <div className="bg-secondary pt-4 pb-4 mb-4">
         <div className="container">
           <h1 className="h3 text-white">Challenge 1 - Temperature</h1>
-          <Temperature />
+          <Temperature />  
         </div>
       </div>
       <div className="container mb-4">
