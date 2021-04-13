@@ -5,7 +5,6 @@ import axios from 'axios';
 function App() {
   const [characters, setCharacters] = useState();
   const [character, setCharacter] = useState();
-  const [options, setOptions] = useState();
 
   useEffect(
     ()=> {
