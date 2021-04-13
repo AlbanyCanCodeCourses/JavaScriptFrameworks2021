@@ -4,6 +4,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import ProtectedRoute from './ProtectedRoute'
 // Import ProtectedRouter
 
 import Login from "../Login/Login";
@@ -14,9 +15,10 @@ function AppRouter() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/home">
+      <ProtectedRoute exact path = "/home">
           <Home />
-        </Route>
+      </ProtectedRoute>
+        
 
         <Route exact path="/login">
           <Login />

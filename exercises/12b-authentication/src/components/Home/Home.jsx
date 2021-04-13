@@ -1,5 +1,9 @@
 // You will need to import some things from React
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import axios from 'axios';
+import { AccessTokenContext } from "../../context/AccessTokenContext";
+import {AccessTokenProvider} from '../../context/AccessTokenContext'
+
 // You will need to import something from AccessTokenContext
 
 function Home() {
@@ -8,6 +12,34 @@ function Home() {
   /**
    * I should be getting something or things from the Context API
    */
+  const { getToken, logOut } = useContext(AccessTokenContext);
+
+
+ 
+  const getMovies = async()=>{
+    try {
+    const response = await axios('http://localhost:7000/api/users',{
+      method: 'GET',
+      headers :{
+        Authorization: `Bearer ${getToken}`
+      }
+
+    });
+    console.log(response);
+    setMovies(response.data)
+   
+      
+    } catch (error) {
+      console.error(error);
+      setErrorMessage("whoops my bad! Come back later if you want")
+      
+    }
+  }
+
+  useEffect( ()=>{
+    getMovies();
+    
+  }, [])
 
   /**
    * Make an AJAX request to http://localhost:7000/api/movies to get a list of movies.
@@ -17,10 +49,10 @@ function Home() {
 
   return (
     <div className="container mt-2 mb-5">
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between"> 
         <h1 className="h2">You are logged in!</h1>
         {/* Make this button functional */}
-        <button className="btn btn-primary">Logout</button>
+        <button className="btn btn-primary" onClick = {logOut}>Logout</button>
       </div>
       {Object.values(movies).map((movie, idx) => {
         return (

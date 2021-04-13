@@ -10,7 +10,7 @@ function Home({ token, logout }) {
   const getMovies = async()=>{
    
     try{
-    const response = await axios("http://localhost:7000/api/movies", {
+    const response = await axios('http://localhost:7000/api/movies', {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`, 

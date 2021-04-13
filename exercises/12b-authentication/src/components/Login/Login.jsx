@@ -1,9 +1,16 @@
 // You will need import something from React
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { AccessTokenProvider } from '../../context/AccessTokenContext';
+import { AccessTokenContext} from '../../context/AccessTokenContext';
+
 // You will need to import something from AccessTokenContext
 // You will need to import useHistory from react-router-dom
 
 function Login() {
+  const { login } = useContext(AccessTokenContext);
+  const history = useHistory();
   /**
    * I should be getting something or things from the Context API
    */
@@ -29,6 +36,25 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Complete me
+    setIsLoading(true);
+    axios.request({
+      method: 'POST',
+      url: 'http://localhost:7000/api/login',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: {username: username, password: password}
+    })
+    .then((response)=>{
+      login(response.data.token)
+      history.push('/home');
+    })
+    .catch( (error)=>{
+      console.error(error);
+      if(error.response && error.response.status === 401){
+        setErrorMessage("You done messed up parnter. Try the CORRECT information this time!");
+      } else{setErrorMessage("actually, i have no idea what's messed up. try again later!")}
+    })
   };
 
   return (
