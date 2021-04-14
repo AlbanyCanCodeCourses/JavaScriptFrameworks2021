@@ -1,0 +1,13 @@
+body {
+  padding: 0 1rem;
+  font-family: sans-serif;
+}
+label,
+input {
+  display: inline-block;
+}
+label,
+input,
+button {
+  margin-right: 5px;
+}
