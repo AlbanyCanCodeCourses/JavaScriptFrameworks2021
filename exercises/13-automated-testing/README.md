@@ -6,6 +6,14 @@ In Visual Studio code, press `command+shift+v` (Mac) or `ctrl+shift+v` (Windows)
 
 We write unit tests to catch bugs, make refactoring code easier, and to improve code quality. The purpose of this challenge is to teach you how to react automated unit tests in React.
 
+## Documentation
+
+For this assignment, we will be using the following testing libraries:
+
+- Jest to run the tests, which is [built into create-react-app](https://create-react-app.dev/docs/running-tests/).
+- [Enzyme](https://enzymejs.github.io/enzyme/docs/api/) to render React components, and to query and manipulate the DOM outputted from React components.
+- [Chai BDD](https://www.chaijs.com/api/bdd/) to assert that your test has passed.
+
 ## Getting Started
 
 Using your command line, you will need to navigate to the this folder, install all dependencies.
@@ -39,12 +47,6 @@ As a user, I would like to add a new link to my list of links.
 As a user, I would like to hide my list of links.
 
 ## Instructions
-
-For this assignment, we will be using the following testing libraries:
-
-- Jest to run the tests, which is [built into create-react-app](https://create-react-app.dev/docs/running-tests/).
-- [Enzyme](https://enzymejs.github.io/enzyme/docs/api/) to render React components, and to query and manipulate the DOM outputted from React components.
-- [Chai BDD](https://www.chaijs.com/api/bdd/) to assert that your test has passed.
 
 Open the file _exercises/13-automated-testing/src/components/App/App.test.js_ and follow its instructions.
 
