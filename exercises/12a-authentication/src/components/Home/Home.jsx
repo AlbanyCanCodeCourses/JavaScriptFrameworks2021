@@ -6,13 +6,13 @@ import axios from 'axios';
 function Home({ token, logout }) {
   const [movies, setMovies] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
-  const MOVE_API_URL = "http://localhost:7000/api/movies";
+  const MOVIE_API_URL = "http://localhost:7000/api/movies";
   /**
    * Make an AJAX request to http://localhost:7000/api/movies to get a list of movies.
    * Be sure to provide the token in the AJAX request.
    */
   useEffect(() => {
-    axios.get(MOVE_API_URL, {
+    axios.get(MOVIE_API_URL, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
