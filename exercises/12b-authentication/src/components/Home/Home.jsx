@@ -1,10 +1,15 @@
-// You will need to import some things from React
-import { useState } from "react";
-// You will need to import something from AccessTokenContext
+import { useState, useContext, useEffect } from "react";
+import { AccessTokenContext } from "../../context/AccessTokenContext";
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 function Home() {
   const [movies, setMovies] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
+
+  const {token, logout} = useContext(AccessTokenContext);
+  const history = useHistory();
+  const MOVIE_API = "http://localhost:7000/api/movies";
   /**
    * I should be getting something or things from the Context API
    */
@@ -14,13 +19,38 @@ function Home() {
    * Be sure to provide the token in the AJAX request.
    * @see exercises/12a-authentication/src/components/Home/Home.jsx
    */
+  const handleLogout = (e) => {
+    logout();
+    history.push("/login")
+  }
+
+  useEffect(() => {
+    axios.get(MOVIE_API, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    }).then(response => {
+      // Successful
+      setMovies(response.data);
+      setErrorMessage("");
+    }).catch(error => {
+      // Fail
+      if (error.response && error.response.status === 401) {
+        setErrorMessage(error.response.data.message)
+      } else {
+        setErrorMessage("Something went wrong...")
+      }
+      
+    })
+  }, [])
 
   return (
     <div className="container mt-2 mb-5">
       <div className="d-flex justify-content-between">
         <h1 className="h2">You are logged in!</h1>
         {/* Make this button functional */}
-        <button className="btn btn-primary">Logout</button>
+        <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
       </div>
       {Object.values(movies).map((movie, idx) => {
         return (

@@ -1,12 +1,15 @@
 // You will need import something from React
-import { useState } from "react";
-// You will need to import something from AccessTokenContext
+import { useState, useContext } from "react";
+import { AccessTokenContext } from '../../context/AccessTokenContext'
+import axios from 'axios';
 // You will need to import useHistory from react-router-dom
+import { useHistory } from 'react-router-dom';
 
 function Login() {
   /**
    * I should be getting something or things from the Context API
    */
+  const {login} = useContext(AccessTokenContext);
 
   /**
    * User input
@@ -19,6 +22,42 @@ function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const history = useHistory();
+
+  const AUTH_URL = "http://localhost:7000/api/login";
+
+  const getBearerToken = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.request({
+        method: "POST",
+        url: AUTH_URL,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          username,
+          password
+        }
+      });
+      // Success - set state, clear input, redirect
+      setIsLoading(false);
+      setErrorMessage("");
+      login(response.data.token);
+      setUsername("");
+      setPassword("");
+      history.push("/home")
+    } catch (error) {
+      // Fail
+      console.log(error);
+      setIsLoading(false);
+      if (error.response && error.response.status === 401) {
+        setErrorMessage("Incorrect username or password")
+      } else {
+        setErrorMessage("Something went wrong...")
+      }
+    }
+  } 
   /**
    * Handle the form submission that will login the user here.
    * If successful, store token in state and redirect to /movies
@@ -28,7 +67,7 @@ function Login() {
    */
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Complete me
+    getBearerToken();
   };
 
   return (
