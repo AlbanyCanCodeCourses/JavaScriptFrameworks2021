@@ -46,9 +46,14 @@ describe("<App />", () => {
   /**
    * Write a test that checks to see if two inputs are rendered on the screen
    */
+  it("should render two inputs on the screen", () => {
+    const wrapper = shallow(<App />);
+    const inputs = wrapper.find("input");
+    expect(inputs).to.have.lengthOf(2);
+  });
 
   // Remove the `.skip` when you are ready to write this test
-  it.skip("should render two links (<li>) on the screen when the component first renders", () => {
+  it("should render two links (<li>) on the screen when the component first renders", () => {
     /**
      * Complete this unit test.
      * HINT: you might run into trouble with this one,
@@ -57,24 +62,37 @@ describe("<App />", () => {
      * inside of <App />
      * @see https://enzymejs.github.io/enzyme/docs/api/mount.html
      */
+    const wrapper = mount(<App />);
+    const links = wrapper.find("a");
+    expect(links).to.have.lengthOf(2);
   });
 
   // Remove the `.skip` when you are ready to write this test
-  it.skip("should hide the links when the hide button is clicked", () => {
+  it("should hide the links when the hide button is clicked", () => {
     /**
      * Complete this unit test.
      * You are going to have to simulate a click event.
      * @see https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/simulate.html
      */
+    const wrapper = mount(<App />);
+    const hideLinkButton = wrapper.find("button").last();
+    hideLinkButton.simulate("click");
+    expect(wrapper.find("li")).to.have.lengthOf(0);
   });
 
   /**
    * Write a test to see if another <li> is added on to the screen
    * after the user clicks on the "Add Link" button
    */
+  it("should add another link <li> on the screen when the add button is clicked", () => {
+    const wrapper = mount(<App />);
+    const addLinkButton = wrapper.find("button").first();
+    addLinkButton.simulate("click");
+    expect(wrapper.find("li")).to.have.lengthOf(3);
+  });
 
   // Remove the `.skip` when you are ready to write this test
-  it.skip("should add the user input to the new link <li> on the screen when the add button is clicked", () => {
+  it("should add the user input to the new link <li> on the screen when the add button is clicked", () => {
     /**
      * This should test that after the user enters a a text and href,
      * and then clicks on the "Add Link" button, it should render
@@ -94,5 +112,32 @@ describe("<App />", () => {
      * @see https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/simulate.html
      * @see https://stackoverflow.com/questions/37219772/enzyme-how-to-access-and-set-input-value
      */
+    const wrapper = mount(<App />);
+    const inputs = wrapper.find("input");
+    const addLinkButton = wrapper.find("button").first();
+    inputs.first().simulate("change", {
+      target: {
+        value: "Testing Components built using React Hooks with Enzyme",
+      },
+    });
+    inputs
+      .last()
+      .simulate("change", { target: { value: "https://www.somewhere.com" } });
+    addLinkButton.simulate("click");
+    expect(wrapper.find("li")).to.have.lengthOf(3);
+    expect(
+      wrapper
+        .find("li")
+        .last()
+        .contains(
+          <a
+            href="https://www.somewhere.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Testing Components built using React Hooks with Enzyme
+          </a>
+        )
+    ).to.be.true;
   });
 });
