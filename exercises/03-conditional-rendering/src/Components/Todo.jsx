@@ -1,15 +1,9 @@
-import React from "react";
-
-function Todo(props) {
-  return (
-    <ul>
-      {props.todos.map((todo, idx) => {
-        if ((props.showCompleted && todo.completed) || !props.showCompleted) {
-          return <li key={idx}>{todo.title}</li>;
-        }
-      })}
-    </ul>
-  );
+const Todo = (props) => {
+    return (
+        props.showCompleted ? 
+        props.todos.map((todo) => <p>{todo.title}</p>) :
+        props.todos.filter(todo => todo.completed).map((todo) => <p>{todo.title}</p>)
+        )
 }
 
 export default Todo;

@@ -1,35 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 
-const LessText = ({ text = "", maxLength }) => {
-  const [state, setState] = useState({
-    string: text,
-  });
+class LessText extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {showMore: true}
+    }
 
-  const truncateString = () => {
-    let str = state.string;
-    let length = maxLength;
-    const truncatedStringMain = str.substring(0, length);
-    setState({
-      string: truncatedStringMain,
-    });
-  };
 
-  const showMore = () => {
-    let str = text;
-    //let length = maxLength;
-    //const truncatedString = str.substring(0, length);
-    setState({
-      string: str,
-    });
-  };
-
-  return (
-    <div>
-      <p>{state.string}</p>
-      <button onClick={() => showMore()}>Read More</button>
-      <button onClick={() => truncateString()}>Read Less</button>
-    </div>
-  );
-};
+  render() {
+    return (
+      <div>
+        <p>
+            {this.state.showMore ? this.props.text : this.props.text.slice(0,20)+"..."}
+        </p>
+        <button className="btn-dark m-2" onClick={() => this.setState({showMore: true})}>Read More</button>
+        <button className="btn-dark m-2" onClick={() => this.setState({showMore: false})}>Read Less</button>
+      </div>
+    );
+  }
+}
 
 export default LessText;

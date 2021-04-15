@@ -1,25 +1,17 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-export default function CharacterCount() {
-  const [state, setState] = useState({
-    count: 0,
-  });
+const CharacterCount = (props) => {
+    const [count,setCount] = useState(0);
 
-  const onChange = (e) => {
-    setState({
-      count: e.target.value.length,
-    });
-  };
-
-  return (
-    <div>
-      <p>Records the amount of words you type!</p>
-      <textarea
-        type="text"
-        onChange={(e) => onChange(e)}
-        style={{ width: "100%" }}
-      ></textarea>
-      <p>Character Count: {state.count}</p>
-    </div>
-  );
+    return (
+        <div>
+            <p>Records the amount of words you type!</p>
+            <textarea name="" id="countThis" cols="30" rows=""
+                onChange={(event) => setCount(event.target.value.length)}
+            ></textarea>
+            <p>Character Count: {count}</p>
+        </div>
+    )
 }
+
+export default CharacterCount;
