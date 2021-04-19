@@ -74,7 +74,7 @@ const validateJwt = (req, res) => {
   } catch (err) {
     return res.status(401).send({
       message:
-        "Forbidden. This means you are either missing your JWT token, your token has expired, or your token is not correct. Setup a header called 'Authorization' and set the value equal to 'Bearer mytoken'. If your token has expired, you need to get a new one with the '/api/refresh' API or by having the user login again.",
+        "Unauthorized. This means you are either missing your JWT token, your token has expired, or your token is not correct. Setup a header called 'Authorization' and set the value equal to 'Bearer mytoken'. If your token has expired, you need to get a new one with the '/api/refresh' API or by having the user login again.",
     });
   }
 };
