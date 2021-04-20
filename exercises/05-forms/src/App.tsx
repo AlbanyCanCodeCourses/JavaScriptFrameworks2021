@@ -4,26 +4,32 @@ import countries from "./assets/countries.json";
 import states from "./assets/states.json";
 
 function App() {
-  const [values, setValues] = useState({
-    firstName: "",
-    lastName: "",
-    addressLine1: "",
-    city: "",
-    state: "",
-    postalCode: "",
-    country: "",
-  });
+  interface Values {
+    firstName?: string;
+    lastName?: string;
+    addressLine1?: string;
+    city?: string;
+    state?: string;
+    postalCode?: string;
+    country?: string;
+  }
+
+  const [values, setValues] = useState<Values>({});
 
   const [displayInfo, setDisplayInfo] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+    ) => {
     setValues({
       ...values,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setDisplayInfo(true);
   };
