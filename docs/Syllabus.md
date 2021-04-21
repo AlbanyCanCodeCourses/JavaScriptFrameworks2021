@@ -109,7 +109,7 @@ During the first few weeks, we will learn the basics of React. Our lectures will
 - JSX
 - Stateless Components
 - Props
-- State and the State Hook
+- State and the _useState_ Hook
 - Events in React
 - Forms in React
 
@@ -125,7 +125,7 @@ We will then looks into some out-of-the-box ways in which you can share state be
 In the beginning of the second half of the class, we will learn about how to handle AJAX and asynchronous code within React. We will also talk how and when to break out of the normal React flow.
 
 - Refs
-- Effect Hook
+- _useEffect_ Hook
 - AJAX and Asynchronous Code in React
 - Suspense
 
@@ -136,9 +136,15 @@ Next, we will cover setting up and structuring your application. We will learn a
 - React Router
 - Authentication
 - JWT Tokens
-- Environments and Configuration
 
-### Weeks 8 - 9
+### Week 8 - 9
+
+In this section, we will talk about areas of the profession that is good to know as a front-end developer, and how they related or integrate with React. We will be focusing on:
+
+- Automated Testing
+- TypeScript
+
+### Weeks 10 - 11
 
 If you join a development team that already has an older codebase, you may need to support older systems like the React Classes and Redux. This section will prepare you for:
 
@@ -148,11 +154,12 @@ If you join a development team that already has an older codebase, you may need 
 - Redux
 - Redux Thunk
 
-### Weeks 10 - 11
+### Weeks 12
 
-In the final week, we will discuss unit testing as well miscellaneous development operations stuff you will need to know to share your application with the world. Here is what we will teach, time permitting:
+In the final week, we will teach you how to share your application with the world. Here is what we will teach, time permitting:
 
-- Automated Testing
+- Environments
+- Configuration
 - Hosting
 - SSL Certificates
 - Web Server Setup
