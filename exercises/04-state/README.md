@@ -2,6 +2,11 @@
 
 In Visual Studio code, press `command+shift+v` (Mac) or `ctrl+shift+v` (Windows) to open a Markdown preview.
 
+## Reason for the Challenges
+
+Managing state is often a source of headache for many developers.
+In these next few challenges will help you improve your ability to manage your app's state.
+
 ## Getting Started
 
 Using your command line, you will need to navigate to the this folder, install all dependencies, and start the app.
@@ -14,11 +19,6 @@ yarn start
 ```
 
 If, at any time, you need to stop the app, press `ctrl+c`.
-
-## Reason for the Challenges
-
-Managing state is often a source of heartache for many developers.
-In these next few challenges will help you improve your ability to manage your app's state.
 
 ## Challenge 1
 
