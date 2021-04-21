@@ -1,58 +1,51 @@
-import { useState } from "react";
+import { useState, FunctionComponent as FC, ReactNode } from "react";
+import React from 'react';
 import "./App.css";
-<<<<<<< HEAD
-import countries from "./assets/countries.json"
-import states from "./assets/states.json"
-// Import data from "assets/countries.json" and "assets/states.json" here
-
-function App() {
-  const [state, setState] = useState(""); 
-  const [country, setCountry] = useState("");
-  function handleForm(e){
-    e.preventDefault()
-  }
-  return (
-    <form onSubmit = {handleForm}className="container mt-4" method="POST">
-      {}
-=======
 import states from "./assets/states.json";
 import countries from "./assets/countries.json";
 
 function App() {
 
-  const defaultFormValues = {
-    firstName: "",
-    lastName: "",
-    addressLine1: "",
-    city: "",
-    postalCode: "",
-    country: "",
+  interface IformValues {
+    firstName: string;
+    lastName: string
+    addressLine1: string;
+    state: string;
+    city: string;
+    postalCode: string;
+    country: string;
+    [key: string]: string;
   }
 
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = React.useState(false);
 
 
-  const [formsValues, setFormsValues] = useState([
+  const [formValues, setFormValues] = useState<IformValues>(
     {firstName: "",
     lastName: "",
     addressLine1: "",
+    state: "",
     city: "",
     postalCode: "",
     country: "",}
-  ]
+  
+  
   );
 
 
-  const [submittedValues,setSubmittedValues] = useState(defaultFormValues)
+  const [submittedValues, setSubmittedValues] = useState<IformValues>();
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true);
     setSubmittedValues({...formValues})
-    setFormValues(defaultFormValues)
+    setFormValues(formValues)
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e:
+    | React.ChangeEvent<HTMLInputElement>
+    | React.ChangeEvent<HTMLSelectElement>
+    ) => {
     setFormValues((prevValues) => {
       return { 
         ...prevValues, 
@@ -62,7 +55,6 @@ function App() {
 
   return (
     <form className="container mt-4" onSubmit={onSubmit}>
->>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
       <div className="mb-3">
         <label htmlFor="firstName" className="control-label">
           First Name
@@ -123,11 +115,6 @@ function App() {
         <label htmlFor="state" className="control-label">
           State / Province / Region
         </label>
-<<<<<<< HEAD
-        { 
-        }
-        <select value={state} onChange = {states.map( (individualState)=>{ <option></option>})}id="state" name="state" className="form-control" />
-=======
         <select
           id="state"
           name="state"
@@ -143,7 +130,6 @@ function App() {
             );
           })}
         </select>
->>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
       </div>
 
       <div className="mb-3">
@@ -164,14 +150,6 @@ function App() {
         <label htmlFor="country" className="control-label">
           Country
         </label>
-<<<<<<< HEAD
-        
-        {
-        
-        }        
-        
-        <select id="country" name="country" className="form-control"  ></select>
-=======
         <select
           id="country"
           name="country"
@@ -183,7 +161,6 @@ function App() {
             return <option value={country}>{country}</option>;
           })}
         </select>
->>>>>>> 3e818c3fe64faa5d2493e35443e8331a8bb198de
       </div>
       <button type="submit" className="btn btn-primary">
         Submit
@@ -193,7 +170,7 @@ function App() {
         <div className="card card-body bg-light mt-4 mb-4">
           <h3>Results:</h3>
           <ul className="list-unstyled mb-0">
-            {Object.keys(submittedValues).map((key, index) => (
+            {submittedValues && Object.keys(submittedValues).map((key, index) => (
               <li key={index}>{`${key}: ` + submittedValues[key]}</li>
             ))}
           </ul>
