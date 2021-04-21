@@ -48,7 +48,7 @@ describe("<App />", () => {
    */
 
   // Remove the `.skip` when you are ready to write this test
-  it.skip("should render two links (<li>) on the screen when the component first renders", () => {
+  it("should render two links (<li>) on the screen when the component first renders", () => {
     /**
      * Complete this unit test.
      * HINT: you might run into trouble with this one,
@@ -57,15 +57,20 @@ describe("<App />", () => {
      * inside of <App />
      * @see https://enzymejs.github.io/enzyme/docs/api/mount.html
      */
+    const wrapper = mount(<App />);
+    expect(wrapper.find("li")).to.have.lengthOf(2);
   });
 
   // Remove the `.skip` when you are ready to write this test
-  it.skip("should hide the links when the hide button is clicked", () => {
+  it("should hide the links when the hide button is clicked", () => {
     /**
      * Complete this unit test.
      * You are going to have to simulate a click event.
      * @see https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/simulate.html
      */
+    const wrapper = mount(<App />);
+    wrapper.find('button').at(1).simulate('click')
+    expect(wrapper.find("li")).to.have.lengthOf(0);
   });
 
   /**
@@ -74,7 +79,7 @@ describe("<App />", () => {
    */
 
   // Remove the `.skip` when you are ready to write this test
-  it.skip("should add the user input to the new link <li> on the screen when the add button is clicked", () => {
+  it("should add the user input to the new link <li> on the screen when the add button is clicked", () => {
     /**
      * This should test that after the user enters a a text and href,
      * and then clicks on the "Add Link" button, it should render
@@ -94,5 +99,9 @@ describe("<App />", () => {
      * @see https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/simulate.html
      * @see https://stackoverflow.com/questions/37219772/enzyme-how-to-access-and-set-input-value
      */
+    const wrapper = mount(<App />);
+    wrapper.find('input')
+    wrapper.find('button').at(0).simulate('click')
+    expect(wrapper.find("li")).to.have.lengthOf(0);
   });
 });
