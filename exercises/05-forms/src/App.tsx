@@ -1,42 +1,44 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import states from "./assets/states.json";
 import countries from "./assets/countries.json";
+import { type } from "node:os";
 
-function App() {
-  const defaultFormValues = {
-    firstName: "",
-    lastName: "",
-    addressLine1: "",
-    city: "",
-    postalCode: "",
-    country: "",
-  };
+interface State {
+  firstName?: string;
+  lastName?: string;
+  addressLine1?: string;
+  city?: string;
+  postalCode?: number;
+  country?: string;
+  [key: string]: string;
+}
 
+const DefaultProps: State = {
+  firstName: "",
+  lastName: "",
+  addressLine1: "",
+  city: "",
+  postalCode: 12345,
+  country: "",
+};
+
+const App: React.FunctionComponent<State> = (props) => {
   const [submitted, setSubmitted] = useState(false);
 
-  const [formsValues, setFormsValues] = useState([
-    {
-      firstName: "",
-      lastName: "",
-      addressLine1: "",
-      city: "",
-      postalCode: "",
-      country: "",
-    },
-  ]);
+  const [formsValues, setFormsValues] = useState<State | undefined>(undefined);
 
-  const [submittedValues, setSubmittedValues] = useState(defaultFormValues);
+  const [submittedValues, setSubmittedValues] = useState<typeof DefaultProps>();
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     setSubmitted(true);
-    setSubmittedValues({ ...formValues });
-    setFormValues(defaultFormValues);
+    setSubmittedValues({ ...formsValues });
+    setFormsValues(submittedValues);
   };
 
-  const handleChange = (e) => {
-    setFormValues((prevValues) => {
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setFormsValues((prevValues) => {
       return {
         ...prevValues,
         [e.target.name]: e.target.value,
@@ -56,7 +58,7 @@ function App() {
           type="text"
           className="form-control"
           onChange={handleChange}
-          value={formValues.firstName}
+          value={formsValues?.firstName}
         />
       </div>
       <div className="mb-3">
@@ -69,7 +71,7 @@ function App() {
           type="text"
           className="form-control"
           onChange={handleChange}
-          value={formValues.lastName}
+          value={formsValues?.lastName}
         />
       </div>
       <div className="mb-3">
@@ -82,7 +84,7 @@ function App() {
           type="text"
           className="form-control"
           onChange={handleChange}
-          value={formValues.addressLine1}
+          value={formsValues?.addressLine1}
         />
         <p className="help-block text-muted">
           Street Address, P.O. Box, Company Name, C/O
@@ -99,7 +101,7 @@ function App() {
           type="text"
           className="form-control"
           onChange={handleChange}
-          value={formValues.city}
+          value={formsValues?.city}
         />
       </div>
       <div className="mb-3">
@@ -111,7 +113,7 @@ function App() {
           name="state"
           className="form-control"
           onChange={handleChange}
-          value={formValues.state}
+          value={formsValues?.city}
         >
           {states.map((state) => {
             return (
@@ -133,7 +135,7 @@ function App() {
           type="text"
           className="form-control"
           onChange={handleChange}
-          value={formValues.postalCode}
+          value={formsValues?.postalCode}
         />
       </div>
 
@@ -146,14 +148,14 @@ function App() {
           name="country"
           className="form-control"
           onChange={handleChange}
-          value={formValues.country}
+          value={formsValues?.country}
         >
           {countries.map((country) => {
             return <option value={country}>{country}</option>;
           })}
         </select>
       </div>
-      <button type="submit" className="btn btn-primary" onChange={handleSubmit}>
+      <button type="submit" className="btn btn-primary" onChange={handleChange}>
         Submit
       </button>
 
@@ -161,14 +163,17 @@ function App() {
         <div className="card card-body bg-light mt-4 mb-4">
           <h3>Results:</h3>
           <ul className="list-unstyled mb-0">
-            {Object.keys(submittedValues).map((key, index) => (
-              <li key={index}>{`${key}: ` + submittedValues[key]}</li>
-            ))}
+            {submittedValues &&
+              Object.keys(submittedValues).map((key, index) => (
+                <li key={index}>{`${key}: ` + submittedValues[key]}</li>
+              ))}
           </ul>
         </div>
       )}
     </form>
   );
-}
+};
+
+App.defaultProps = DefaultProps;
 
 export default App;

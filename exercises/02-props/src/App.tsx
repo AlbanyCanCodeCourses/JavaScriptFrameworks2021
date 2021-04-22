@@ -1,7 +1,5 @@
 import "./App.css";
-import Welcome from "./Components/Wlecome";
-// import something here
-import Welcome from "./components/Welcome";
+import Welcome from "./Components/Welcome";
 
 function App() {
   return (
