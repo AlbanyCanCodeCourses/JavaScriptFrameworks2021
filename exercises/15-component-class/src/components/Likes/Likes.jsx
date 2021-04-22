@@ -10,9 +10,7 @@ class Likes extends Component {
    *
    */
 
-  like = () => {
-    this.setState({ likes: this.state.likes + 1 });
-  };
+  like = () => {};
 
   render() {
     /**
