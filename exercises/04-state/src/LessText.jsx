@@ -11,5 +11,5 @@ function LessText({ text, maxLength }) {
     </div>
   );
 }
-
+ 
 export default LessText;
