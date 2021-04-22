@@ -8,15 +8,24 @@ import countries from "./assets/countries.json"
 
 function App() {
 
+  interface IFormValues {
+    firstName: string,
+    lastName: string,
+    addressLine1: string,
+    city: string,
+    state: string,
+    postalCode: number,
+    country: string
+  }
   const [formValues, setFormValues] = useState({});
   const [showUserDetails, setShowUserDetails] = useState(false);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: | React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setShowUserDetails(!showUserDetails);
   }
 
-  const handleInput = (name, value) => {
+  const handleInput = (name: string, value: string | number) => {
     setFormValues({
       ...formValues,
       [name]: value
@@ -85,7 +94,7 @@ function App() {
         {/* Loop through the states you imported here */}
         <select id="state" name="state" className="form-control" onChange={event => handleInput(event.target.name, event.target.value)}>
           <option disabled selected>Select a state...</option>
-          {states.map((state, index) => <option key={state.toLowerCase+index}>{state}</option>)}
+          {states.map((state, index) => <option key={state.toLowerCase()}>{state}</option>)}
         </select>
       </div>
 
@@ -109,7 +118,7 @@ function App() {
         {/* Loop through the countries you imported here */}
         <select id="country" name="country" className="form-control"onChange={event => handleInput(event.target.name, event.target.value)}>
           <option disabled selected>Select a country...</option>
-          {countries.map((country, index) => <option key={country.toLowerCase+index}>{country}</option>)}
+          {countries.map((country, index) => <option key={country.toLowerCase()}>{country}</option>)}
         </select>
       </div>
       <button type="submit" className="btn btn-primary">
