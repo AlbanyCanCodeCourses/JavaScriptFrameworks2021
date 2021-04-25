@@ -1,11 +1,20 @@
 import PropTypes from "prop-types";
 
-function TemperatureDisplay(props) {
-  return <>{/* Complete me */}</>;
+const TemperatureDisplay = ({temp, scale}) => {
+  
+  return (
+    <>
+      <div className="h4">Current Temperature:</div>
+      <div className="h1">
+        {temp} &deg; {scale}
+      </div>
+    </>
+  );
+  
 }
 
 TemperatureDisplay.propTypes = {
-  temperature: PropTypes.number.isRequired,
+  temp: PropTypes.number.isRequired,
   scale: PropTypes.string.isRequired,
 };
 

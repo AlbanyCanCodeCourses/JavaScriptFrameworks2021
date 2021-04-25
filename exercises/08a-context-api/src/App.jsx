@@ -1,28 +1,41 @@
 // Import what you need from React
-import { useState } from "react";
+import { useState, useContext, createContext } from "react";
 import "./App.css";
 import translations from "./assets/translations.json";
 
 /**
  * Declare createContext() here.
  */
+const LanguageContext = createContext(
+  {
+    language: "en",
+    setLanguage: () => {}
+  }
+)
+
+const StateContext = createContext()
 
 function App() {
   /**
    * Set state here. (See useState in "CreateAccount" below.)
    */
+  const [language, setLanguage] = useState("en");
 
   /**
    * You will need to return more than just <CreateAccount />.
    */
-  return <CreateAccount />;
+  return (
+    <StateContext.Provider value={{language, setLanguage}} >
+      <CreateAccount />
+    </StateContext.Provider>
+  );
 }
 
 function CreateAccount() {
   /**
    * You will need to replace "useState" with something else.
    */
-  const [language, setLanguage] = useState("en");
+   const childValues = useContext(StateContext)
 
   /**
    * @see src/assets/translations.json
@@ -39,7 +52,7 @@ function CreateAccount() {
    *    // ...
    * }
    */
-  const t = translations[language];
+  const t = translations[childValues.language];
 
   /**
    * You will not need to change anything below this line.
@@ -55,7 +68,7 @@ function CreateAccount() {
           <button
             type="button"
             className="btn btn-link btn-sm"
-            onClick={() => setLanguage("en")}
+            onClick={() => childValues.setLanguage("en")}
           >
             English
           </button>
@@ -63,7 +76,7 @@ function CreateAccount() {
           <button
             type="button"
             className="btn btn-link btn-sm"
-            onClick={() => setLanguage("es")}
+            onClick={() => childValues.setLanguage("es")}
           >
             Español
           </button>

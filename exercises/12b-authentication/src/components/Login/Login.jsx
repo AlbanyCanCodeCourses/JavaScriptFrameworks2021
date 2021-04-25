@@ -1,9 +1,12 @@
 // You will need import something from React
-import { useState } from "react";
+import { useState, useContext } from "react";
 // You will need to import something from AccessTokenContext
 // You will need to import useHistory from react-router-dom
+import { AccessTokenContext} from '../../context/AccessTokenContext';
+import {useHistory} from 'react-router-dom';
+import axios from 'axios';
 
-function Login() {
+function Login(){
   /**
    * I should be getting something or things from the Context API
    */
@@ -11,8 +14,10 @@ function Login() {
   /**
    * User input
    */
+  const { setToken, setIsLoggedIn } = useContext(AccessTokenContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
   /**
    * Handling AJAX loading and errors
    */
@@ -25,16 +30,49 @@ function Login() {
    * If invalid username and password, display an error letting the user know it is invalid.
    * @see exercises/12a-authentication/src/components/App/App.jsx
    * @see examples/12a-authentication-quick-dirty/src/components/App/App.jsx
+   * 
+   * 
    */
+  const requestLogin = async() => {
+    try{
+     setIsLoading(true); 
+     const asyncResponse =  await axios({
+        method: 'POST',
+        url: "http://localhost:7000/api/login",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: JSON.stringify({
+          username: username, 
+          password: password
+          })
+      },
+      )
+      
+     if(asyncResponse.status === 200 && asyncResponse.data.token) {
+        setToken(asyncResponse.data.token);
+        setIsLoggedIn(true);
+        setIsLoading(false);
+        history.push("/home");
+     }
+    }
+    catch(error) {
+      if(error.response && error.response.status === 401);
+      setErrorMessage("Sorry an error occurred");
+      setIsLoading(false);
+      setIsLoggedIn(false);
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Complete me
+    requestLogin();
   };
 
   return (
     <div className="container mt-2 mb-5">
       <h1>Login</h1>
-      <form className="form-inline mb-2" method="POST" onSubmit={handleSubmit}>
+      <form className="form-inline mb-2" method="POST" onSubmit={(e)=>handleSubmit(e)}>
         <div className="form-group">
           <label htmlFor="username" className="mr-2">
             Username

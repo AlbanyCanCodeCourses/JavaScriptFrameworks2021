@@ -4,7 +4,7 @@
  * Change this so that it will display products for the correct category.
  */
 
-// import something here
+import {useLocation} from 'react-router-dom';
 
 /**
  * This imports a list of products.
@@ -12,11 +12,14 @@
 import inventory from "../../assets/inventory";
 
 function Category() {
+
   /**
    * Category is hardcoded here.
    * This is the only part you will need to change in this file.
    */
-  const category = "office"; // change me
+  const location = useLocation();
+  const category = location.pathname.split("/")[2]; // change me
+
   /**
    * All the products in a category. To see how this works, take a look at
    * @see exercises/10-react-router/src/assets/inventory.js
