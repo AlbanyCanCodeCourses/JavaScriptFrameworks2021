@@ -12,26 +12,28 @@ export class App extends Component {
   }
 
   componentDidMount = async() =>  {
-    this.setState({
-      ...this.state,
-      isLoading: true
-    })
-    await axios.get("https://ron-swanson-quotes.herokuapp.com/v2/quotes")
-    .then((response)=> {
+    try{
       this.setState({
         ...this.state,
-        isLoading: false,
-        data: response.data
+        isLoading: true
       })
-    })
-    .catch((error) => {
+      await axios.get("https://ron-swanson-quotes.herokuapp.com/v2/quotes")
+      .then((response)=> {
+        this.setState({
+          ...this.state,
+          isLoading: false,
+          data: response.data
+        })
+      })
+    }
+    catch (error) {
       this.setState({
         ...this.state,
         isLoading: false,
         isError: true,
         error: "Sorry there was an error"
       })
-    })
+    }
   }
 
   render() {
