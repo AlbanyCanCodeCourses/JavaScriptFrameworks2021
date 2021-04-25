@@ -10,7 +10,11 @@ class Likes extends Component {
    *
    */
 
-  like = () => {};
+  like = () => {
+    this.setState({
+      likes: this.state.likes + 1
+    })
+  };
 
   render() {
     /**
@@ -18,7 +22,7 @@ class Likes extends Component {
      */
     return (
       <div className="mt-4">
-        <button className="btn btn-light">{this.state.likes} Likes</button>
+        <button className="btn btn-light" onClick={()=>this.like()}>{this.state.likes} Likes</button>
       </div>
     );
   }
