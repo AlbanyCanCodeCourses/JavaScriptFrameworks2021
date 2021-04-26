@@ -1,7 +1,8 @@
+import {FunctionComponent} from 'react';
 import "./App.css";
 import Welcome from './components/Welcome';
 
-function App() {
+const App: FunctionComponent = () => {
   return (
     <div className="App">
       <Welcome name="God"/>

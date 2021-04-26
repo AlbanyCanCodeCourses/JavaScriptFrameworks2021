@@ -1,22 +1,32 @@
-import { useState } from "react";
+import { useState, FunctionComponent, FormEvent } from "react";
 import "./App.css";
 import countries from "./assets/countries.json";
 import states from "./assets/states.json";
 import { ListGroup } from "react-bootstrap";
 
-function App() {
-  const [values, setValues] = useState({
-    // firstName: null,
-    // lastName: null,
-    // addressLine1: null,
-    // city: null,
-    // state: null,
-    // postalCode: null,
-    // country: null
+interface StateProperties  {
+  firstName: string | undefined;
+  lastName: string | undefined;
+  addressLine1: string | undefined;
+  city: string | undefined;
+  state: string | undefined;
+  postalCode: string | undefined;
+  country: string | undefined;
+};
+
+const App:FunctionComponent = () => {
+  const [values, setValues]= useState<StateProperties>({
+      firstName: undefined,
+      lastName: undefined,
+      addressLine1: undefined,
+      city: undefined,
+      state: undefined,
+      postalCode: undefined,
+      country: undefined
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
   }
   return (
     <>
@@ -147,7 +157,7 @@ function App() {
             onClick={(e) => {
               setValues({
                 ...values,
-                country: e.target.value,
+                country: (e.target as HTMLSelectElement).value,
               });
             }}
             id="country"
