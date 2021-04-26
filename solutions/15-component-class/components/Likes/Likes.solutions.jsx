@@ -10,16 +10,18 @@ class Likes extends Component {
    *
    */
 
-  like = () => {};
+  like = () => {
+    this.setState({ likes: this.state.likes + 1 });
+  };
 
   render() {
     /**
      * Make the button functional
      */
     return (
-      <div className="mt-4">
-        <button className="btn btn-light">{this.state.likes} Likes</button>
-      </div>
+      <button className="btn btn-light" onClick={this.like}>
+        {this.state.likes} Likes
+      </button>
     );
   }
 }
