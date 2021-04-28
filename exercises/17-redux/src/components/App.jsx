@@ -1,4 +1,5 @@
 function App(props) {
+  console.log("props", props)
   const handleSubmit = (e) => {
     e.preventDefault();
     props.addTodo();
@@ -79,8 +80,8 @@ function App(props) {
           </div>
         </form>
         <ul className="list-group mt-2">
-          {props.todos.map((todo) => {
-            return <li className="list-group-item">{todo}</li>;
+          {props.todos.map((todo, idx) => {
+            return <li className="list-group-item" key={idx}>{todo}</li>;
           })}
         </ul>
       </section>
