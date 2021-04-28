@@ -1,3 +1,5 @@
+import { setInput } from "../actions";
+
 function App(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,7 +14,7 @@ function App(props) {
           type="button"
           className="btn btn-secondary mr-2"
           onClick={props.increaseCount}
-        >
+        > 
           Increase
         </button>
         <button
@@ -68,19 +70,23 @@ function App(props) {
           <div className="form-group">
             <input
               type="text"
+              required
               placeholder="Enter Todo"
               className="form-control"
               value={props.todoInput || ""}
+              onFocus= {()=>props.setInput('')}
               onChange={(e) => props.setInput(e.target.value)}
             />
-            <button type="submit" className="btn btn-secondary">
+            <button  type="submit" className="btn btn-secondary" >
               Add Todo
             </button>
+            
           </div>
         </form>
         <ul className="list-group mt-2">
-          {props.todos.map((todo) => {
-            return <li className="list-group-item">{todo}</li>;
+          {props.todos.map((todo, index) => {
+            return <div><li className="list-group-item">{todo}<button onClick = {()=>{props.deleteItem(index)}} type="button" className = 'btn btn-primary btn-danger'   >Delete Item</button></li> </div>;
+            
           })}
         </ul>
       </section>

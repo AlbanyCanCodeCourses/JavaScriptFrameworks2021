@@ -11,17 +11,18 @@ import {
   toggle,
   pickColor,
   setInput,
-  addTodo
+  addTodo,
+  deleteItem
 } from "../actions";
 
 const mapStateToProps = state => {
-  console.log("state", state);
+  // console.log("state", state);
   return {
     count: state.count,
     isVisible: state.isVisible,
     color: state.color,
     todoInput: state.todoInput,
-    todos: state.todos
+    todos: state.todos,
   };
 };
 
@@ -31,7 +32,8 @@ const mapDispatchToProps = {
   toggle,
   pickColor,
   setInput,
-  addTodo
+  addTodo,
+  deleteItem
 };
 
 export default connect(
