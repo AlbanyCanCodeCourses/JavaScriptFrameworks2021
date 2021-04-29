@@ -6,33 +6,19 @@
  * As a bonus, see if you can get and set user input from the store as well
  */
 
-import { useState } from "react";
 import ListItem from "./ListItem/ListItem";
 
 function Todo(props) {
-  const [userInput, setUserInput] = useState("");
-  const [todos, setTodos] = useState([]);
-
-  /**
-   * This will be passed down from the container as props instead
-   * (but you still need to prevent the form from submitting and pass up user input)
-   */
   const addTodo = (e) => {
     e.preventDefault();
-    setTodos([...todos, userInput]);
-    setUserInput("");
+    props.addTodo(props.userInput);
+    props.setTodoInput("");
   };
-  /**
-   * This will be passed down from the container as props instead
-   * (but you still need to pass up the todo index)
-   */
+
   const deleteTodo = (todoIndex) => {
-    setTodos(
-      todos.filter((item, index) => {
-        return index !== todoIndex;
-      })
-    );
+    props.deleteTodo(todoIndex);
   };
+
   return (
     <div className="mt-4">
       <h1 className="h3">Todo List</h1>
@@ -44,19 +30,18 @@ function Todo(props) {
             placeholder="Enter text"
             aria-label="Enter text"
             aria-describedby="button-add"
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
+            value={props.userInput}
+            onChange={(e) => props.setTodoInput(e.target.value)}
           />
           <div className="input-group-append">
-            <button className="btn btn-primary" type="subimit" id="button-add">
+            <button className="btn btn-primary" type="submit" id="button-add">
               Add
             </button>
           </div>
         </div>
       </form>
       <ul className="list-group">
-        {/* The todos will be passed down as props */}
-        {todos.map((text, index) => {
+        {props.todos.map((text, index) => {
           const key = `todo-item-${index}`;
           return (
             <ListItem deleteTodo={deleteTodo} todoIndex={index} key={key}>
