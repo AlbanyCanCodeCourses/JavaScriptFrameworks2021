@@ -1,0 +1,46 @@
+{
+  "wZ69DwAAQBAJ": {
+    "title": "Salmon",
+    "subtitle": "A Fish, the Earth, and the History of a Common Fate",
+    "authors": [
+      "Mark Kurlansky"
+    ],
+    "publisher": "Simon and Schuster",
+    "publishedDate": "2020-06-25",
+    "description": "<p>Most of what we do on land ends up impacting the ocean, but never is that clearer than when we look at salmon. Centuries of our greatest assaults on nature, from overfishing to dams, from hatcheries to fish farms, from industrial pollution to the ravages of climate change, can be seen in their harrowing yet awe-inspiring life cycle. From the Pacific to the Atlantic, through Scotland, Ireland, Norway, Iceland, Japan and Siberia, Mark Kurlansky traces the history of the world through his fish-eye lens, laying bare our misdirected attempts to manipulate salmon for our own benefit. Attempts that have had a devastating impact on both fish and earth. Now, the only way to save salmon is to save the planet, and the only way to save the planet may be to save the salmon.</p>",
+    "industryIdentifiers": [
+      {
+        "type": "ISBN_13",
+        "identifier": "9781786078537"
+      },
+      {
+        "type": "ISBN_10",
+        "identifier": "1786078538"
+      }
+    ],
+    "readingModes": {
+      "text": true,
+      "image": false
+    },
+    "pageCount": 320,
+    "printType": "BOOK",
+    "categories": [
+      "History"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "panelizationSummary": {
+      "containsEpubBubbles": false,
+      "containsImageBubbles": false
+    },
+    "imageLinks": {
+      "smallThumbnail": "http://books.google.com/books/content?id=wZ69DwAAQBAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+      "thumbnail": "http://books.google.com/books/content?id=wZ69DwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=wZ69DwAAQBAJ&dq=salmon&hl=&cd=1&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=wZ69DwAAQBAJ&dq=salmon&hl=&source=gbs_api",
+    "canonicalVolumeLink": "https://books.google.com/books/about/Salmon.html?hl=&id=wZ69DwAAQBAJ"
+  }
+}
