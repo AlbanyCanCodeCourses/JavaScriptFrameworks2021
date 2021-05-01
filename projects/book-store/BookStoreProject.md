@@ -19,7 +19,7 @@ Together, these shelves will make up their “bookshelf”. You will include fun
 This project will put together these topics that were covered in class:
 
 - Global state management with the Context API (or alternatively, Redux)
-- AJAX and the useEffect (or lifecycle) hooks
+- AJAX and the `useEffect` (or lifecycle) hooks
 - Routing
 - Authentication
 
@@ -31,6 +31,7 @@ Your book store must meet all the following application setup, UI and coding req
 
 - You must create a git repository for your application and it must be hosted publicly on Github.
 - Your application should be easy to install and start. **IF WE CANNOT INSTALL OR START YOUR APPLICATION, IT IS AN AUTOMATIC FAILURE.**
+- Your application should not crash at any point.
 - You should include a _README.md_ file within the root of the git repository. The _README.md_ should have clear instructions on how to install and start the project.
 
 Note that we will go over setting up the project in class.
@@ -53,7 +54,7 @@ Your project should have four screens:
 
 ![Searching for a book](book-store-search-screen.png)
 
-- Users should be able to search for different book titles. An onChange event should trigger the search.
+- Users should be able to search for different book titles.
 - At least the book title, author(s) and a thumbnail of the book cover should appear in the search results. The API does not include the same information every time, so use conditional rendering; check to see if the data is there before displaying it on the screen.
 - If there are no matching titles, display a message on the screen telling the user that no search results are found.
 - Each book should link to the _Book Details_ screen.
@@ -95,7 +96,7 @@ Routing is a system for resource navigation. When a user clicks on a link, they 
 
 - When a user successfully signs in, they should be redirected to their bookshelf.
 - The user must be logged in to view the _Search_, _Book Details_ or _Bookshelf_ screens. If they are not, redirect them to the _Signin_ screen. (Hint: use protected routes.)
-- The user should be able to navigate to their _Bookshelf_ and the _Search_ screens from every page except the _Signin_ screen.
+- When logged in, the user should be able to navigate to their _Bookshelf_ and the _Search_ screens from every page except the _Signin_ screen.
 
 ![An example of navigating to the Bookshelf and Search screens with a navbar](book-store-navbar-screen.png)
 
@@ -112,10 +113,8 @@ Routing is a system for resource navigation. When a user clicks on a link, they 
 
 - This application should contain at least four React components. Each of the four screens outlined earlier should be a separate, high-level React Component. (You can choose to use hooks, extend the React Component class, or mix and match. It is up to you.)
 - You must use the React Router library.
-- You must have a signin form and authenticate users with either JWT style or session UUID style authentication tokens.
-- You must store your authentication tokens as either a secure cookies or inside local storage.
+- You must have a signin form and authenticate users.
 - You must have protected routes (routes that the user must be logged in to see).
-- If the user has logged in, and refreshes the page, they should still be logged in. If the user has not logged in yet and refreshes the page, they should not be able to access any protected content.
 - You must use the Context API (recommended) or Redux to store state that is shared universally between most components.
 - For components that are functions, you should handle AJAX calls inside the `useEffect()` hooks. For components where you extend the React Component class, you should make AJAX requests inside of `componentDidMount()` and other lifecycle hooks.
 - AJAX errors should be caught.
@@ -123,7 +122,7 @@ Routing is a system for resource navigation. When a user clicks on a link, they 
 
 ## Styling Your Project
 
-We do not have example HTML or CSS for this project. We suggest that you use a CSS framework like [Bootstrap](https://getbootstrap.com/), [Foundation](https://get.foundation/sites.html) or [Bulma](https://bulma.io/). Here are ways to include styling:
+We do not have example HTML or CSS for this project. We suggest that you use a CSS framework like [Bootstrap](https://getbootstrap.com/), [Foundation](https://get.foundation/sites.html) or [UIKit](https://getuikit.com/). Here are a few different ways to include styling:
 
 - Add a CDN link to the _index.html_ file of your project.
 - Install a CSS library with yarn. Import the library's entry CSS file in your _index.js_ file.
@@ -154,27 +153,21 @@ You will need to have both this back-end server and your project's React server 
 
 ### API End-Points
 
-The API is a REST based API that will return JSON data. Here is an overview of the API end-points:
+The API is a REST based API that will return JSON data. Here is an overview of the API end-points. You will need to plugin the _bookId_, _shelfKey_ and _bookTitle_ into the URL.
 
-| Action                                | Method | URL                                                 | Need JWT / UUID |
-| ------------------------------------- | ------ | --------------------------------------------------- | --------------- |
-| Signin and get a JWT token            | POST   | http://localhost:7000/signin/jwt                    | No              |
-| Signin and get a UUID token           | POST   | http://localhost:7000/signin/uuid                   | No              |
-| Get a list of books in a bookshelf    | GET    | http://localhost:7000/bookshelf                     | Yes             |
-| Add a book to the bookshelf           | PUT    | http://localhost:7000/bookshelf/_bookId_/_shelfKey_ | Yes             |
-| Remove a book from the bookshelf      | PUT    | http://localhost:7000/bookshelf/_bookId_/none       | Yes             |
-| Move a book from one shelf to another | PUT    | http://localhost:7000/bookshelf/_bookId_/_shelfKey_ | Yes             |
-| View details on a single book         | GET    | http://localhost:7000/book/_bookId_                 | Yes             |
-| Search for books                      | GET    | http://localhost:7000/book/search/_bookTitle_       | Yes             |
+| Action                                | Method | URL                                                 | Need JWT? |
+| ------------------------------------- | ------ | --------------------------------------------------- | --------- |
+| Signin and get a JWT token            | POST   | http://localhost:7000/signin                        | No        |
+| Get a list of books in a bookshelf    | GET    | http://localhost:7000/bookshelf                     | Yes       |
+| Add a book to the bookshelf           | PUT    | http://localhost:7000/bookshelf/_bookId_/_shelfKey_ | Yes       |
+| Remove a book from the bookshelf      | PUT    | http://localhost:7000/bookshelf/_bookId_/none       | Yes       |
+| Move a book from one shelf to another | PUT    | http://localhost:7000/bookshelf/_bookId_/_shelfKey_ | Yes       |
+| View details on a single book         | GET    | http://localhost:7000/book/_bookId_                 | Yes       |
+| Search for books                      | GET    | http://localhost:7000/book/search/_bookTitle_       | Yes       |
 
 #### Signin
 
-You must pick one of these two styles:
-
-1. JWT Style Authentication
-2. Session UUID Style Authentication
-
-With either style, you will need to include the username and password in the request body, like this:
+You will need to include the username and password in the request body, like this:
 
 ```json
 {
@@ -191,7 +184,14 @@ You have two users you can signin with:
 > Username: hermione \
 > Password: granger
 
-If the username or password is correct, you will receive the JWT or UUID token in the response.
+POST a request the URL http://localhost:7000/signin/jwt. If the username and password is correct, you will get a response with a JWT token like this:
+
+```json
+{
+  "message": "You did it! Success!",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyNzI1IiwiaWF0IjoxNTg3MjQ1MzMxfQ.lC7PVh4Miwc_r6GO6UWelJAqDYBvaInC-qepdX_7Jdw"
+}
+```
 
 If they are not correct, you will get a response like this below. The server will return a 401 Unauthorized error and, if you are using Axios, you must handle it within the catch block.
 
@@ -201,24 +201,14 @@ If they are not correct, you will get a response like this below. The server wil
 }
 ```
 
-**One thing to note about the tokens is that they will be different each time you restart the back-end server. This means you should open your browser's DevTools and delete any old tokens before you start the back-end server.**
-
-##### JWT Style Authentication
-
-POST a request the URL http://localhost:7000/signin/jwt. If the username and password is correct, you will get a response like this:
-
-```json
-{
-  "message": "You did it! Success!",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyNzI1IiwiaWF0IjoxNTg3MjQ1MzMxfQ.lC7PVh4Miwc_r6GO6UWelJAqDYBvaInC-qepdX_7Jdw"
-}
-```
+**One thing to note about the tokens is that they will be different each time you restart the back-end server. This means you will need to signin and get a new JWT token every time you restart.**
 
 In every other AJAX request, you must include the JWT token you received in the _Authorization_ header. Here is an example with Axios:
 
 ```javascript
+// You should not hardcode this
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyNzI1IiwiaWF0IjoxNTg3MjQ1MzMxfQ.lC7PVh4Miwc_r6GO6UWelJAqDYBvaInC-qepdX_7Jdw"; // You should not actually hardcode this
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyNzI1IiwiaWF0IjoxNTg3MjQ1MzMxfQ.lC7PVh4Miwc_r6GO6UWelJAqDYBvaInC-qepdX_7Jdw";
 
 axios("http://localhost:7000/bookshelf", {
   method: "GET",
@@ -229,41 +219,12 @@ axios("http://localhost:7000/bookshelf", {
 });
 ```
 
-See the AJAX requests in [Example 11a](../../examples/11a-authentication-local-storage/) for an example of authentication with JWT tokens.
-
-##### Session UUID Style Authentication
-
-POST a request the URL http://localhost:7000/signin/uuid. If the username and password is correct, you will get a response like this:
-
-```json
-{
-  "message": "You did it! Success!",
-  "uuid": "5173a285-c76b-40b5-a3b2-2183c02c2b4b"
-}
-```
-
-In every other AJAX request, you must include the UUID token you received as a query parameters. Here is an example with Axios:
-
-```javascript
-const token = "5173a285-c76b-40b5-a3b2-2183c02c2b4b"; // You should not actually hardcode this
-
-axios("http://localhost:7000/bookshelf", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  params: {
-    id: token,
-  },
-});
-```
-
-See [Example 11b](../../examples/11b-authentication-cookie/) for an example of authentication with session tokens.
+See the AJAX requests in [Example 12a](../../examples/12a-authentication-quick-dirty) and [Example 12b](../../examples/12b-authentication-routing) for an example of authentication with JWT tokens.
 
 #### Get a List of Books in a User's Bookshelf
 
 To lookup books in a user’s bookshelf, you will make a GET request to
-http://localhost:7000/bookshelf. A token must be in the request, or you will get a 403 Forbidden error.
+http://localhost:7000/bookshelf. A token must be in the request, or you will get a 401 Unauthorized error.
 
 Here is an example of a success response:
 
@@ -295,7 +256,7 @@ In order to add a book to a bookshelf, you need both the book ID and shelf key. 
 This is a PUT request. You will need to plug in both the book ID and shelf key into the URL. For example, if I had a book with the ID _dgYvDwAAQBAJ_ and I wanted to add it to my “Currently Reading” bookshelf, I would send the request to: \
 http://localhost:7000/bookshelf/dgYvDwAAQBAJ/currentlyReading
 
-A token must be in the request, or you will get a 403 Forbidden error.
+A token must be in the request, or you will get a 401 Unauthorized.
 
 The response will be the same as getting all books in a bookshelf.
 
@@ -304,7 +265,7 @@ The response will be the same as getting all books in a bookshelf.
 This request is similar to adding a book to a bookshelf, but you will replace the shelf key with _none_. For example, if I'm removing a book with the ID _dgYvDwAAQBAJ_ from my bookshelf, I would send a PUT request to: \
 http://localhost:7000/bookshelf/dgYvDwAAQBAJ/none
 
-A token must be in the request, or you will get a 403 Forbidden error.
+A token must be in the request, or you will get a 401 Unauthorized.
 
 The response will be the same as getting all books in a bookshelf.
 
@@ -313,7 +274,7 @@ The response will be the same as getting all books in a bookshelf.
 An example of when you would make this request is when a user wants to move a book from the “Currently Reading” to the “Read” category. In order to do this, you will need both the book ID and the new desired book shelf. If my book ID is _dgYvDwAAQBAJ_, and I want to move it to the "Read" shelf, I would send a PUT request to: \
 http://localhost:7000/bookshelf/dgYvDwAAQBAJ/read
 
-A token must be in the request, or you will get a 403 Forbidden error.
+A token must be in the request, or you will get a 401 Unauthorized.
 
 The response will be the same as getting books in a bookshelf.
 
@@ -391,15 +352,11 @@ A good place to start is with routing. Create a bunch of components that say, at
 
 Use React Router's `<Link>` tag to navigate to new components.
 
-You can copy and paste a lot of your code from the [11b Authentication and Routing exercise](../../exercises/11b-authentication-routing/) into this project.
-
-Use the "Applications" tab in your Chrome DevTools or "Storage" tab in your Firefox DevTools to view and delete authentication tokens.
-
-Only store authentication tokens within cookies or local storage.
+You can copy and paste a lot of your code from the [12b Authentication and Routing exercise](../../exercises/12b-authentication) into this project.
 
 In most places, it is recommended that you store data and other state in React component's local state. The Context API or Redux should really only be used for state that is shared between most components.
 
-The book IDs will drive most of your application. You will receive books IDs in your response when you make an AJAX request to search for a book, open the bookshelf or modify a bookshelf. You should place book IDs into `<Link>` paths to new screens (see how we linked to the movie details page in the [React Router example](https://codesandbox.io/s/react-router-vij9b?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fcomponents%2FNowPlaying%2FNowPlaying.jsx&theme=dark). You will also need to carry the books IDs from one AJAX request to another when a user modifies their bookshelf or views details on a single book.
+The book IDs will drive most of your application. You will receive books IDs in your response when you make an AJAX request to search for a book, open the bookshelf or modify a bookshelf. You should place book IDs into `<Link>` paths to new screens (see how we linked to the movie details page in the [React Router example](https://codesandbox.io/s/react-router-v52-l8w48?file=/src/components/App/App.jsx). You will also need to carry the books IDs from one AJAX request to another when a user modifies their bookshelf or views details on a single book.
 
 You may find it helpful to use [Postman](https://www.postman.com/) to test our your AJAX requests before building them into React.
 

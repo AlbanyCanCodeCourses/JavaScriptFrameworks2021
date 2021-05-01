@@ -2,16 +2,15 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 
 const Users = require("../models/Users");
-const Sessions = require("../models/Sessions");
 
 const methodNotAllowedError = require("../errors/methodNotAllowed");
 
-const { JWT_SECRET } = require("../config");
+const { JWT_SECRET, JWT_EXPIRY_IN_MILLISECONDS } = require("../config");
 
 const router = express.Router();
 
 router
-  .route(["/jwt", "/uuid"])
+  .route("/")
   .post((req, res) => {
     // Slowing down so that you can see if the button has been disabled
     setTimeout(() => {
@@ -30,19 +29,13 @@ router
           message: "Unauthorized. Your username or password is not correct.",
         });
 
-      if (req.originalUrl.includes("/jwt")) {
-        const token = jwt.sign({ sub: user.id.toString() }, JWT_SECRET);
-        return res.status(200).send({
-          message: "You did it! Success!",
-          token,
-        });
-      } else if (req.originalUrl.includes("/uuid")) {
-        const uuid = Sessions.insert(user.id);
-        return res.status(200).send({
-          message: "You did it! Success!",
-          uuid,
-        });
-      }
+      const token = jwt.sign({ sub: user.id.toString() }, JWT_SECRET, {
+        expiresIn: `${JWT_EXPIRY_IN_MILLISECONDS}ms`,
+      });
+      return res.status(200).send({
+        message: "You did it! Success!",
+        token,
+      });
     }, 500);
   })
   .all(methodNotAllowedError);

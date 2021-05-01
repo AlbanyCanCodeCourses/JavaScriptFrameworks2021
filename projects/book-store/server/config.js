@@ -11,4 +11,5 @@ const JWT_SECRET = generateRandomString();
 
 module.exports = {
   JWT_SECRET,
+  JWT_EXPIRY_IN_MILLISECONDS: 57600000, // 16 hours (normally, this would be 15 minutes for applications with sensitive data)
 };
