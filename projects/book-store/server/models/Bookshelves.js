@@ -59,7 +59,7 @@ const structureBook = (bookId, volumeInfo, shelf) => {
     id: bookId,
     ...volumeInfo,
     description: volumeInfo.description
-      ? stripHtml(volumeInfo.description)
+      ? stripHtml(volumeInfo.description).result
       : "",
     shelf,
   };

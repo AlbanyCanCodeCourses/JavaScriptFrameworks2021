@@ -119,6 +119,9 @@ describe("models/Bookshelves.js", () => {
         .that.not.have.all.keys("id", "title", "description", "shelf");
       expect(book.title).to.equal("Salmon");
       expect(book.id).to.equal("wZ69DwAAQBAJ");
+      expect(book.description).to.equal(
+        "WINNER OF THE JOHN AVERY AWARD AT THE ANDRÉ SIMON AWARDS Over the centuries, salmon have been a vital resource, a dietary staple and an irresistible catch. But there is so much more to this extraordinary fish. As Mark Kurlansky reveals, salmon persist as a barometer for the health of our planet. Centuries of our greatest assaults on nature can be seen in their harrowing yet awe-inspiring life cycle. Full of all Kurlansky’s characteristic curiosity and insight, Salmon is a magisterial history of a wondrous creature."
+      );
       expect(book.shelf).to.equal("wantToRead");
     });
 

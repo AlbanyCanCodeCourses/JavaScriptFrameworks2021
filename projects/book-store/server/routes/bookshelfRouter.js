@@ -15,7 +15,7 @@ router
     const { bookId, shelf } = req.params;
     if (!["wantToRead", "currentlyReading", "read", "none"].includes(shelf)) {
       return res.status(400).send({
-        message: `Pst! Shelf "${shelf}" is not an option. Your shelf should be either "wantToRead", "currentlyReading", "read" or "none".`,
+        message: `Pst! Shelf '${shelf}' is not an option. Your shelf should be either 'wantToRead', 'currentlyReading', 'read' or 'none'.`,
       });
     }
 
