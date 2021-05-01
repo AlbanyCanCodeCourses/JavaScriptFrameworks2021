@@ -149,21 +149,33 @@ Your server is running on http://localhost:7000/
 Press ctrl+c to stop
 ```
 
+To avoid CORS errors, update the _package.json_ of your React app so that it proxy's the server's traffic. (What this essentially means is that instead of sending AJAX requests to e.g. _http://localhost:7000/api/signin_, you would send it to _/api/signin_. This will make it easier for those of you who want to host your project.)
+
+```json
+{
+  "name": "book-store",
+  "version": "0.1.0",
+  "private": true,
+  // ...
+  "proxy": "http://localhost:7000/"
+}
+```
+
 You will need to have both this back-end server and your project's React server running at the same time.
 
 ### API End-Points
 
 The API is a REST based API that will return JSON data. Here is an overview of the API end-points. You will need to plugin the _bookId_, _shelfKey_ and _bookTitle_ into the URL.
 
-| Action                                | Method | URL                                                 | Need JWT? |
-| ------------------------------------- | ------ | --------------------------------------------------- | --------- |
-| Signin and get a JWT token            | POST   | http://localhost:7000/signin                        | No        |
-| Get a list of books in a bookshelf    | GET    | http://localhost:7000/bookshelf                     | Yes       |
-| Add a book to the bookshelf           | PUT    | http://localhost:7000/bookshelf/_bookId_/_shelfKey_ | Yes       |
-| Remove a book from the bookshelf      | PUT    | http://localhost:7000/bookshelf/_bookId_/none       | Yes       |
-| Move a book from one shelf to another | PUT    | http://localhost:7000/bookshelf/_bookId_/_shelfKey_ | Yes       |
-| View details on a single book         | GET    | http://localhost:7000/book/_bookId_                 | Yes       |
-| Search for books                      | GET    | http://localhost:7000/book/search/_bookTitle_       | Yes       |
+| Action                                | Method | URL                                | Need JWT? |
+| ------------------------------------- | ------ | ---------------------------------- | --------- |
+| Signin and get a JWT token            | POST   | /api/signin                        | No        |
+| Get a list of books in a bookshelf    | GET    | /api/bookshelf                     | Yes       |
+| Add a book to the bookshelf           | PUT    | /api/bookshelf/_bookId_/_shelfKey_ | Yes       |
+| Remove a book from the bookshelf      | PUT    | /api/bookshelf/_bookId_/none       | Yes       |
+| Move a book from one shelf to another | PUT    | /api/bookshelf/_bookId_/_shelfKey_ | Yes       |
+| View details on a single book         | GET    | /api/book/_bookId_                 | Yes       |
+| Search for books                      | GET    | /api/book/search/_bookTitle_       | Yes       |
 
 #### Signin
 
@@ -184,7 +196,7 @@ You have two users you can signin with:
 > Username: hermione \
 > Password: granger
 
-POST a request the URL http://localhost:7000/signin/jwt. If the username and password is correct, you will get a response with a JWT token like this:
+POST a request the URL _/api/signin_. If the username and password is correct, you will get a response with a JWT token like this:
 
 ```json
 {
@@ -210,7 +222,7 @@ In every other AJAX request, you must include the JWT token you received in the 
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyNzI1IiwiaWF0IjoxNTg3MjQ1MzMxfQ.lC7PVh4Miwc_r6GO6UWelJAqDYBvaInC-qepdX_7Jdw";
 
-axios("http://localhost:7000/bookshelf", {
+axios("/api/bookshelf", {
   method: "GET",
   headers: {
     Authorization: `Bearer ${token}`,
@@ -224,7 +236,7 @@ See the AJAX requests in [Example 12a](../../examples/12a-authentication-quick-d
 #### Get a List of Books in a User's Bookshelf
 
 To lookup books in a user’s bookshelf, you will make a GET request to
-http://localhost:7000/bookshelf. A token must be in the request, or you will get a 401 Unauthorized error.
+_/api/bookshelf_. A token must be in the request, or you will get a 401 Unauthorized error.
 
 Here is an example of a success response:
 
@@ -254,7 +266,7 @@ In order to add a book to a bookshelf, you need both the book ID and shelf key. 
 - read
 
 This is a PUT request. You will need to plug in both the book ID and shelf key into the URL. For example, if I had a book with the ID _dgYvDwAAQBAJ_ and I wanted to add it to my “Currently Reading” bookshelf, I would send the request to: \
-http://localhost:7000/bookshelf/dgYvDwAAQBAJ/currentlyReading
+_/api/bookshelf/dgYvDwAAQBAJ/currentlyReading_
 
 A token must be in the request, or you will get a 401 Unauthorized.
 
@@ -263,7 +275,7 @@ The response will be the same as getting all books in a bookshelf.
 #### Remove a Book from the Bookshelf
 
 This request is similar to adding a book to a bookshelf, but you will replace the shelf key with _none_. For example, if I'm removing a book with the ID _dgYvDwAAQBAJ_ from my bookshelf, I would send a PUT request to: \
-http://localhost:7000/bookshelf/dgYvDwAAQBAJ/none
+_/api/bookshelf/dgYvDwAAQBAJ/none_
 
 A token must be in the request, or you will get a 401 Unauthorized.
 
@@ -272,7 +284,7 @@ The response will be the same as getting all books in a bookshelf.
 #### Move a Book from One Shelf to Another
 
 An example of when you would make this request is when a user wants to move a book from the “Currently Reading” to the “Read” category. In order to do this, you will need both the book ID and the new desired book shelf. If my book ID is _dgYvDwAAQBAJ_, and I want to move it to the "Read" shelf, I would send a PUT request to: \
-http://localhost:7000/bookshelf/dgYvDwAAQBAJ/read
+_/api/bookshelf/dgYvDwAAQBAJ/read_
 
 A token must be in the request, or you will get a 401 Unauthorized.
 
@@ -281,7 +293,7 @@ The response will be the same as getting books in a bookshelf.
 #### View Details on a Single Book
 
 In order to get the complete details on a single book, you need the book ID. If the book ID is _dgYvDwAAQBAJ_, you would send a GET request to this URL: \
-http://localhost:7000/book/dgYvDwAAQBAJ
+_/api/book/dgYvDwAAQBAJ_
 
 Here is an example response:
 
@@ -302,7 +314,7 @@ Here is an example response:
 You will need to make a GET request.
 
 If the user types text into the search bar, (e.g. "salmon fishing"), replace any white space with "+" and plugin the search entry into the url like this:
-http://localhost:7000/book/search/salmon+fishing
+_/api/book/search/salmon+fishing_
 
 Here is an example of a response:
 

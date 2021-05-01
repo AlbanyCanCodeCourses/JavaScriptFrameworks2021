@@ -1,15 +1,15 @@
 const express = require("express");
-// const cors = require("cors");
 
 const loginRouter = require("./routes/loginRouter");
 const bookshelfRouter = require("./routes/bookshelfRouter");
 const bookSearchRouter = require("./routes/bookSearchRouter");
 const bookRouter = require("./routes/bookRouter");
 
+const fileNotFoundError = require("./errors/fileNotFound");
+
 const app = express();
 
 app.use(express.json());
-// app.use(cors());
 
 // Error handler
 app.use((err, req, res, next) => {
@@ -26,16 +26,18 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.use("/signin", loginRouter);
-app.use("/bookshelf", bookshelfRouter);
-app.use("/book/search", bookSearchRouter);
-app.use("/book", bookRouter);
+app.use("/api/signin", loginRouter);
+app.use("/api/bookshelf", bookshelfRouter);
+app.use("/api/book/search", bookSearchRouter);
+app.use("/api/book", bookRouter);
 
-app.all("*", (req, res) => {
+app.all("/", (req, res) => {
   const text =
     "Its running!\nTo use the API, please refer to the Project README.md.";
   res.send(text);
 });
+
+app.all("*", fileNotFoundError);
 
 const server = app.listen(7000, () => {
   console.log(
