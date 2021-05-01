@@ -172,7 +172,7 @@ The API is a REST based API that will return JSON data. Here is an overview of t
 | Signin and get a JWT token            |  POST  | /api/signin                        | No        |
 | Get a list of books in a bookshelf    |  GET   | /api/bookshelf                     | Yes       |
 | Add a book to the bookshelf           |  PUT   | /api/bookshelf/_bookId_/_shelfKey_ | Yes       |
-| Remove a book from the bookshelf      |  PUT   | /api/bookshelf/_bookId_/none       | Yes       |
+| Remove a book from the bookshelf      | DELETE | /api/bookshelf/_bookId_            | Yes       |
 | Move a book from one shelf to another |  PUT   | /api/bookshelf/_bookId_/_shelfKey_ | Yes       |
 | View details on a single book         |  GET   | /api/book/_bookId_                 | Yes       |
 | Search for books                      |  GET   | /api/book/search/_bookTitle_       | Yes       |
@@ -276,8 +276,8 @@ The response will be the same as getting all books in a bookshelf.
 
 #### Remove a Book from the Bookshelf
 
-This request is similar to adding a book to a bookshelf, but you will replace the shelf key with _none_. For example, if I'm removing a book with the ID _dgYvDwAAQBAJ_ from my bookshelf, I would send a PUT request to: \
-_/api/bookshelf/dgYvDwAAQBAJ/none_
+You will need to send a DELETE request with the _bookId_ in the URL. For example, if I'm removing a book with the ID _dgYvDwAAQBAJ_ from my bookshelf, I would send a DELETE request to: \
+_/api/bookshelf/dgYvDwAAQBAJ_
 
 A token must be in the request, or you will get a 401 Unauthorized.
 

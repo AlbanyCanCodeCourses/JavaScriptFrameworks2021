@@ -80,7 +80,7 @@ const deleteBook = (userId, bookId) => {
 
 const updateBookshelf = (userId, bookId, volumeInfo, shelf) => {
   deleteBook(userId, bookId);
-  if (shelf !== "none") insertBook(userId, bookId, volumeInfo, shelf);
+  insertBook(userId, bookId, volumeInfo, shelf);
 };
 
 resetBookshelf();
@@ -91,5 +91,6 @@ module.exports = {
   hasBook,
   findShelfForBook,
   structureBook,
+  deleteBook,
   updateBookshelf,
 };

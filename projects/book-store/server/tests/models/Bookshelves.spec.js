@@ -184,13 +184,6 @@ describe("models/Bookshelves.js", () => {
       expect(book.shelf).to.equal("currentlyReading");
     });
 
-    it('should remove a book from a user\'s bookshelf if the new shelf is "none"', () => {
-      const testBook = Bookshelves.getBook("2725", "ppjUtAEACAAJ");
-      Bookshelves.updateBookshelf("2725", "ppjUtAEACAAJ", testBook, "none");
-      const book = Bookshelves.getBook("2725", "ppjUtAEACAAJ");
-      expect(book).to.be.undefined;
-    });
-
     it("should not change the location of another user's book on the bookshelf", () => {
       Bookshelves.updateBookshelf(
         "2725",
@@ -216,7 +209,7 @@ describe("models/Bookshelves.js", () => {
       expect(book.shelf).to.equal("wantToRead");
     });
 
-    it("should throw an error if the new shelf is not wantToRead, currentlyReading, read or none", () => {
+    it("should throw an error if the new shelf is not wantToRead, currentlyReading, or read", () => {
       const fn = () => {
         Bookshelves.updateBookshelf(
           "2725",

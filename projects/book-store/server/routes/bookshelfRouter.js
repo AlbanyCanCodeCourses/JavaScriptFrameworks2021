@@ -13,9 +13,9 @@ router
   .route("/:bookId/:shelf")
   .put((req, res) => {
     const { bookId, shelf } = req.params;
-    if (!["wantToRead", "currentlyReading", "read", "none"].includes(shelf)) {
+    if (!["wantToRead", "currentlyReading", "read"].includes(shelf)) {
       return res.status(400).send({
-        message: `Pst! Shelf '${shelf}' is not an option. Your shelf should be either 'wantToRead', 'currentlyReading', 'read' or 'none'.`,
+        message: `Pst! Shelf '${shelf}' is not an option. Your shelf should be either 'wantToRead', 'currentlyReading', or 'read'.`,
       });
     }
 
@@ -38,6 +38,25 @@ router
         });
     } else {
       Bookshelves.updateBookshelf(userId, book.id, book, shelf);
+      const bookshelf = Bookshelves.getBookshelf(userId);
+      return res.send({ books: bookshelf });
+    }
+  })
+  .all(methodNotAllowedError);
+
+router
+  .route("/:bookId")
+  .delete((req, res) => {
+    const { bookId } = req.params;
+
+    const userId = getUserId(req);
+    const book = Bookshelves.getBook(userId, bookId);
+    if (!book) {
+      return res.status(404).send({
+        message: `No book with book ID ${bookId} found in your bookshelf.`,
+      });
+    } else {
+      Bookshelves.deleteBook(userId, book.id);
       const bookshelf = Bookshelves.getBookshelf(userId);
       return res.send({ books: bookshelf });
     }
