@@ -19,13 +19,21 @@ export const toggle = () => {
 };
 
 export const pickColor = (color) => {
-  // Complete me
+  return {
+    type: types.WHAT_COLOR,
+    color: color,
+  };
 };
 
 export const setInput = (todoInput) => {
-  // Complete me
+  return {
+    type: types.SET_INPUT,
+    todoInput: todoInput,
+  };
 };
 
 export const addTodo = () => {
-  // Complete me
+  return {
+    type: types.ADD_TODO,
+  };
 };
