@@ -79,9 +79,10 @@ function App(props) {
           </div>
         </form>
         <ul className="list-group mt-2">
-          {props.todos.map((todo) => {
-            return <li className="list-group-item">{todo}</li>;
-          })}
+          {props.todos &&
+            props.todos.map((todo) => {
+              return <li className="list-group-item">{todo}</li>;
+            })}
         </ul>
       </section>
     </div>
