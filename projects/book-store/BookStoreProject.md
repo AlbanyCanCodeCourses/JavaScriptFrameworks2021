@@ -168,14 +168,16 @@ You will need to have both this back-end server and your project's React server 
 The API is a REST based API that will return JSON data. Here is an overview of the API end-points. You will need to plugin the _bookId_, _shelfKey_ and _bookTitle_ into the URL.
 
 | Action                                | Method | URL                                | Need JWT? |
-| ------------------------------------- | ------ | ---------------------------------- | --------- |
-| Signin and get a JWT token            | POST   | /api/signin                        | No        |
-| Get a list of books in a bookshelf    | GET    | /api/bookshelf                     | Yes       |
-| Add a book to the bookshelf           | PUT    | /api/bookshelf/_bookId_/_shelfKey_ | Yes       |
-| Remove a book from the bookshelf      | PUT    | /api/bookshelf/_bookId_/none       | Yes       |
-| Move a book from one shelf to another | PUT    | /api/bookshelf/_bookId_/_shelfKey_ | Yes       |
-| View details on a single book         | GET    | /api/book/_bookId_                 | Yes       |
-| Search for books                      | GET    | /api/book/search/_bookTitle_       | Yes       |
+| ------------------------------------- | :----: | ---------------------------------- | --------- |
+| Signin and get a JWT token            |  POST  | /api/signin                        | No        |
+| Get a list of books in a bookshelf    |  GET   | /api/bookshelf                     | Yes       |
+| Add a book to the bookshelf           |  PUT   | /api/bookshelf/_bookId_/_shelfKey_ | Yes       |
+| Remove a book from the bookshelf      |  PUT   | /api/bookshelf/_bookId_/none       | Yes       |
+| Move a book from one shelf to another |  PUT   | /api/bookshelf/_bookId_/_shelfKey_ | Yes       |
+| View details on a single book         |  GET   | /api/book/_bookId_                 | Yes       |
+| Search for books                      |  GET   | /api/book/search/_bookTitle_       | Yes       |
+| Get a new JWT token                   |  GET   | /api/refresh                       | No        |
+| Sign out                              | DELETE | /api/signout                       | Yes       |
 
 #### Signin
 

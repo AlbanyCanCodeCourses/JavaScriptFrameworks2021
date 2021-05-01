@@ -1,6 +1,8 @@
 const express = require("express");
+const session = require("express-session");
+const { SESSION_SECRET, SESSION_EXPIRY_IN_MILLISECONDS } = require("./config");
 
-const loginRouter = require("./routes/loginRouter");
+const authRouter = require("./routes/authRouter");
 const bookshelfRouter = require("./routes/bookshelfRouter");
 const bookSearchRouter = require("./routes/bookSearchRouter");
 const bookRouter = require("./routes/bookRouter");
@@ -8,8 +10,21 @@ const bookRouter = require("./routes/bookRouter");
 const fileNotFoundError = require("./errors/fileNotFound");
 
 const app = express();
-
 app.use(express.json());
+app.use(
+  session({
+    secret: SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    rolling: true,
+    cookie: {
+      httpOnly: true,
+      sameSite: true,
+      secure: false, // Normally, we would want this to be true
+      maxAge: SESSION_EXPIRY_IN_MILLISECONDS,
+    },
+  })
+);
 
 // Error handler
 app.use((err, req, res, next) => {
@@ -26,10 +41,10 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.use("/api/signin", loginRouter);
 app.use("/api/bookshelf", bookshelfRouter);
 app.use("/api/book/search", bookSearchRouter);
 app.use("/api/book", bookRouter);
+app.use("/api/", authRouter);
 
 app.all("/", (req, res) => {
   const text =
