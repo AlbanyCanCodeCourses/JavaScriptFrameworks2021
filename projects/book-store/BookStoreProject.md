@@ -23,6 +23,83 @@ This project will put together these topics that were covered in class:
 - Routing
 - Authentication
 
+## Getting Started
+
+Copy the entire folder _projects/book-store/book-store-app_ and paste it somewhere that you will remember (e.g. ~/Documents). Open the folder in Visual Studio Code. Open your terminal and install the server.
+
+```
+yarn install
+```
+
+To start the server, run `yarn start`. You should see this:
+
+```
+Your server is running on http://localhost:3001/
+Press ctrl+c to stop
+```
+
+If you open _http://localhost:3001/_ in your browser or Postman, you should see a message like this:
+
+```
+Its running! To use the API, please refer to the Project README.md.
+```
+
+Next, open up a new terminal. (You can either use split screen, or press the plus icon). You are going to create a folder called _client_, which will contain the React app that you will be working on.
+
+```
+npx create-react-app client
+```
+
+To avoid CORS issues, we are going to proxy the server. (What this essentially means is that instead of sending AJAX requests to e.g. _http://localhost:3001/api/signin_, you would send it to _/api/signin_. This will make it easier for those of you who want to host your project on a site like Heroku.) Open up the _client/package.json_ file and add this:
+
+```json
+{
+  "name": "book-store-client",
+  "version": "0.1.0",
+  "private": true,
+  // ...
+  "proxy": "http://localhost:3001"
+}
+```
+
+Now you should ready to go. To start the React app:
+
+```
+cd client
+yarn start
+```
+
+### Setting Up Git
+
+You will first want to remove git from the _client_ folder, because you will need to commit the server to git too. You should only have one git repo for the entire project.
+
+```
+cd client
+rm -rf .git
+```
+
+Now, initialize git for the entire project.
+
+```
+cd ../
+git init
+```
+
+Create a _.gitignore_ file. At the very least, it should ignore _node_modules_ and _build_. ([You can can use the .gitingore here and add _build_ to it.](https://www.toptal.com/developers/gitignore/api/node,react,macos,windows,visualstudiocode))
+
+Now, commit everything:
+
+```
+git add .
+git commit -m "Initial commit"
+```
+
+Follow the instructions in Github docs on ["Adding an existing project to GitHub using the command line"](https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line) to host your repo on Github.
+
+### Heroku
+
+If you would like to host your project on Heraku, see ["How to Create a React App with a Node Backend: The Complete Guide"](https://www.freecodecamp.org/news/how-to-create-a-react-app-with-a-node-backend-the-complete-guide/). We will be going over this in class. This is optional.
+
 ## Project Requirements
 
 Your book store must meet all the following application setup, UI and coding requirements.
@@ -130,38 +207,7 @@ We do not have example HTML or CSS for this project. We suggest that you use a C
 
 ## Back-End Book Store Server And API
 
-As a part of this project, you will be making AJAX requests to the back-end book store server. The server has an API that will allow you to signin, search for books, find details about a single book, look up books in a user’s book store and update books in a user’s book store. In order for this to be a part of your Github portfolio, we have a written a server in Node.js, which you will install and run locally.
-
-### Getting Started
-
-You will copy the entire server directory from the class’s _JavaScriptFrameworks2020_ Github repository and paste it inside your own Book Store project repository. It can be found in _projects/2-book-store/server/_. From the command line, navigate into the new server folder, install all of the node packages, and start the server.
-
-```
-cd server
-yarn install
-yarn start
-```
-
-When the server starts and is working, you should see this message appear in the command line:
-
-```
-Your server is running on http://localhost:7000/
-Press ctrl+c to stop
-```
-
-To avoid CORS errors, update the _package.json_ of your React app so that it proxy's the server's traffic. (What this essentially means is that instead of sending AJAX requests to e.g. _http://localhost:7000/api/signin_, you would send it to _/api/signin_. This will make it easier for those of you who want to host your project.)
-
-```json
-{
-  "name": "book-store",
-  "version": "0.1.0",
-  "private": true,
-  // ...
-  "proxy": "http://localhost:7000/"
-}
-```
-
-You will need to have both this back-end server and your project's React server running at the same time.
+As a part of this project, you will be making AJAX requests to the back-end book store server. The server has an API that will allow you to signin, search for books, find details about a single book, look up books in a user’s book store and update books in a user’s book store. In order for this to be a part of your Github portfolio, we have a written a server in Node.js, which you will install and run locally. We also have it setup so that if you choose, you can easily upload the application to [Heroku](https://www.heroku.com/home).
 
 ### API End-Points
 
@@ -389,15 +435,15 @@ Talk to your instructors and talk to them earlier on. They can guide you on desi
 While your grade is not determined on whether or not you follow these code quality tips, we encourage you to code to a professional standard. One of the goals of this project is to help you build a portfolio. Just like an interviewer will judge you on your attire, employers will judge you on the neatness of your code.
 
 - Your _README.md_ should be written in Markdown. It should also describe your project, explain the purpose of the project, give instructions on how to install and start both your project and the server and credit yourself as the author. Here are some resources on creating _README.md_ files:
-  - [_README.md_ template](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
+  - [Make a README](https://www.makeareadme.com/)
   - [Markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+- Add anything that should not be committed to your _.gitigore_ file. Your _node_modules_ and _build_ folder should be ignored.
 - Choose descriptive and specific names for React components, constants, functions and anything else that is named.
 - You must not leave any debugging statements in your code. Remove any `console.log()` statements from your code before committing.
-- Add comments to the parts of your code that is difficult to understand. (You will make a good impression if you use JSDoc. See [Code documentation for JavaScript with JSDoc: an introduction](https://www.valentinog.com/blog/jsdoc/), [Jsdoc cheatsheet](https://devhints.io/jsdoc) and [JSDoc Manual](https://jsdoc.app/)).
-- Do not commit anything that is commented out for debugging purposes. Before submitting, make sure you only have actual comments within comment tags.
+- Only have actual comments within comment tags. Do not commit code that you commented out for debugging purposes.
 - Remove any components or code that is not being used. (This affects application load time as well as code quality.)
 - Use proper indentation. (Prettier can take care of this.)
-- Add anything that should not be committed to your _.gitigore_ file.
+- There should not be any errors in the console.
 
 ## Project Submission
 

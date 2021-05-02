@@ -1,3 +1,9 @@
+/**
+ * The server is for the Book Store project
+ * @author AlbanyCanCode
+ */
+const path = require("path");
+const fs = require("fs");
 const express = require("express");
 const session = require("express-session");
 const { SESSION_SECRET, SESSION_EXPIRY_IN_MILLISECONDS } = require("./config");
@@ -9,7 +15,10 @@ const bookRouter = require("./routes/bookRouter");
 
 const fileNotFoundError = require("./errors/fileNotFound");
 
+const PORT = process.env.PORT || 3001;
+
 const app = express();
+
 app.use(express.json());
 app.use(
   session({
@@ -41,20 +50,26 @@ app.use((err, req, res, next) => {
   }
 });
 
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+
 app.use("/api/bookshelf", bookshelfRouter);
 app.use("/api/book/search", bookSearchRouter);
 app.use("/api/book", bookRouter);
 app.use("/api/", authRouter);
+app.all("/api/*", fileNotFoundError);
 
-app.all("/", (req, res) => {
+app.get("*", (req, res) => {
+  if (fs.existsSync(path.resolve(__dirname, "../client/build", "index.html"))) {
+    return res.sendFile(
+      path.resolve(__dirname, "../client/build", "index.html")
+    );
+  }
   const text =
     "Its running!\nTo use the API, please refer to the Project README.md.";
   res.send(text);
 });
 
-app.all("*", fileNotFoundError);
-
-const server = app.listen(7000, () => {
+const server = app.listen(PORT, () => {
   console.log(
     `\nYour server is running on http://localhost:${server.address().port}/`
   );

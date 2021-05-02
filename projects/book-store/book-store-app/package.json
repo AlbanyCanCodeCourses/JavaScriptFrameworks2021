@@ -1,12 +1,13 @@
 {
   "name": "book-store-server",
-  "author": "",
+  "author": "albanycancode",
   "private": true,
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node .",
-    "test": "mocha tests/**/*.spec.js"
+    "start": "node server/index.js",
+    "test": "mocha server/tests/**/*.spec.js",
+    "build": "cd client && yarn install && yarn run build"
   },
   "keywords": [],
   "license": "ISC",
