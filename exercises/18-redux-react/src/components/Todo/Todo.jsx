@@ -9,34 +9,40 @@
 import { useState } from "react";
 import ListItem from "./ListItem/ListItem";
 
+
 function Todo(props) {
   const [userInput, setUserInput] = useState("");
-  const [todos, setTodos] = useState([]);
+  // const [todos, setTodos] = useState([]);
 
   /**
    * This will be passed down from the container as props instead
    * (but you still need to prevent the form from submitting and pass up user input)
    */
-  const addTodo = (e) => {
+  const handleSubmit = (e)=>{
     e.preventDefault();
-    setTodos([...todos, userInput]);
-    setUserInput("");
-  };
+    props.addTodo(userInput);
+    props.deleteTodo();
+  }
+  // const addTodo = (e) => {
+  //   e.preventDefault();
+  //   setTodos([...todos, userInput]);
+  //   setUserInput("");
+  // };
   /**
    * This will be passed down from the container as props instead
    * (but you still need to pass up the todo index)
    */
-  const deleteTodo = (todoIndex) => {
-    setTodos(
-      todos.filter((item, index) => {
-        return index !== todoIndex;
-      })
-    );
-  };
+  // const deleteTodo = (todoIndex) => {
+  //   setTodos(
+  //     todos.filter((item, index) => {
+  //       return index !== todoIndex;
+  //     })
+  //   );
+  // };
   return (
     <div className="mt-4">
       <h1 className="h3">Todo List</h1>
-      <form className="form-group" onSubmit={addTodo}>
+      <form className="form-group" onSubmit={handleSubmit}>
         <div className="input-group mb-3">
           <input
             type="text"
@@ -44,7 +50,7 @@ function Todo(props) {
             placeholder="Enter text"
             aria-label="Enter text"
             aria-describedby="button-add"
-            value={userInput}
+            value={props.userInput}
             onChange={(e) => setUserInput(e.target.value)}
           />
           <div className="input-group-append">
@@ -56,10 +62,10 @@ function Todo(props) {
       </form>
       <ul className="list-group">
         {/* The todos will be passed down as props */}
-        {todos.map((text, index) => {
+        {props.todos.map((text, index) => {
           const key = `todo-item-${index}`;
           return (
-            <ListItem deleteTodo={deleteTodo} todoIndex={index} key={key}>
+            <ListItem deleteTodo={props.deleteTodo} todoIndex={props.index} key={key}>
               {text}
             </ListItem>
           );

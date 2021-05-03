@@ -9,7 +9,7 @@ const images = { dice1, dice2, dice3, dice4, dice5, dice6 };
 
 function DiceRoller(props) {
   const src = images["dice" + props.diceNumber];
-  const alt = `Dice ${props.diceNumber}`;
+  const alt = `Dice ${props.diceNumber}`; 
   return (
     <div>
       <div className="d-inline-flex flex-row align-items-center">

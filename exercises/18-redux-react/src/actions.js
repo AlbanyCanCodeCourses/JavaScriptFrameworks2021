@@ -6,6 +6,7 @@ export function rollDice() {
   };
 }
 
+
 export function increaseCount() {
   return {
     type: types.INCREASE_COUNT
@@ -17,7 +18,7 @@ export function decreaseCount() {
     type: types.DECREASE_COUNT
   };
 }
-
+ 
 export function addTodo(userInput) {
   return {
     type: types.ADD_TODO,

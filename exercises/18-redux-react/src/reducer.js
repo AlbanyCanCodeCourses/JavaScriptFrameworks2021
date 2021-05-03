@@ -28,7 +28,7 @@ const reducer = (
       };
     case types.DECREASE_COUNT:
       return {
-        ...state,
+        ...state, 
         count: state.count - 1
       };
     case types.ADD_TODO:
