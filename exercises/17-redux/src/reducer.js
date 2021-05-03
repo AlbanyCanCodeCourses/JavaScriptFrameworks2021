@@ -21,6 +21,31 @@ const reducer = (
     /**
      * Add additional case statements here
      */
+    case types.DECREASE_COUNT:
+      return {
+        ...state,
+        count: state.count - 1
+      };
+    case types.PICK_COLOR:
+      return {
+        ...state,
+        color: action.color
+      }
+    case types.TOGGLE:
+      return {
+        ...state,
+        isVisible: !state.isVisible
+      }
+    case types.ADD_TODO:
+      return {
+        ...state,
+        todos: [...state.todos, state.todoInput]
+      };
+    case types.SET_INPUT:
+      return {
+        ...state,
+        todoInput: action.todoInput
+      }
     default:
       return state;
   }
