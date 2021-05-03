@@ -24,7 +24,9 @@ export const pickColor = color => {
   // Complete me
   return {
     type: types.PICK_COLOR,
-    color: color
+    payload: {
+      data: color
+    }
   };
 };
 
@@ -32,7 +34,9 @@ export const setInput = todoInput => {
   // Complete me
   return {
     type: types.SET_INPUT,
-    todoInput: todoInput
+    payload: {
+      data: todoInput
+    }
   };
 };
 

@@ -29,7 +29,7 @@ const reducer = (
     case types.PICK_COLOR:
       return {
         ...state,
-        color: action.color
+        color: action.payload.data
       }
     case types.TOGGLE:
       return {
@@ -44,7 +44,7 @@ const reducer = (
     case types.SET_INPUT:
       return {
         ...state,
-        todoInput: action.todoInput
+        todoInput: action.payload.data
       }
     default:
       return state;
