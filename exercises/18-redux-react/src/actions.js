@@ -18,10 +18,16 @@ export function decreaseCount() {
   };
 }
 
-export function addTodo(userInput) {
+export function setInput(userInput) {
+  return {
+    type: types.SET_INPUT,
+    userInput
+  };
+}
+
+export function addTodo() {
   return {
     type: types.ADD_TODO,
-    userInput
   };
 }
 
