@@ -34,7 +34,7 @@ Follow the guide [Creating a pull request from a fork](https://help.github.com/a
 ## Resources
 
 - [Syllabus](docs/Syllabus.md)
-- Projects: [Project 1: Retro Board](projects/retro-board/RetroBoardProject.md)
+- Projects: [Project 1: Retro Board](projects/retro-board/RetroBoardProject.md) | [Project 2: Book Store](projects/book-store/BookStoreProject.md)
 - [Slides](https://slides.com/accjavascript/decks/2021-javascript-frameworks)
 - [Code Sandboxes](https://codesandbox.io/u/matinaspatsos/sandboxes)
 - Installation Guide: [Mac](docs/InstallationGuideMac.md) | [Windows](docs/InstallationGuideWindows.md) | [Linux](docs/InstallationGuideLinuxAndNVM.md)
