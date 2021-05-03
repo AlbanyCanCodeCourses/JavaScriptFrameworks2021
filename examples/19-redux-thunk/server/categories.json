@@ -1,0 +1,42 @@
+{
+  "1": {
+    "category": "Entertainer of the Year",
+    "nominees": [
+      "Jason Aldean",
+      "Luke Bryan",
+      "Kenny Chesney",
+      "Chris Stapleton",
+      "Keith Urban"
+    ]
+  },
+  "2": {
+    "category": "Album of the Year",
+    "nominees": [
+      "From A Room: Volume 2, Chris Stapleton",
+      "Golden Hour, Kacey Musgraves​",
+      "Graffiti U, Keith Urban",
+      "Life Changes, Thomas Rhett",
+      "The Mountain, Dierks Bentley"
+    ]
+  },
+  "3": {
+    "category": "Female Vocalist of the Year",
+    "nominees": [
+      "Kelsea Ballerini",
+      "Miranda Lambert",
+      "Maren Morris",
+      "Kacey Musgraves",
+      "Carrie Underwood"
+    ]
+  },
+  "4": {
+    "category": "Male Vocalist of the Year",
+    "nominees": [
+      "Dierks Bentley",
+      "Luke Combs",
+      "Thomas Rhett",
+      "Chris Stapleton",
+      "Keith Urban"
+    ]
+  }
+}
