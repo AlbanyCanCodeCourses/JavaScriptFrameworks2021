@@ -22,18 +22,25 @@ import { increaseCount, decreaseCount } from "../../actions";
 function mapStateToProps(state) {
     console.log("state", state)
     return {
-        increaseCount: state.increaseCount,
-        decreaseCount: state.decreaseCount
+        count: state.count
     }
 }
 
 /**
  * Complete this function. You may need to pass in arguements
  */
-const mapDispatchToProps = {
-    increaseCount,
-    decreaseCount
+const mapDispatchToProps = (dispatch) => {
+    return {
+        increaseCount: ()=> dispatch(increaseCount()),
+        decreaseCount: ()=> dispatch(decreaseCount())
+    }
 }
+
+//could be 
+//const mapDispatchToProps = {
+//   increaseCount,
+//   decreateCount
+//}
 
 /**
  * Refactor this so that you are connecting the Counter to the Redux store.

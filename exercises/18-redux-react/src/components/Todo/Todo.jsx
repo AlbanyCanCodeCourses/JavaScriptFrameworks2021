@@ -11,32 +11,16 @@ import ListItem from "./ListItem/ListItem";
 
 function Todo(props) {
   const [userInput, setUserInput] = useState("");
-  const [todos, setTodos] = useState([]);
 
-  /**
-   * This will be passed down from the container as props instead
-   * (but you still need to prevent the form from submitting and pass up user input)
-   */
-  const addTodo = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setTodos([...todos, userInput]);
-    setUserInput("");
-  };
-  /**
-   * This will be passed down from the container as props instead
-   * (but you still need to pass up the todo index)
-   */
-  const deleteTodo = (todoIndex) => {
-    setTodos(
-      todos.filter((item, index) => {
-        return index !== todoIndex;
-      })
-    );
-  };
+    props.addTodo(userInput);
+  }
+
   return (
     <div className="mt-4">
       <h1 className="h3">Todo List</h1>
-      <form className="form-group" onSubmit={addTodo}>
+      <form className="form-group" onSubmit={e=>handleSubmit(e)}>
         <div className="input-group mb-3">
           <input
             type="text"
@@ -55,11 +39,10 @@ function Todo(props) {
         </div>
       </form>
       <ul className="list-group">
-        {/* The todos will be passed down as props */}
-        {todos.map((text, index) => {
+        {props.todos.map((text, index) => {
           const key = `todo-item-${index}`;
           return (
-            <ListItem deleteTodo={deleteTodo} todoIndex={index} key={key}>
+            <ListItem deleteTodo={props.deleteTodo} todoIndex={index} key={key}>
               {text}
             </ListItem>
           );
