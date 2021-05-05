@@ -14,8 +14,8 @@ import {
     rollDice,
     increaseCount,
     decreaseCount,
-    addTodo,
-    deleteTodo,
+    // addTodo,
+    // deleteTodo,
 }  from '../../actions';
 
 /**
@@ -29,8 +29,8 @@ const mapStateToProps = state => {
     return{
         diceNumber: state.diceNumber,
         count: state.count,
-        todos: state.todos,
-        deleteTodo: state.deleteTodo
+        // todos: state.todos,
+        // deleteTodo: state.deleteTodo
     }
 }
 
@@ -41,8 +41,8 @@ const mapDispatchToProps = {
     rollDice,
     increaseCount,
     decreaseCount,
-    addTodo,
-    deleteTodo,
+    // addTodo,
+    // deleteTodo,
 }
 
 /**

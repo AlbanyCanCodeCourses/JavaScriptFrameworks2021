@@ -21,7 +21,6 @@ function Todo(props) {
   const handleSubmit = (e)=>{
     e.preventDefault();
     props.addTodo(userInput);
-    props.deleteTodo();
   }
   // const addTodo = (e) => {
   //   e.preventDefault();
@@ -65,7 +64,7 @@ function Todo(props) {
         {props.todos.map((text, index) => {
           const key = `todo-item-${index}`;
           return (
-            <ListItem deleteTodo={props.deleteTodo} todoIndex={props.index} key={key}>
+            <ListItem deleteTodo={props.deleteTodo} todoIndex={index} key={key}>
               {text}
             </ListItem>
           );
