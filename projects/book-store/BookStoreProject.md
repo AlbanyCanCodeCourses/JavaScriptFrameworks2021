@@ -193,7 +193,7 @@ Routing is a system for resource navigation. When a user clicks on a link, they 
 - You must have a signin form and authenticate users.
 - You must have protected routes (routes that the user must be logged in to see).
 - You must use the Context API (recommended) or Redux to store state that is shared universally between most components.
-- For components that are functions, you should handle AJAX calls inside the `useEffect()` hooks. For components where you extend the React Component class, you should make AJAX requests inside of `componentDidMount()` and other lifecycle hooks.
+- For components that are functions, you should handle AJAX calls using a style that we learned about in class. (`useEffect()` hook. lifecycle hooks if class, or [React Query](https://react-query.tanstack.com/))
 - AJAX errors should be caught.
 - Styling must be included, but you will not be graded on how visually appealing your application is or how well your CSS is written.
 
