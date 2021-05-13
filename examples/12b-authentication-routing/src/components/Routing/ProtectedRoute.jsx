@@ -1,11 +1,11 @@
 import { useContext, useState, useEffect } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, useParams } from "react-router-dom";
 import { AccessTokenContext } from "../../context/AccessTokenContext";
 
 /**
  * This will redirect the user to the login form if they haven't logged in.
  */
-function ProtectedRoute({ children }) {
+function ProtectedRoute({ children, ...restOfProps }) {
   /**
    * If the user is logged in, the JWT token will be stored in the Context API.
    */
@@ -31,7 +31,7 @@ function ProtectedRoute({ children }) {
     /**
      * If the user is logged in, return the child component
      */
-    <Route>{children}</Route>
+    <Route {...restOfProps}>{children}</Route>
   ) : (
     /**
      * If the user isn't logged in, redirect to the login form
