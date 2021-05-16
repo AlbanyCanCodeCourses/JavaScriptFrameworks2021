@@ -44,10 +44,10 @@ axios
     headers: {
       "Content-Type": "application/json",
     },
-    data: JSON.stringify({
+    data: {
       username: "fluffypanda37",
       password: "1234",
-    }),
+    },
   })
   .then((response) => {
     // This is how you get the token
@@ -185,7 +185,7 @@ If you like, you can mimic a real life scenario with a monolithic app (where the
   "version": "0.1.0",
   "private": true,
   // ...
-  "proxy": "http://localhost:7000/"
+  "proxy": "http://localhost:7000"
 }
 ```
 
